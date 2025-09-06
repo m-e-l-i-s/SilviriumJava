@@ -1,0 +1,10 @@
+{
+    "displayName": "SilviriumLib",
+    "name": "slib",
+    "author": "Melis",
+    "main": "Mod.SilviriumLib",
+    "description": "A Mindustry Java mod that i use as a library.",
+    "version": 1.0,
+    "minGameVersion": 145,
+    "java": true
+}
