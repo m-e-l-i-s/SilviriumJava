@@ -3,7 +3,6 @@ package content;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.math.Mathf;
-import entities.bullet.AntiBuildingBulletType;
 import type.HealtActivationWeapon;
 import mindustry.ai.types.MissileAI;
 import mindustry.content.Fx;
