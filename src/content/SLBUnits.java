@@ -217,9 +217,9 @@ public class SLBUnits {
             legMaxLength= 1.2f;
             legMinLength= 0.8f;
             legForwardScl = 1.1f;
-            legMoveSpace = 1f;
+            legMoveSpace = 0.8f;
             legSpeed = 0.2f;
-            legSplashDamage =  12f;
+            legSplashDamage =  10f;
             legSplashRange =  8f;
             legExtension = 4f;
             legGroupSize = 2;
@@ -294,7 +294,7 @@ public class SLBUnits {
                 legMaxLength = 1.2f;
                 legMinLength = 0.8f;
                 legForwardScl = 1.2f;
-                legMoveSpace = 1f;
+                legMoveSpace = 0.9f;
                 legSpeed = 0.2f;
                 legSplashDamage =  16f;
                 legSplashRange =  10f;
@@ -350,7 +350,7 @@ public class SLBUnits {
                         x = 0;
                         y = 3;
                         shootY = 0;
-                        reload = 180;
+                        reload = 200;
                         rotationLimit = 25f;
                         rotateSpeed = 5f;
                         shootCone = 10f;
@@ -362,16 +362,17 @@ public class SLBUnits {
                                         lifetime = 50;
                                         speed = 4;
                                         outlines = false;
+                                        maxRange = 30;
                                         weapons.add(
                                                 new Weapon("Silvsile-exp"){{
                                                         x = y = 0;
-                                                        reload = 5;
+                                                        reload = 1800;
                                                         shootCone = 360f;
                                                         shootOnDeath = true;
                                                         mirror = false;
                                                         bullet = new ExplosionBulletType(400,40){{
                                                                 buildingDamageMultiplier = 0.5f;
-                                                                range = 40;
+                                                                range = 32;
                                                                 splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
                                                                 hittable = false;
                                                                 smokeEffect = Fx.none;
