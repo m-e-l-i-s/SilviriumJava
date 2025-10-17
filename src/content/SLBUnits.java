@@ -19,7 +19,7 @@ import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 
 public class SLBUnits {
-    public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5, silvsile, silvone, silvioros, silvistar;
+    public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5, silvsile, silvone, silvioros, silvistar,star1;
     
     public static void load(){
         silvanon = new UnitType("Silvanon"){{
@@ -39,10 +39,10 @@ public class SLBUnits {
             rotateSpeed = 10f;
             rotateMoveFirst = true;
             forceMultiTarget = true;
-            hoverable = true;
-            mechFrontSway = 0.2f;
+            hoverable = false;
+            mechFrontSway = 0.3f;
             mechSideSway = 0.2f;
-            mechStride = 0.2f;
+            mechStride = 0.3f;
             range = 80f; 
             maxRange = 80f;
             weapons.add(
@@ -421,7 +421,7 @@ public class SLBUnits {
                 maxRange = 120;
                 ammoCapacity = 300;
                 ammoType = new ItemAmmoType(SLBItems.silvirium);
-                itemCapacity = 30;
+                itemCapacity = 60;
                 outlineRadius = 0;
                 weapons.add(
                         new HealtActivationWeapon("slib-Silvruner-machingun"){{
@@ -487,7 +487,7 @@ public class SLBUnits {
             }};
             silv5 = new UnitType("Silv5"){{
             constructor = LegsUnit::create;
-                description = "The second silvirium unit equipped with 2 charge guns.";
+                description = "The 5 silvirium unit (WIP).";
                 speed = 1.2f;
                 accel = 0.3f;
                 rotateMoveFirst = true;
@@ -752,6 +752,78 @@ public class SLBUnits {
                 }};
             }});
         }};
+         star1 = new UnitType("star1"){{
+            constructor = MechUnit::create;
+            description = "a star unit equipped with a powerful short-range star flame";
+            health = 90f;
+            armor = 2;
+            hitSize = 8;
+            itemCapacity = 10;
+            immunities.add(SLBStatusEffects.disrupted);
+            ammoCapacity = 60;
+            ammoType = new ItemAmmoType(SLBItems.silvirium);
+            outlines = false;
+            speed = 2f;
+            accel = 0.2f;
+            drag = 0.6f;
+            rotateSpeed = 10f;
+            rotateMoveFirst = true;
+            forceMultiTarget = true;
+            hoverable = false;
+            mechFrontSway = 0.3f;
+            mechSideSway = 0.2f;
+            mechStride = 0.3f;
+            range = 80f; 
+            maxRange = 80f;
+            weapons.add(
+            new Weapon("slib-Silvanon-cannon"){{
+                x = 4;
+                y = 0;
+                shootY = 0;
+                reload = 5;
+                shootCone = 2;
+                top = true;
+                mirror = rotate = false;
+                predictTarget = false;
+                continuous = true;
+                alwaysContinuous = true;
+                shootSound = Sounds.flame;
+                bullet = new ContinuousFlameBulletType(){{
+                        length = 40f;
+                        width = 2f;
+                        damageInterval = 5f;
+                        damage = 1f /*12 * damageInterval / 60f*/;
+                        buildingDamageMultiplier = 0.5f;
+                        pierceBuilding = true;
+                        pierceCap = 4;
+                        status = SLBStatusEffects.disrupted;
+                        statusDuration = 300f;
+                        knockback = -0.4f;
+                        impact = true;
+                        lifetime = 10f;
+                        range = 120f;
+                        hitEffect = SLBFx.silviriumHit1Effect;
+                        lightStroke = 24f;
+                        oscScl = 0.04f;
+                        oscMag = 0.02f;
+                        drawFlare = false;
+                        divisions = 2;
+                        colors = new Color[]{
+                                SLBPal.starRedDarkColor,
+                                SLBPal.starRedColor,
+                                SLBPal.starOrangeDarkColor,
+                                SLBPal.starOrangeColor,
+                                Color.white.cpy()
+                        };
+                        lengthWidthPans = new float[]{
+                                1.0f,1.3f,0.35f,
+                                0.8f,1f,0.3f,
+                                0.6f,0.9f,0.2f,
+                                0.5f,0.8f,0.15f,
+                                0.35f,0.5f,0.1f};
+                    }};
+                }});
+            }};
 }}
 
     
