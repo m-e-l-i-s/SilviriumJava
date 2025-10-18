@@ -6,6 +6,7 @@ import arc.math.Mathf;
 import type.HealtActivationWeapon;
 import mindustry.ai.types.MissileAI;
 import mindustry.content.Fx;
+import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
