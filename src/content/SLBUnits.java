@@ -39,11 +39,10 @@ public class SLBUnits {
             drag = 0.6f;
             rotateSpeed = 10f;
             rotateMoveFirst = true;
-            forceMultiTarget = true;
             hoverable = false;
-            mechFrontSway = 0.3f;
-            mechSideSway = 0.2f;
-            mechStride = 1.5f;
+            mechFrontSway = 0.4f;
+            mechSideSway = 0.35f;
+            mechStride = 3f;
             range = 80f; 
             maxRange = 80f;
             weapons.add(
@@ -57,13 +56,13 @@ public class SLBUnits {
                 mirror = rotate = false;
                 shootSound = Sounds.lasershoot;
                 recoil = 5;
-                bullet = new BasicBulletType(4,0){{
-                        recoil = 12;
-                        knockback = 12;
+                bullet = new BasicBulletType(6,0){{
+                        recoil = 15;
+                        knockback = 15;
                         splashDamage = 15;
-                        splashDamageRadius = 4;
+                        splashDamageRadius = 8;
                         buildingDamageMultiplier = 0.7f;
-                        lifetime = 30;
+                        lifetime = 20;
                         range = 120;
                         splashDamagePierce = pierce = pierceBuilding = collidesAir = collidesGround = true;
                         pierceCap = 2;
@@ -756,15 +755,15 @@ public class SLBUnits {
          star1 = new UnitType("star1"){{
             constructor = MechUnit::create;
             description = "a star unit equipped with a powerful short-range star flame";
-            health = 90f;
-            armor = 2;
+            health = 130f;
+            armor = 0;
             hitSize = 8;
             itemCapacity = 10;
             immunities.add(SLBStatusEffects.disrupted);
             ammoCapacity = 10;
             ammoType = new ItemAmmoType(SLBItems.starFrag);
             outlines = false;
-            speed = 2f;
+            speed = 2.2f;
             accel = 0.2f;
             drag = 0.6f;
             rotateMoveFirst = true;
@@ -786,13 +785,13 @@ public class SLBUnits {
                 bullet = new ContinuousFlameBulletType(){{
                         length = 80f;
                         range = 80f;
-                        width = 2f;
+                        width = 3.5f;
                         damageInterval = 1f;
                         damage = 0.2f /*12 * damageInterval / 60f*/;
                         buildingDamageMultiplier = 0.5f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
-                        statusDuration = 300f;
+                        statusDuration = 60f;
                         knockback = 0;
                         impact = true;
                         lifetime = 10f;
@@ -814,7 +813,8 @@ public class SLBUnits {
                                 0.8f,1f,0.3f,
                                 0.6f,0.9f,0.2f,
                                 0.5f,0.8f,0.15f,
-                                0.3f,0.5f,0.1f};
+                                0.3f,0.5f,0.1f
+                        };
                     }};
                 }});
             }};
