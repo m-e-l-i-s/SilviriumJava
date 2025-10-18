@@ -42,7 +42,7 @@ public class SLBUnits {
             hoverable = false;
             mechFrontSway = 0.3f;
             mechSideSway = 0.2f;
-            mechStride = 0.3f;
+            mechStride = 1.5f;
             range = 80f; 
             maxRange = 80f;
             weapons.add(
@@ -321,18 +321,18 @@ public class SLBUnits {
                         reload = 90;
                         rotationLimit = 90f;
                         rotateSpeed = 5f;
-                        shootCone = 10f;
+                        shootCone = 35f;
                         rotate = alternate = mirror = true;
                         top = false;
                         shoot = new ShootBarrel(){{
                                 barrels = new float[]{
                                         0, 0, 0,
                                         0, 0, 0,
-                                        -3, 0f, 0,
-                                        3, 0f, 0
+                                        -3, -30f, 0,
+                                        3, 30f, 0
                                 };
                                 shots = 3;
-                                shotDelay = 10f;
+                                shotDelay = 25f;
                         }};
                         shootSound = Sounds.lasershoot;
                         bullet = new BasicBulletType(2.5f,60f){{
@@ -760,50 +760,43 @@ public class SLBUnits {
             hitSize = 8;
             itemCapacity = 10;
             immunities.add(SLBStatusEffects.disrupted);
-            ammoCapacity = 60;
-            ammoType = new ItemAmmoType(SLBItems.silvirium);
+            ammoCapacity = 10;
+            ammoType = new ItemAmmoType(SLBItems.starFrag);
             outlines = false;
             speed = 2f;
             accel = 0.2f;
             drag = 0.6f;
-            rotateSpeed = 10f;
             rotateMoveFirst = true;
             forceMultiTarget = true;
             hoverable = false;
             mechFrontSway = 0.3f;
             mechSideSway = 0.2f;
-            mechStride = 0.3f;
-            range = 80f; 
-            maxRange = 80f;
+            mechStride = 1f;
             weapons.add(
-            new Weapon("slib-Silvanon-cannon"){{
-                x = 4;
-                y = 0;
-                shootY = 0;
+            new Weapon("star-flame"){{
+                x = 0;
+                y = 3;
+                shootY = 2;
                 reload = 5;
                 shootCone = 2;
-                top = true;
-                mirror = rotate = false;
-                predictTarget = false;
-                continuous = true;
-                alwaysContinuous = true;
+                mirror = rotate = predictTarget = false;
+                top = continuous = alwaysContinuous = true;
                 shootSound = Sounds.flame;
                 bullet = new ContinuousFlameBulletType(){{
-                        length = 40f;
+                        length = 80f;
+                        range = 80f;
                         width = 2f;
-                        damageInterval = 5f;
-                        damage = 1f /*12 * damageInterval / 60f*/;
+                        damageInterval = 1f;
+                        damage = 0.2f /*12 * damageInterval / 60f*/;
                         buildingDamageMultiplier = 0.5f;
                         pierceBuilding = true;
-                        pierceCap = 4;
-                        status = SLBStatusEffects.disrupted;
+                        status = StatusEffects.burning;
                         statusDuration = 300f;
-                        knockback = -0.4f;
+                        knockback = 0;
                         impact = true;
                         lifetime = 10f;
-                        range = 120f;
                         hitEffect = SLBFx.silviriumHit1Effect;
-                        lightStroke = 24f;
+                        lightStroke = 20f;
                         oscScl = 0.04f;
                         oscMag = 0.02f;
                         drawFlare = false;
@@ -820,7 +813,7 @@ public class SLBUnits {
                                 0.8f,1f,0.3f,
                                 0.6f,0.9f,0.2f,
                                 0.5f,0.8f,0.15f,
-                                0.35f,0.5f,0.1f};
+                                0.3f,0.5f,0.1f};
                     }};
                 }});
             }};
