@@ -46,7 +46,7 @@ public class SLBFx {
         });
     }),
     silviriumInvHit3Effect = new ParticleEffect(){{
-        colorFrom = SLBPal.silviriumColor;
+        colorFrom = SLBPal.silviriumOtherColor;
         colorTo = SLBPal.silviriumDarkColor;
         particles = 4;
         randLength = false;
@@ -62,7 +62,7 @@ public class SLBFx {
         lifetime = 30;
     }},
     silviriumRailHit = new Effect(20, 200, (e) -> {
-        Draw.color(SLBPal.silviriumColor);
+        Draw.color(SLBPal.silviriumOtherColor);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + 130);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + -130);
         Angles.randLenVectors((long)e.id, 3, 1f + 80f * e.fin(), e.rotation, 120f, (x, y) -> {
@@ -70,10 +70,10 @@ public class SLBFx {
         });
       }),
       silviriumRail = new Effect(40, 200, (e) -> {
-        Draw.color(SLBPal.silviriumColor);
+        Draw.color(SLBPal.silviriumOtherColor);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 12, e.rotation);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 4, e.rotation + 180);
-        Draw.color(SLBPal.silviriumOtherColor);
+        Draw.color(SLBPal.silviriumColor);
         Drawf.tri(e.x, e.y, 7 * e.fout(), 11, e.rotation);
         Drawf.tri(e.x, e.y, 7 * e.fout(), 3, e.rotation + 180);
     }),
