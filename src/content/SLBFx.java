@@ -69,13 +69,13 @@ public class SLBFx {
          Drawf.tri(e.x + x, e.y + y, e.fslope() * 9f + 3f, e.fslope() * 9f + 3f, Mathf.angle(x, y)+180f);
         });
       }),
-      silviriumRail = new Effect(40, 200, (e) -> {
+      silviriumRail = new Effect(30, 200, (e) -> {
         Draw.color(SLBPal.silviriumOtherColor);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 12, e.rotation);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 4, e.rotation + 180);
         Draw.color(SLBPal.silviriumColor);
-        Drawf.tri(e.x, e.y, 7 * e.fout(), 11, e.rotation);
-        Drawf.tri(e.x, e.y, 7 * e.fout(), 3, e.rotation + 180);
+        Drawf.tri(e.x, e.y, 6 * e.fout(), 10, e.rotation);
+        Drawf.tri(e.x, e.y, 6 * e.fout(), 3, e.rotation + 180);
     }),
     silvAmb = new ParticleEffect(){{
         particles = 2;
