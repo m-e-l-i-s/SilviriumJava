@@ -71,7 +71,7 @@ public class SLBFx {
         Angles.randLenVectors((long)e.id, 3, 1f + 80f * e.fin(), e.rotation, 120f, (x, y) -> {
             Draw.color(SLBPal.silviriumOtherColor);
             Drawf.tri(e.x + x, e.y + y, e.fslope() * 9f + 3f, e.fslope() * 9f + 3f, Mathf.angle(x, y)+180f);
-            Draw.color(SLBPal.silviriumrColor);
+            Draw.color(SLBPal.silviriumColor);
             Drawf.tri(e.x + x, e.y + y, e.fslope() * 8f + 3f, e.fslope() * 8f + 3f, Mathf.angle(x, y)+180f);
         });
       }),
