@@ -208,7 +208,7 @@ public class SLBBlocks {
             rotate = false;
             solid = true;
             envEnabled = Env.any;
-            itemCapacity = 16f;
+            itemCapacity = 16;
             craftTime = 600;
 
             consumePower(0.5f);
@@ -228,7 +228,7 @@ public class SLBBlocks {
             rotate = false;
             solid = true;
             envEnabled = Env.any;
-            itemCapacity = 32f;
+            itemCapacity = 1;
             craftTime = 600;
 
             consumePower(8f);
