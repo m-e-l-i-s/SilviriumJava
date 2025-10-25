@@ -795,7 +795,7 @@ public class SLBUnits {
                         knockback = 0;
                         impact = true;
                         lifetime = 10f;
-                        hitEffect = SLBFx.silviriumHit1Effect;
+                        hitEffect = SLBFx.starHit;
                         lightStroke = 20f;
                         oscScl = 0.04f;
                         oscMag = 0.02f;
