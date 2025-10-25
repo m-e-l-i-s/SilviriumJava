@@ -27,8 +27,8 @@ import static mindustry.type.LiquidStack.*;
 
 public class SLBBlocks {
     public static Block
-    liqsilvfac,
-    silvFacT1, silvFacT2, silvFacT3, silvFacT4,
+    liqsilvfac,silvingfac,starfac,
+    silvFacT1, silvFacT2, silvFacT3, silvFacT4,starFacT1,
     silvOre,
     ABT,HPT,ST,
     decoy;
@@ -46,26 +46,34 @@ public class SLBBlocks {
             consumePower(0f);
             consumeLiquid(SLBliquids.liquidSilvirium, 0.5f);
             plans.addAll(
-            new UnitPlan(
-                SLBUnits.silvirror, 1200,
-                new ItemStack[]{
-                  new ItemStack(SLBItems.silvirium, 30),
-                  new ItemStack(Items.silicon, 20)
-                }
-            ),
-            new UnitPlan(
-                SLBUnits.silvioros, 1200,
-                new ItemStack[]{
-                  new ItemStack(SLBItems.silvirium, 20),
-                  new ItemStack(Items.silicon, 10)
-                }
-            ),
-            new UnitPlan(
-                SLBUnits.silvanon, 900,
-                new ItemStack[]{
-                  new ItemStack(SLBItems.silvirium, 35),
-                }
-            ));
+                new UnitPlan(
+                    SLBUnits.silvirror, 1200,
+                    new ItemStack[]{
+                      new ItemStack(SLBItems.silvirium, 30),
+                      new ItemStack(Items.silicon, 20)
+                    }
+                ),
+                new UnitPlan(
+                    SLBUnits.silvone, 1200,
+                    new ItemStack[]{
+                      new ItemStack(SLBItems.silvirium, 20),
+                      new ItemStack(Items.silicon, 10)
+                    }
+                ),
+                new UnitPlan(
+                    SLBUnits.silvioros, 1200,
+                    new ItemStack[]{
+                      new ItemStack(SLBItems.silvirium, 20),
+                      new ItemStack(Items.silicon, 10)
+                    }
+                ),
+                new UnitPlan(
+                    SLBUnits.silvanon, 900,
+                    new ItemStack[]{
+                      new ItemStack(SLBItems.silvirium, 35),
+                    }
+                )
+            );
         }};
         silvFacT2 = new Reconstructor("silvirium-remolder"){{
         requirements(Category.units, new ItemStack[]{
@@ -118,13 +126,32 @@ public class SLBBlocks {
             constructTime = 2400f;
             addUpgrade(SLBUnits.silvbane, SLBUnits.silvruner);
         }};
+        starFacT1 = new UnitFactory("silvirium-molder"){{
+        requirements(Category.units, new ItemStack[]{
+                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(Items.lead, 40),
+                new ItemStack(Items.silicon, 70)
+            });
+            size = 2;
+            health = 220;
+            consumePower(0f);
+            plans.addAll(
+                new UnitPlan(
+                    SLBUnits.star1, 0,
+                    new ItemStack[]{
+                      new ItemStack(SLBItems.starFrag, 30),
+                      new ItemStack(Items.silicon, 20)
+                    }
+                )
+            );
+        }};
         //factory
         liqsilvfac = new GenericCrafter("liquid-silvirium-factory"){{
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
-                new ItemStack(SLBItems.silvirium, 50)
+                new ItemStack(SLBItems.silviriumIng, 50)
             });
             outputLiquid = new LiquidStack(SLBliquids.liquidSilvirium, 0.25f);
             size = 2;
@@ -166,6 +193,44 @@ public class SLBBlocks {
                         layer = 40.5f;
                 }}
             );
+        }};
+        silvingfac = new GenericCrafter("silvirium-ingot-factory"){{
+            requirements(Category.crafting, new ItemStack[]{
+                new ItemStack(SLBItems.silvirium, 100),
+                new ItemStack(Items.metaglass, 10),
+                new ItemStack(Items.silicon, 50),
+            });
+            size = 2;
+            hasPower = true;
+            hasItems = true;
+            hasLiquids = true;
+            rotate = false;
+            solid = true;
+            envEnabled = Env.any;
+            itemCapacity = 16f;
+            craftTime = 600;
+
+            consumePower(0.5f);
+            consumeItem(SLBItems.silvirium,4);
+            outputItem = new ItemStack(SLBItems.silviriumIng, 1);
+        }};
+        starfac new GenericCrafter("liquid-silvirium-factory"){{
+            requirements(Category.crafting, new ItemStack[]{
+                new ItemStack(Items.metaglass, 50),
+                new ItemStack(Items.silicon, 110),
+            });
+            size = 2;
+            hasPower = true;
+            hasItems = true;
+            hasLiquids = true;
+            rotate = false;
+            solid = true;
+            envEnabled = Env.any;
+            itemCapacity = 32f;
+            craftTime = 600;
+
+            consumePower(8f);
+            outputItem = new ItemStack(SLBItems.starFrag, 1);
         }};
         //ore
         silvOre = new OreBlock("ore-silvirium", SLBItems.silvirium){{
