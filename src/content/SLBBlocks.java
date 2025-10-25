@@ -126,7 +126,7 @@ public class SLBBlocks {
             constructTime = 2400f;
             addUpgrade(SLBUnits.silvbane, SLBUnits.silvruner);
         }};
-        starFacT1 = new UnitFactory("silvirium-molder"){{
+        starFacT1 = new UnitFactory("star-molder"){{
         requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.lead, 40),
@@ -216,7 +216,7 @@ public class SLBBlocks {
             outputItem = new ItemStack(SLBItems.silviriumIng, 1);
         }};
         
-        starfac = new GenericCrafter("liquid-silvirium-factory"){{
+        starfac = new GenericCrafter("star-factory"){{
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(Items.metaglass, 50),
                 new ItemStack(Items.silicon, 110),
@@ -372,6 +372,15 @@ public class SLBBlocks {
                 pierceDamageFactor = 0.6f;
                 frontColor = Items.thorium.color;
                 backColor = Items.thorium.color.mul(0.8f);
+            }},
+                SLBItems.starFrag, new BasicBulletType(8, 2100){{
+                lifetime = 200;
+                width = 16;
+                height = 12;
+                pierce = pierceBuilding = true;
+                pierceDamageFactor = 0.1f;
+                frontColor = SLBItems.starFrag.color;
+                backColor = SLBItems.starFrag.color.mul(0.8f);
             }});
         }};
         //util
