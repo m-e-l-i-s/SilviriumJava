@@ -107,4 +107,18 @@ public class SLBFx {
         lifetime = 20;
         cone = 0;
     }};
+    starHit = new ParticleEffect(){{
+        particles = 1;
+        length = 0.5f;
+        baseLength = 1;
+        line = true;
+        colorFrom = SLBPal.starColor;
+        colorTo = SLBPal.starOtherColor;
+        strokeFrom = 20f;
+        strokeTo = 0f;
+        lenFrom = 12f;
+        lenTo = 2f;
+        lifetime = 10;
+        cone = 10;
+    }};
 }
