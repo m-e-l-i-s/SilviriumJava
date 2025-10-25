@@ -65,8 +65,14 @@ public class SLBFx {
         Draw.color(SLBPal.silviriumOtherColor);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + 130);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + -130);
+        Draw.color(SLBPal.silviriumColor);
+        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + 130);
+        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + -130);
         Angles.randLenVectors((long)e.id, 3, 1f + 80f * e.fin(), e.rotation, 120f, (x, y) -> {
-         Drawf.tri(e.x + x, e.y + y, e.fslope() * 9f + 3f, e.fslope() * 9f + 3f, Mathf.angle(x, y)+180f);
+            Draw.color(SLBPal.silviriumOtherColor);
+            Drawf.tri(e.x + x, e.y + y, e.fslope() * 9f + 3f, e.fslope() * 9f + 3f, Mathf.angle(x, y)+180f);
+            Draw.color(SLBPal.silviriumOtherColor);
+            Drawf.tri(e.x + x, e.y + y, e.fslope() * 8f + 3f, e.fslope() * 8f + 3f, Mathf.angle(x, y)+180f);
         });
       }),
       silviriumRail = new Effect(30, 200, (e) -> {
