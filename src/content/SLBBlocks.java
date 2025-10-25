@@ -194,6 +194,7 @@ public class SLBBlocks {
                 }}
             );
         }};
+        
         silvingfac = new GenericCrafter("silvirium-ingot-factory"){{
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 100),
@@ -214,7 +215,8 @@ public class SLBBlocks {
             consumeItem(SLBItems.silvirium,4);
             outputItem = new ItemStack(SLBItems.silviriumIng, 1);
         }};
-        starfac new GenericCrafter("liquid-silvirium-factory"){{
+        
+        starfac = new GenericCrafter("liquid-silvirium-factory"){{
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(Items.metaglass, 50),
                 new ItemStack(Items.silicon, 110),
