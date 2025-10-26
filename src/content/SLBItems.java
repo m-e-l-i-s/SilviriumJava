@@ -11,7 +11,7 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
             color = SLBPal.silviriumColor;
         }};
         silviriumIng = new Item("silvirium-ingot"){{
-                color = SLBPal.silviriumColor;
+                color = SLBPal.silviriumOtherColor;
         }};
         starFrag = new Item("star-fragment"){{
             explosiveness = 0.8f;
