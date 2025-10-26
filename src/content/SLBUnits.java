@@ -24,6 +24,7 @@ public class SLBUnits {
     
     public static void load(){
         silvanon = new UnitType("Silvanon"){{
+            alwaysUnlocked = true;
             constructor = MechUnit::create;
             description = "a silvirium unit equipped with a powerful short-range heavy cannon. \nless effective against buildings";
             health = 90f;
@@ -77,6 +78,7 @@ public class SLBUnits {
                 }};}});
             }};
         silvirror = new UnitType("Silvirror"){{
+            alwaysUnlocked = true;
             constructor = MechUnit::create;
             description = "the first silvirium unit, equipped with 2 short-range twin conrinuous blowtorch. \nless effective against buildings";
             health = 160f;
@@ -199,6 +201,7 @@ public class SLBUnits {
             }});
         }};
         silvokeor = new UnitType("Silvokeor"){{
+            alwaysUnlocked = true;
             constructor = LegsUnit::create;
             description = "The second silvirium unit equipped with 2 charge guns.";
             speed = 1.2f;
@@ -276,6 +279,7 @@ public class SLBUnits {
                 }};}});
             }};
             silvbane = new UnitType("Silvbane"){{
+                alwaysUnlocked = true;
                 constructor = LegsUnit::create;
                 description = "The third silvirium unit equipped with 2 weave homing guns and 1 roket lacucher.";
                 speed = 1f;
@@ -386,6 +390,7 @@ public class SLBUnits {
                 }});
             }};
             silvruner = new UnitType("Silvruner"){{
+                alwaysUnlocked = true;
                 constructor = LegsUnit::create;
                 description = "The second silvirium unit equipped with 2 charge guns.";
                 speed = 1.2f;
@@ -486,7 +491,8 @@ public class SLBUnits {
                 );
             }};
             silv5 = new UnitType("Silv5"){{
-            constructor = LegsUnit::create;
+                alwaysUnlocked = true;
+                constructor = LegsUnit::create;
                 description = "The 5 silvirium unit (WIP).";
                 speed = 1.2f;
                 accel = 0.3f;
@@ -525,6 +531,7 @@ public class SLBUnits {
                 outlineRadius = 0;
             }};
             silvone = new UnitType("Silvone"){{
+                alwaysUnlocked = true;
                 constructor = UnitEntity::create;
                 flying = true;
                 immunities.add(SLBStatusEffects.disrupted);
@@ -563,6 +570,7 @@ public class SLBUnits {
                 }});
             }};
             silvioros = new UnitType("Silvioros"){{
+                alwaysUnlocked = true;
                 constructor = PayloadUnit::create;
                 description = "the T1 flying silvirium unit, equipped with 1 building stuner cannon";
                 flying = true;
@@ -630,6 +638,7 @@ public class SLBUnits {
             }});
         }};
         silvistar = new UnitType("Silvistar"){{
+            alwaysUnlocked = true;
             constructor = PayloadUnit::create;
             description = "A flying unit made by mixing tecnologys, equipped with 1 accel orb cannon and 1 static star mines launcher.";
             circleTarget = flying = true;
@@ -744,36 +753,37 @@ public class SLBUnits {
             }});
         }};
          star1 = new UnitType("star1"){{
-            constructor = MechUnit::create;
-            description = "a star unit equipped with a powerful short-range star flame";
-            health = 130f;
-            armor = 0;
-            hitSize = 8;
-            itemCapacity = 10;
-            immunities.add(SLBStatusEffects.disrupted);
-            ammoCapacity = 10;
-            ammoType = new ItemAmmoType(SLBItems.starFrag);
-            outlines = false;
-            speed = 2.2f;
-            accel = 0.2f;
-            drag = 0.6f;
-            rotateMoveFirst = true;
-            forceMultiTarget = true;
-            hoverable = false;
-            mechFrontSway = 0.3f;
-            mechSideSway = 0.2f;
-            mechStride = 1f;
-            weapons.add(
-            new Weapon("star-flame"){{
-                x = 0;
-                y = 3;
-                shootY = 2;
-                reload = 5;
-                shootCone = 2;
-                mirror = rotate = predictTarget = false;
-                top = continuous = alwaysContinuous = true;
-                shootSound = Sounds.flame;
-                bullet = new ContinuousFlameBulletType(){{
+             alwaysUnlocked = true;
+             constructor = MechUnit::create;
+             description = "a star unit equipped with a powerful short-range star flame";
+             health = 130f;
+             armor = 0;
+             hitSize = 8;
+             itemCapacity = 10;
+             immunities.add(SLBStatusEffects.disrupted);
+             ammoCapacity = 10;
+             ammoType = new ItemAmmoType(SLBItems.starFrag);
+             outlines = false;
+             speed = 2.2f;
+             accel = 0.2f;
+             drag = 0.6f;
+             rotateMoveFirst = true;
+             forceMultiTarget = true;
+             hoverable = false;
+             mechFrontSway = 0.3f;
+             mechSideSway = 0.2f;
+             mechStride = 1f;
+             weapons.add(
+                 new Weapon("star-flame"){{
+                    x = 0;
+                    y = 3;
+                    shootY = 2;
+                    reload = 5;
+                    shootCone = 2;
+                    mirror = rotate = predictTarget = false;
+                    top = continuous = alwaysContinuous = true;
+                    shootSound = Sounds.flame;
+                    bullet = new ContinuousFlameBulletType(){{
                         length = 80f;
                         range = 80f;
                         width = 5f;
