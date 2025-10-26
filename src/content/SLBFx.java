@@ -112,8 +112,8 @@ public class SLBFx {
         length = 0.5f;
         baseLength = 1;
         line = true;
-        colorFrom = SLBPal.starColor;
-        colorTo = SLBPal.starOtherColor;
+        colorFrom = SLBPal.starOrangeColor;
+        colorTo = SLBPal.starRedDarkColor;
         strokeFrom = 20f;
         strokeTo = 0f;
         lenFrom = 12f;
