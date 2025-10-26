@@ -8,6 +8,7 @@ public static Liquid liquidSilvirium;
 
     public static void load(){
         liquidSilvirium = new Liquid("liquid-silvirium"){{
+            alwaysUnlocked = true;
             color = SLBPal.silviriumColor;
             gasColor = SLBPal.silviriumligthColor;
             effect = SLBStatusEffects.disrupted;
