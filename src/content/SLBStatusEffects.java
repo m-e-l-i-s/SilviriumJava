@@ -15,6 +15,7 @@ public class SLBStatusEffects {
     
     public static void load(){
         disrupted = new StatusEffect("disrupted"){{
+            alwaysUnlocked = true;
             reloadMultiplier = 0.7f;
             speedMultiplier = 0.7f;
             damageMultiplier = 0.7f;
@@ -46,6 +47,7 @@ public class SLBStatusEffects {
             super.update(unit, time);
         }};
         rush = new StatusEffect("rush"){{
+            alwaysUnlocked = true;
             reloadMultiplier = 0f;
             speedMultiplier = 2.5f;
             buildSpeedMultiplier = 0f;
