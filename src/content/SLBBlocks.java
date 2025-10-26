@@ -36,7 +36,8 @@ public class SLBBlocks {
     public static void load(){
         //unit factory
         silvFacT1 = new UnitFactory("silvirium-molder"){{
-        requirements(Category.units, new ItemStack[]{
+            alwaysUnlocked = true;
+            requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.lead, 40),
                 new ItemStack(Items.silicon, 70)
@@ -76,7 +77,8 @@ public class SLBBlocks {
             );
         }};
         silvFacT2 = new Reconstructor("silvirium-remolder"){{
-        requirements(Category.units, new ItemStack[]{
+            alwaysUnlocked = true;
+            requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
@@ -92,8 +94,10 @@ public class SLBBlocks {
             constructTime = 900f;
             addUpgrade(SLBUnits.silvirror, SLBUnits.silvokeor);
         }};
+        
         silvFacT3 = new Reconstructor("silvirium-regrower"){{
-        requirements(Category.units, new ItemStack[]{
+            alwaysUnlocked = true;
+            requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
@@ -109,8 +113,10 @@ public class SLBBlocks {
             constructTime = 1800f;
             addUpgrade(SLBUnits.silvokeor, SLBUnits.silvbane);
         }};
+        
         silvFacT4 = new Reconstructor("silvirium-reforge"){{
-        requirements(Category.units, new ItemStack[]{
+            alwaysUnlocked = true;
+            requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
@@ -126,8 +132,10 @@ public class SLBBlocks {
             constructTime = 2400f;
             addUpgrade(SLBUnits.silvbane, SLBUnits.silvruner);
         }};
+        
         starFacT1 = new UnitFactory("star-molder"){{
-        requirements(Category.units, new ItemStack[]{
+            alwaysUnlocked = true;
+            requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.lead, 40),
                 new ItemStack(Items.silicon, 70)
@@ -147,6 +155,7 @@ public class SLBBlocks {
         }};
         //factory
         liqsilvfac = new GenericCrafter("liquid-silvirium-factory"){{
+            alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
@@ -196,6 +205,7 @@ public class SLBBlocks {
         }};
         
         silvingfac = new GenericCrafter("silvirium-ingot-factory"){{
+            alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 100),
                 new ItemStack(Items.metaglass, 10),
@@ -217,6 +227,7 @@ public class SLBBlocks {
         }};
         
         starfac = new GenericCrafter("star-factory"){{
+            alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(Items.metaglass, 50),
                 new ItemStack(Items.silicon, 110),
@@ -236,6 +247,7 @@ public class SLBBlocks {
         }};
         //ore
         silvOre = new OreBlock("ore-silvirium", SLBItems.silvirium){{
+            alwaysUnlocked = true;
             status = SLBStatusEffects.disrupted;
             statusDuration = 300f;
             speedMultiplier = 0.6f;
@@ -249,6 +261,7 @@ public class SLBBlocks {
         }};
         //turrets
         HPT = new LiquidTurret("higth-presure-turret"){{
+            alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 120),
                 new ItemStack(Items.graphite, 90),
@@ -292,6 +305,7 @@ public class SLBBlocks {
             shootEffect = Fx.shootLiquid;
         }};
         ST = new ItemTurret("silvirium-turret"){{
+            alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 110),
             });
@@ -322,6 +336,7 @@ public class SLBBlocks {
             shootEffect = SLBFx.silviriumHit2Effect;
         }};
         ABT = new ItemTurret("anti-building-turret"){{
+            alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(Items.copper, 3000),
                 new ItemStack(Items.lead, 3000),
@@ -385,6 +400,7 @@ public class SLBBlocks {
         }};
         //util
         decoy = new Wall("decoy"){{
+            alwaysUnlocked = true;
             requirements(Category.effect, new ItemStack[]{
                 new ItemStack(Items.silicon, 80),
                 new ItemStack(Items.copper, 50),
