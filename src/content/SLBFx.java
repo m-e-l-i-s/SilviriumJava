@@ -106,7 +106,7 @@ public class SLBFx {
         lenTo = 12f;
         lifetime = 20;
         cone = 0;
-    }};
+    }},
     starHit = new ParticleEffect(){{
         particles = 1;
         length = 0.5f;
