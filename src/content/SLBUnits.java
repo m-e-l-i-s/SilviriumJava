@@ -43,8 +43,8 @@ public class SLBUnits {
             mechFrontSway = 0.4f;
             mechSideSway = 0.35f;
             mechStride = 3f;
-            range = 80f; 
-            maxRange = 80f;
+            range = 160f; 
+            maxRange = 160f;
             weapons.add(
             new Weapon("slib-Silvanon-cannon"){{
                 x = 0;
@@ -56,14 +56,14 @@ public class SLBUnits {
                 mirror = rotate = false;
                 shootSound = Sounds.lasershoot;
                 recoil = 5;
-                bullet = new BasicBulletType(6,0){{
+                bullet = new BasicBulletType(4,0){{
                         recoil = 15;
                         knockback = 15;
                         splashDamage = 15;
-                        splashDamageRadius = 8;
-                        buildingDamageMultiplier = 0.7f;
-                        lifetime = 20;
-                        range = 120;
+                        splashDamageRadius = 12;
+                        buildingDamageMultiplier = 0.65f;
+                        lifetime = 40;
+                        range = 160;
                         splashDamagePierce = pierce = pierceBuilding = collidesAir = collidesGround = true;
                         pierceCap = 2;
                         hittable = false;
@@ -626,15 +626,6 @@ public class SLBUnits {
                                 super.hitTile(b, build, x, y, initialHealth, direct);
                                 build.applySlowdown(0f, 300f);
                         }
-                        @Override
-                        public void drawTrail(Bullet b){
-                                if(trailLength > 0 && b.trail != null){
-                                    float z = Draw.z();
-                                    Draw.z(z - 0.0001f);
-                                    b.trail.draw(trailColor.set(SLBPal.silviriumColor).lerp(SLBPal.silviriumDarkColor, b.fout()), trailWidth);
-                                    Draw.z(z);
-                                }
-                        }
                 };
             }});
         }};
@@ -696,7 +687,7 @@ public class SLBUnits {
                 shootSound = Sounds.shootBig;
                 rotate = false;
                 inaccuracy = 0f;
-                bullet = new BasicBulletType(0.2f, 5f){{
+                bullet = new BasicBulletType(0.0795f, 5f){{
                         keepVelocity = false;
                         splashDamagePierce = collides = true;
                         mixColorFrom = SLBPal.silviriumColor;
@@ -711,11 +702,11 @@ public class SLBUnits {
                         shrinkY = 0;
                         range = 80f;
                         drag = -0.1f;
-                        homingDelay = 16;
-                        homingPower = 0.08f;
-                        homingRange = 40;
+                        homingDelay = 12;
+                        homingPower = 0.09f;
+                        homingRange = 56;
                         splashDamage = 10;
-                        splashDamageRadius = 12;
+                        splashDamageRadius = 16;
                         buildingDamageMultiplier = 0.5f;
                 }
             };}},
