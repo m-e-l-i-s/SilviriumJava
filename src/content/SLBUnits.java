@@ -217,11 +217,11 @@ public class SLBUnits {
             
             legCount = 4;
             legLength = 18;
-            legMaxLength= 1.2f;
-            legMinLength= 0.8f;
-            legForwardScl = 1.1f;
+            legMaxLength = 1.5f;
+            legMinLength = 0.5f;
+            legForwardScl = 0.8f;
             legMoveSpace = 0.8f;
-            legSpeed = 0.2f;
+            legSpeed = 0.3f;
             legSplashDamage =  10f;
             legSplashRange =  8f;
             legExtension = 4f;
@@ -325,19 +325,11 @@ public class SLBUnits {
                         reload = 90;
                         rotationLimit = 90f;
                         rotateSpeed = 5f;
-                        shootCone = 35f;
+                        shootCone = 30f;
                         rotate = alternate = mirror = true;
                         top = false;
-                        shoot = new ShootBarrel(){{
-                                barrels = new float[]{
-                                        0, 0, 0,
-                                        0, 0, 0,
-                                        -3, -30f, 0,
-                                        3, 30f, 0
-                                };
-                                shots = 3;
-                                shotDelay = 25f;
-                        }};
+                        shoot.shots = 3;
+                        shoot.shotDelay = 20f;
                         shootSound = Sounds.lasershoot;
                         bullet = new BasicBulletType(2.5f,60f){{
                                 frontColor = trailColor  = SLBPal.silviriumColor;
@@ -393,7 +385,7 @@ public class SLBUnits {
                 alwaysUnlocked = true;
                 constructor = LegsUnit::create;
                 description = "The second silvirium unit equipped with 2 charge guns.";
-                speed = 1.2f;
+                speed = 1.3f;
                 accel = 0.2f;
                 rotateMoveFirst = true;
                 hitSize = 40;
