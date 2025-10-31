@@ -760,7 +760,6 @@ public class SLBUnits {
              armor = 0;
              hitSize = 8;
              itemCapacity = 10;
-             immunities.add(SLBStatusEffects.burning);
              ammoCapacity = 20;
              ammoType = new ItemAmmoType(SLBItems.starFrag);
              outlines = false;
