@@ -755,20 +755,19 @@ public class SLBUnits {
          star1 = new UnitType("star1"){{
              alwaysUnlocked = true;
              constructor = MechUnit::create;
-             description = "a star unit equipped with a powerful short-range star flame";
-             health = 130f;
+             description = "a star unit equipped with a powerful star blowtorch flame";
+             health = 160f;
              armor = 0;
              hitSize = 8;
              itemCapacity = 10;
-             immunities.add(SLBStatusEffects.disrupted);
-             ammoCapacity = 10;
+             immunities.add(SLBStatusEffects.burning);
+             ammoCapacity = 20;
              ammoType = new ItemAmmoType(SLBItems.starFrag);
              outlines = false;
              speed = 2.2f;
              accel = 0.2f;
              drag = 0.6f;
              rotateMoveFirst = true;
-             forceMultiTarget = true;
              hoverable = false;
              mechFrontSway = 0.3f;
              mechSideSway = 0.2f;
