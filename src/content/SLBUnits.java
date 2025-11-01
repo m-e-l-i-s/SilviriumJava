@@ -217,11 +217,11 @@ public class SLBUnits {
             
             legCount = 4;
             legLength = 18;
-            legMaxLength = 1.5f;
-            legMinLength = 0.5f;
-            legForwardScl = 0.8f;
-            legMoveSpace = 0.8f;
-            legSpeed = 0.3f;
+            legMaxLength = 2.5f;
+            legMinLength = 0f;
+            legForwardScl = 0.5f;
+            legMoveSpace = 1.8f;
+            legSpeed = 0.4f;
             legSplashDamage =  10f;
             legSplashRange =  8f;
             legExtension = 4f;
@@ -319,8 +319,8 @@ public class SLBUnits {
                 outlineRadius = 0;
                 weapons.add(
                 new Weapon("Silvbane-side"){{
-                        x = 12;
-                        y = 3;
+                        x = 8.75f;
+                        y = 7.5f;
                         shootY = 0;
                         reload = 90;
                         rotationLimit = 90f;
@@ -331,6 +331,23 @@ public class SLBUnits {
                         shoot.shots = 3;
                         shoot.shotDelay = 20f;
                         shootSound = Sounds.lasershoot;
+                        parts.add(
+                            new ShapePart(){{
+                                    color = SLBPal.silviriumColor;
+                                    colorTo = SLBPal.silviriumOtherColor;
+                                    progress = PartProgress.recoil.inv();
+                                    hollow = mirror = true;
+                                    sides = 3;
+                                    rotateSpeed = 6;
+                                    radius = 0;
+                                    radiusTo = 4;
+                                    stroke = 0;
+                                    strokeTo = 1;
+                                    x = 0;
+                                    moveX = 0;
+                                    y = 0;
+                            }}
+                        );
                         bullet = new BasicBulletType(2.5f,60f){{
                                 frontColor = trailColor  = SLBPal.silviriumColor;
                                 trailLength = 8;
