@@ -114,7 +114,7 @@ public class SLBFx {
         line = true;
         colorFrom = SLBPal.starOrangeColor;
         colorTo = SLBPal.starRedDarkColor;
-        strokeFrom = 20f;
+        strokeFrom = 2f;
         strokeTo = 0f;
         lenFrom = 12f;
         lenTo = 2f;
