@@ -84,13 +84,13 @@ public class SLBFx {
         Drawf.tri(e.x, e.y, 6 * e.fout(), 3, e.rotation + 180);
     }),
     silvAmb = new ParticleEffect(){{
-        particles = 2;
-        length = 20;
-        baseLength = 40;
+        particles = 1;
+        length = 10;
+        baseLength = 60;
         colorFrom = SLBPal.silviriumColor;
         colorTo = SLBPal.silviriumOtherColor;
-        sizeFrom = 1;
-        sizeTo = 1.5f;
+        sizeFrom = 0.7f;
+        sizeTo = 2f;
         lifetime = 60;
     }},
     silvline = new ParticleEffect(){{
