@@ -397,7 +397,12 @@ public class SLBBlocks {
                 frontColor = SLBItems.starFrag.color;
                 backColor = SLBItems.starFrag.color.mul(0.8f);
             }});
-        }};
+        }@Override
+            public void init(){
+                super.init();
+                placeOverlapRange =0;
+            }
+        };
         //util
         decoy = new Wall("decoy"){{
             alwaysUnlocked = true;
