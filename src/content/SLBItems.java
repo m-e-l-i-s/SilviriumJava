@@ -13,7 +13,7 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
         }};
         silviriumIng = new Item("silvirium-ingot"){{
             alwaysUnlocked = true;
-                color = SLBPal.silviriumOtherColor;
+            color = SLBPal.silviriumOtherColor;
         }};
         starFrag = new Item("star-fragment"){{
             alwaysUnlocked = true;
