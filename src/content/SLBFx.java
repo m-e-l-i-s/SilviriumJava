@@ -9,6 +9,7 @@ import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
+import mindustry.content.Items;
 import mindustry.entities.Effect;
 import mindustry.entities.effect.*;
 import mindustry.graphics.Drawf;
@@ -104,6 +105,20 @@ public class SLBFx {
         strokeTo = 0f;
         lenFrom = 12f;
         lenTo = 12f;
+        lifetime = 20;
+        cone = 0;
+    }},
+    sndLine = new ParticleEffect(){{
+        particles = 1;
+        length = 0.5f;
+        baseLength = 1;
+        line = true;
+        colorFrom = Items.sand.color;
+        colorTo = Items.sand.color.mul(0.8f);
+        strokeFrom = 1f;
+        strokeTo = 0f;
+        lenFrom = 16f;
+        lenTo = 16f;
         lifetime = 20;
         cone = 0;
     }},
