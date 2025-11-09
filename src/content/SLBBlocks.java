@@ -5,6 +5,7 @@ import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.bullet.*;
 import mindustry.entities.part.RegionPart;
+import mindustry.gen.Bullet;
 import mindustry.graphics.Layer;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
@@ -14,6 +15,7 @@ import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.units.UnitFactory;
 import mindustry.world.blocks.units.Reconstructor;
 import arc.struct.EnumSet;
+import arc.util.Time;
 import arc.math.Interp;
 import content.SLBliquids;
 import mindustry.type.*;
@@ -338,7 +340,7 @@ public class SLBBlocks {
         SST = new ItemTurret("sand-storm-turret"){{
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
-                new ItemStack(SLBItems.sand, 110),
+                new ItemStack(Items.sand, 110),
                 new ItemStack(Items.silicon, 110)
             });
             ammoTypes.putAll(
