@@ -355,7 +355,7 @@ public class SLBBlocks {
                             public void updateWeaving(Bullet b){
                                 b.vel.rotate(5 * Time.delta);
                             };
-                    }})
+                    }});
                 }}
             );
             size = 1;
