@@ -5,7 +5,7 @@ import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.bullet.*;
 import mindustry.entities.part.RegionPart;
-import mindustry.gen;
+import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
