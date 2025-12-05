@@ -312,7 +312,7 @@ public class SLBBlocks {
                 new ItemStack(SLBItems.silvirium, 110),
             });
             ammoTypes.putAll(
-            SLBItems.silvirium, new BasicBulletType(2f,10f){{
+            SLBItems.silvirium, new BasicBulletType(2f,11f){{
                 lifetime = 51;
                 width = 6;
                 height = 10;
@@ -333,7 +333,7 @@ public class SLBBlocks {
             maxAmmo = 10;
             rotateSpeed = 5f;
             range = 100f;
-            health = 270;
+            health = 240f;
             flags = EnumSet.of(BlockFlag.turret);
             shootEffect = SLBFx.silviriumHit2Effect;
         }};
@@ -439,7 +439,7 @@ public class SLBBlocks {
                 frontColor = Items.thorium.color;
                 backColor = Items.thorium.color.mul(0.8f);
             }},
-                SLBItems.starFrag, new BasicBulletType(8, 2100){{
+            SLBItems.starFrag, new BasicBulletType(8, 2100){{
                 lifetime = 200;
                 width = 16;
                 height = 12;
@@ -451,7 +451,7 @@ public class SLBBlocks {
         }@Override
             public void init(){
                 super.init();
-                placeOverlapRange =0;
+                placeOverlapRange = 0;
             }
         };
         //util
