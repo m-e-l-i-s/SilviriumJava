@@ -826,6 +826,81 @@ public class SLBUnits {
                     }};
                 }});
             }};
+            star1 = new UnitType("star2"){{
+             alwaysUnlocked = true;
+             constructor = MechUnit::create;
+             description = "a star unit equipped with a powerful star blowtorch flame";
+             health = 360f;
+             armor = 0;
+             hitSize = 8;
+             itemCapacity = 10;
+             ammoCapacity = 20;
+             ammoType = new ItemAmmoType(SLBItems.starFrag);
+             outlines = false;
+             speed = 3f;
+             accel = 0.2f;
+             drag = 0.2f;
+             rotateMoveFirst = true;
+             hoverable = false;
+             mechFrontSway = 0.3f;
+             mechSideSway = 0.2f;
+             mechStride = 1f;
+             weapons.add(
+                 new HealtActivationWeapon("star-drone"){{
+                    x = 5;
+                    y = 5;
+                    shootY = 2;
+                    reload = 5;
+                    shootCone = 2;
+                    maxHealthRange = 0.90f;
+                    minHealthRange = 0.00f;
+                    mirror = rotate = predictTarget = false;
+                    top = continuous = alwaysContinuous = true;
+                    shootSound = Sounds.flame;
+                    parts.add(
+                        new RegionPart("-part"){{
+                            moveRot = -10f;
+                            moveX = -1f;
+                            moves.add(new PartMove(PartProgress.warmup, 2f, 1f, -5f));
+                            progress = PartProgress.warmup;
+                            mirror = true;
+                        }});
+                        bullet = new ContinuousFlameBulletType(){{
+                        length = 40f;
+                        range = 40f;
+                        width = 2f;
+                        damageInterval = 60f;
+                        damage = 30f /*30 * damageInterval / 60f*/;
+                        buildingDamageMultiplier = 4f;
+                        pierceBuilding = true;
+                        status = StatusEffects.burning;
+                        statusDuration = 60f;
+                        knockback = 0;
+                        impact = true;
+                        lifetime = 10f;
+                        hitEffect = SLBFx.starHit;
+                        lightStroke = 20f;
+                        oscScl = 0.04f;
+                        oscMag = 0.02f;
+                        drawFlare = false;
+                        divisions = 4;
+                        colors = new Color[]{
+                                SLBPal.starRedDarkColor,
+                                SLBPal.starRedColor,
+                                SLBPal.starOrangeDarkColor,
+                                SLBPal.starOrangeColor,
+                                Color.white.cpy()
+                        };
+                        lengthWidthPans = new float[]{
+                                1.0f,1.0f,0.1f,
+                                0.8f,0.8f,0.1f,
+                                0.6f,0.6f,0.1f,
+                                0.4f,0.4f,0.1f,
+                                0.2f,0.2f,0.1f
+                        };
+                    }};
+                }});
+            }};
 }}
 
     
