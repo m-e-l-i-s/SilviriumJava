@@ -351,23 +351,23 @@ public class SLBBlocks {
                     trailEffect = SLBFx.sndLine;
                     ammoMultiplier = 1;
                     spawnBullets.add(new ExplosionBulletType(10,120){{
+                        killShooter = false;
                         fragBullet = new BasicBulletType(2,10){{
                             lifetime = 180;
-                            killShooter = false;
                         }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(5 / b.time() * Time.delta);
+                                b.vel.rotate(5 * b.fin() * Time.delta);
                             }
                         }; 
                     }}, new ExplosionBulletType(10,240){{
+                        killShooter = false;
                         fragBullet = new BasicBulletType(2,10){{
                             lifetime = 180;
-                            killShooter = false;
                         }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(-5 / b.time() * Time.delta);
+                                b.vel.rotate(-5 * b.fin() * Time.delta);
                             }
                         }; 
                     }});
