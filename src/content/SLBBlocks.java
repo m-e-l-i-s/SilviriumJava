@@ -126,7 +126,7 @@ public class SLBBlocks {
             });
             size = 5;
             consumePower(0f);
-            health = 40;
+            health = 1375;
             consumeItems(new ItemStack[]{
                 new ItemStack(SLBItems.silvirium, 1200),
                 new ItemStack(Items.silicon, 400),
@@ -333,7 +333,7 @@ public class SLBBlocks {
             maxAmmo = 10;
             rotateSpeed = 5f;
             range = 100f;
-            health = 240f;
+            health = 240;
             flags = EnumSet.of(BlockFlag.turret);
             shootEffect = SLBFx.silviriumHit2Effect;
         }};
