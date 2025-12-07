@@ -357,7 +357,7 @@ public class SLBBlocks {
                         }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(5 * b.fin() * Time.delta);
+                                b.vel.rotate(10 * (b.fin()>0.5f?2:1) * Time.delta);
                             }
                         }; 
                     }}, new ExplosionBulletType(10,240){{
@@ -367,7 +367,7 @@ public class SLBBlocks {
                         }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(-5 * b.fin() * Time.delta);
+                                b.vel.rotate(-10 * (b.fin()>0.5f?2:1) * Time.delta);
                             }
                         }; 
                     }});
