@@ -354,6 +354,8 @@ public class SLBBlocks {
                         killShooter = false;
                         fragBullet = new BasicBulletType(2,10){{
                             lifetime = 180;
+                            homingPower = 0.05f;
+                            homingRange = 24;
                         }
                             @Override
                             public void updateWeaving(Bullet b){
@@ -364,6 +366,8 @@ public class SLBBlocks {
                         killShooter = false;
                         fragBullet = new BasicBulletType(2,10){{
                             lifetime = 180;
+                            homingPower = 0.05f;
+                            homingRange = 24;
                         }
                             @Override
                             public void updateWeaving(Bullet b){
