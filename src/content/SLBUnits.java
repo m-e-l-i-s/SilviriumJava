@@ -877,7 +877,7 @@ public class SLBUnits {
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 60f;
-                        knockback = 0;
+                        knockback = 16;
                         impact = true;
                         lifetime = 5f;
                         hitEffect = SLBFx.starHit;
