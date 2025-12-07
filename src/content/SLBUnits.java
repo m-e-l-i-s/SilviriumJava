@@ -854,36 +854,38 @@ public class SLBUnits {
                     shootCone = 2;
                     maxHealthRange = 0.90f;
                     minHealthRange = 0.00f;
+                    minWarmup = 0.9f;
                     mirror = rotate = predictTarget = false;
                     top = continuous = alwaysContinuous = true;
                     shootSound = Sounds.flame;
+                    mirror = true;
                     parts.add(
                         new RegionPart("-part"){{
-                            moveRot = -10f;
+                            moveRot = 0f;
                             moveX = -1f;
-                            moves.add(new PartMove(PartProgress.warmup, 2f, 1f, -5f));
+                            moves.add(new PartMove(PartProgress.warmup.inv(), -3.5f, -4f, 70));
                             progress = PartProgress.warmup;
-                            mirror = true;
+                            mirror = false;
                         }});
                         bullet = new ContinuousFlameBulletType(){{
                         length = 40f;
                         range = 40f;
                         width = 2f;
-                        damageInterval = 60f;
-                        damage = 30f /*30 * damageInterval / 60f*/;
+                        damageInterval = 120f;
+                        damage = 60f /*30 * damageInterval / 60f*/;
                         buildingDamageMultiplier = 4f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 60f;
                         knockback = 0;
                         impact = true;
-                        lifetime = 10f;
+                        lifetime = 5f;
                         hitEffect = SLBFx.starHit;
-                        lightStroke = 20f;
+                        lightStroke = 10f;
                         oscScl = 0.04f;
                         oscMag = 0.02f;
                         drawFlare = false;
-                        divisions = 4;
+                        divisions = 6;
                         colors = new Color[]{
                                 SLBPal.starRedDarkColor,
                                 SLBPal.starRedColor,
