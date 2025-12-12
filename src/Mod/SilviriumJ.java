@@ -18,7 +18,7 @@ public class SilviriumLib extends Mod{
             Time.runTask(30f, () -> {
                 BaseDialog dialog = new BaseDialog("Hello message");
                 dialog.cont.add("This is Silvirium").row();
-                dialog.cont.image(Core.atlas.find("slib-icon")).pad(40f).row();
+                dialog.cont.image(Core.atlas.find("sli-icon")).pad(40f).row();
                 dialog.cont.button("CLOSE", dialog::hide).size(150f,75f);
                 dialog.show();
             });
@@ -27,10 +27,10 @@ public class SilviriumLib extends Mod{
 
     @Override
     public void loadContent(){
-        SLBStatusEffects.load();
-        SLBliquids.load();
-        SLBItems.load();
-        SLBUnits.load();
-        SLBBlocks.load();
+        SLStatusEffects.load();
+        SLliquids.load();
+        SLItems.load();
+        SLUnits.load();
+        SLBlocks.load();
     };
 }
