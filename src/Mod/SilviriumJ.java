@@ -31,6 +31,6 @@ public class SilviriumJ extends Mod{
         SLliquids.load();
         SLItems.load();
         SLUnits.load();
-        SLlocks.load();
+        SLBlocks.load();
     };
 }
