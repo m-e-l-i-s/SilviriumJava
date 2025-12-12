@@ -335,6 +335,7 @@ public class SLlocks {
             range = 100f;
             health = 240;
             flags = EnumSet.of(BlockFlag.turret);
+            coolant = consume(new ConsumeLiquid(SLliquids.liquidSilvirium, 0.05f));
             shootEffect = SLFx.silviriumHit2Effect;
         }};
         SST = new ItemTurret("sand-storm-turret"){{
