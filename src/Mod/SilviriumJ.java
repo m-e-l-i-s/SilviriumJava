@@ -2,11 +2,11 @@ package Mod;
 
 import arc.*;
 import arc.util.*;
-import content.SLBBlocks;
-import content.SLBStatusEffects;
-import content.SLBUnits;
-import content.SLBItems;
-import content.SLBliquids;
+import content.SLlocks;
+import content.SLStatusEffects;
+import content.SLUnits;
+import content.SLItems;
+import content.SLliquids;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
@@ -31,6 +31,6 @@ public class SilviriumLib extends Mod{
         SLliquids.load();
         SLItems.load();
         SLUnits.load();
-        SLBlocks.load();
+        SLlocks.load();
     };
 }
