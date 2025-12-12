@@ -14,7 +14,7 @@ import mindustry.entities.Effect;
 import mindustry.entities.effect.*;
 import mindustry.graphics.Drawf;
 
-public class SLBFx {
+public class SLFx {
     public static Vec2 vect1 = new Vec2();
     public static Vec2 vect2 = new Vec2();
     static float tmpx;
@@ -24,14 +24,14 @@ public class SLBFx {
         float rds = 1f;
         int amnt = 5;
         float dst = 16f;
-        color(SLBPal.silviriumColor, SLBPal.silviriumDarkColor, e.fin());
+        color(SLPal.silviriumColor, SLPal.silviriumDarkColor, e.fin());
         randLenVectors(e.id, e.fin(), amnt, dst, (x, y, fin, fout) -> {
             Fill.circle(e.x + x, e.y + y, 4f * fout * rds);
         });
     }),
     silviriumWave1Effect = new WaveEffect(){{
-        colorFrom=SLBPal.silviriumColor;
-        colorTo=SLBPal.silviriumDarkColor;
+        colorFrom=SLPal.silviriumColor;
+        colorTo=SLPal.silviriumDarkColor;
         strokeFrom=1f;
         strokeTo=0.2f;
         sizeFrom=4f;
@@ -41,14 +41,14 @@ public class SLBFx {
         float rds = 1f;
         int amnt = 5;
         float dst = 24f;
-        color(SLBPal.silviriumColor, SLBPal.silviriumDarkColor, e.fin());
+        color(SLPal.silviriumColor, SLPal.silviriumDarkColor, e.fin());
         randLenVectors(e.id, e.finpow(), amnt, dst, (x, y, fin, fout) -> {
             Fill.circle(e.x + x, e.y + y, 4f * fout * rds);
         });
     }),
     silviriumInvHit3Effect = new ParticleEffect(){{
-        colorFrom = SLBPal.silviriumOtherColor;
-        colorTo = SLBPal.silviriumDarkColor;
+        colorFrom = SLPal.silviriumOtherColor;
+        colorTo = SLPal.silviriumDarkColor;
         particles = 4;
         randLength = false;
         length = 24;
@@ -63,24 +63,24 @@ public class SLBFx {
         lifetime = 30;
     }},
     silviriumRailHit = new Effect(20, 200, (e) -> {
-        Draw.color(SLBPal.silviriumOtherColor);
+        Draw.color(SLPal.silviriumOtherColor);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + 130);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + -130);
-        Draw.color(SLBPal.silviriumColor);
+        Draw.color(SLPal.silviriumColor);
         Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + 130);
         Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + -130);
         Angles.randLenVectors((long)e.id, 3, 1f + 80f * e.fin(), e.rotation, 120f, (x, y) -> {
-            Draw.color(SLBPal.silviriumOtherColor);
+            Draw.color(SLPal.silviriumOtherColor);
             Drawf.tri(e.x + x, e.y + y, e.fslope() * 9f + 3f, e.fslope() * 9f + 3f, Mathf.angle(x, y)+180f);
-            Draw.color(SLBPal.silviriumColor);
+            Draw.color(SLPal.silviriumColor);
             Drawf.tri(e.x + x, e.y + y, e.fslope() * 8f + 3f, e.fslope() * 8f + 3f, Mathf.angle(x, y)+180f);
         });
       }),
       silviriumRail = new Effect(30, 200, (e) -> {
-        Draw.color(SLBPal.silviriumOtherColor);
+        Draw.color(SLPal.silviriumOtherColor);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 12, e.rotation);
         Drawf.tri(e.x, e.y, 8 * e.fout(), 4, e.rotation + 180);
-        Draw.color(SLBPal.silviriumColor);
+        Draw.color(SLPal.silviriumColor);
         Drawf.tri(e.x, e.y, 6 * e.fout(), 10, e.rotation);
         Drawf.tri(e.x, e.y, 6 * e.fout(), 3, e.rotation + 180);
     }),
@@ -88,8 +88,8 @@ public class SLBFx {
         particles = 1;
         length = 10;
         baseLength = 60;
-        colorFrom = SLBPal.silviriumColor;
-        colorTo = SLBPal.silviriumOtherColor;
+        colorFrom = SLPal.silviriumColor;
+        colorTo = SLPal.silviriumOtherColor;
         sizeFrom = 0.7f;
         sizeTo = 2f;
         lifetime = 60;
@@ -99,8 +99,8 @@ public class SLBFx {
         length = 0.5f;
         baseLength = 1;
         line = true;
-        colorFrom = SLBPal.silviriumColor;
-        colorTo = SLBPal.silviriumOtherColor;
+        colorFrom = SLPal.silviriumColor;
+        colorTo = SLPal.silviriumOtherColor;
         strokeFrom = 2f;
         strokeTo = 0f;
         lenFrom = 12f;
@@ -127,8 +127,8 @@ public class SLBFx {
         length = 0.5f;
         baseLength = 1;
         line = true;
-        colorFrom = SLBPal.starOrangeColor;
-        colorTo = SLBPal.starRedDarkColor;
+        colorFrom = SLPal.starOrangeColor;
+        colorTo = SLPal.starRedDarkColor;
         strokeFrom = 2f;
         strokeTo = 0f;
         lenFrom = 12f;
