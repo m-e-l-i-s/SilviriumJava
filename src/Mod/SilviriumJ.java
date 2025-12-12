@@ -2,7 +2,7 @@ package Mod;
 
 import arc.*;
 import arc.util.*;
-import content.SLlocks;
+import content.SLBlocks;
 import content.SLStatusEffects;
 import content.SLUnits;
 import content.SLItems;
@@ -13,7 +13,7 @@ import mindustry.ui.dialogs.*;
 
 public class SilviriumJ extends Mod{
 
-    public SilviriumLib(){
+    public SilviriumJ(){
     Events.on(ClientLoadEvent.class, e -> {
             Time.runTask(30f, () -> {
                 BaseDialog dialog = new BaseDialog("Hello message");
