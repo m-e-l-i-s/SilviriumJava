@@ -14,6 +14,7 @@ import mindustry.world.blocks.defense.turrets.LiquidTurret;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.units.UnitFactory;
 import mindustry.world.blocks.units.Reconstructor;
+import mindustry.world.consumers.*;
 import arc.struct.EnumSet;
 import arc.util.Time;
 import arc.math.Interp;
@@ -27,7 +28,7 @@ import static mindustry.type.ItemStack.*;
 import static mindustry.type.LiquidStack.*;
 
 
-public class SLlocks {
+public class SLBlocks {
     public static Block
     liqsilvfac,silvingfac,starfac,
     silvFacT1, silvFacT2, silvFacT3, silvFacT4,starFacT1,
