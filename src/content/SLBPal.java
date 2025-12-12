@@ -2,7 +2,7 @@ package content;
 
 import arc.graphics.Color;
 
-public class SLBPal {
+public class SLPal {
     public static Color
 
     silviriumColor = Color.valueOf("00fff7"),
