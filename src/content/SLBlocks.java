@@ -17,7 +17,7 @@ import mindustry.world.blocks.units.Reconstructor;
 import arc.struct.EnumSet;
 import arc.util.Time;
 import arc.math.Interp;
-import content.SLBliquids;
+import content.SLliquids;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
@@ -27,7 +27,7 @@ import static mindustry.type.ItemStack.*;
 import static mindustry.type.LiquidStack.*;
 
 
-public class SLBBlocks {
+public class SLlocks {
     public static Block
     liqsilvfac,silvingfac,starfac,
     silvFacT1, silvFacT2, silvFacT3, silvFacT4,starFacT1,
@@ -40,40 +40,40 @@ public class SLBBlocks {
         silvFacT1 = new UnitFactory("silvirium-molder"){{
             alwaysUnlocked = true;
             requirements(Category.units, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.lead, 40),
                 new ItemStack(Items.silicon, 70)
             });
             size = 2;
             health = 220;
             consumePower(0f);
-            consumeLiquid(SLBliquids.liquidSilvirium, 0.5f);
+            consumeLiquid(SLliquids.liquidSilvirium, 0.5f);
             plans.addAll(
                 new UnitPlan(
-                    SLBUnits.silvirror, 1200,
+                    SLUnits.silvirror, 1200,
                     new ItemStack[]{
-                      new ItemStack(SLBItems.silvirium, 30),
+                      new ItemStack(SLItems.silvirium, 30),
                       new ItemStack(Items.silicon, 20)
                     }
                 ),
                 new UnitPlan(
-                    SLBUnits.silvone, 1200,
+                    SLUnits.silvone, 1200,
                     new ItemStack[]{
-                      new ItemStack(SLBItems.silvirium, 20),
+                      new ItemStack(SLItems.silvirium, 20),
                       new ItemStack(Items.silicon, 10)
                     }
                 ),
                 new UnitPlan(
-                    SLBUnits.silvioros, 1200,
+                    SLUnits.silvioros, 1200,
                     new ItemStack[]{
-                      new ItemStack(SLBItems.silvirium, 20),
+                      new ItemStack(SLItems.silvirium, 20),
                       new ItemStack(Items.silicon, 10)
                     }
                 ),
                 new UnitPlan(
-                    SLBUnits.silvanon, 900,
+                    SLUnits.silvanon, 900,
                     new ItemStack[]{
-                      new ItemStack(SLBItems.silvirium, 35),
+                      new ItemStack(SLItems.silvirium, 35),
                     }
                 )
             );
@@ -81,7 +81,7 @@ public class SLBBlocks {
         silvFacT2 = new Reconstructor("silvirium-remolder"){{
             alwaysUnlocked = true;
             requirements(Category.units, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
                 new ItemStack(Items.metaglass, 50)
@@ -90,17 +90,17 @@ public class SLBBlocks {
             consumePower(0f);
             health = 495;
             consumeItems(new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 80),
+                new ItemStack(SLItems.silvirium, 80),
                 new ItemStack(Items.silicon, 40),
             });
             constructTime = 900f;
-            addUpgrade(SLBUnits.silvirror, SLBUnits.silvokeor);
+            addUpgrade(SLUnits.silvirror, SLUnits.silvokeor);
         }};
         
         silvFacT3 = new Reconstructor("silvirium-regrower"){{
             alwaysUnlocked = true;
             requirements(Category.units, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
                 new ItemStack(Items.metaglass, 50)
@@ -109,17 +109,17 @@ public class SLBBlocks {
             consumePower(0f);
             health = 880;
             consumeItems(new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.silicon, 150),
             });
             constructTime = 1800f;
-            addUpgrade(SLBUnits.silvokeor, SLBUnits.silvbane);
+            addUpgrade(SLUnits.silvokeor, SLUnits.silvbane);
         }};
         
         silvFacT4 = new Reconstructor("silvirium-reforge"){{
             alwaysUnlocked = true;
             requirements(Category.units, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
                 new ItemStack(Items.metaglass, 50)
@@ -128,17 +128,17 @@ public class SLBBlocks {
             consumePower(0f);
             health = 1375;
             consumeItems(new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 1200),
+                new ItemStack(SLItems.silvirium, 1200),
                 new ItemStack(Items.silicon, 400),
             });
             constructTime = 2400f;
-            addUpgrade(SLBUnits.silvbane, SLBUnits.silvruner);
+            addUpgrade(SLUnits.silvbane, SLUnits.silvruner);
         }};
         
         starFacT1 = new UnitFactory("star-molder"){{
             alwaysUnlocked = true;
             requirements(Category.units, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.lead, 40),
                 new ItemStack(Items.silicon, 70)
             });
@@ -147,9 +147,9 @@ public class SLBBlocks {
             consumePower(0f);
             plans.addAll(
                 new UnitPlan(
-                    SLBUnits.star1, 0,
+                    SLUnits.star1, 0,
                     new ItemStack[]{
-                      new ItemStack(SLBItems.starFrag, 30),
+                      new ItemStack(SLItems.starFrag, 30),
                       new ItemStack(Items.silicon, 20)
                     }
                 )
@@ -159,12 +159,12 @@ public class SLBBlocks {
         liqsilvfac = new GenericCrafter("liquid-silvirium-factory"){{
             alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 200),
+                new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
                 new ItemStack(Items.silicon, 70),
-                new ItemStack(SLBItems.silviriumIng, 50)
+                new ItemStack(SLItems.silviriumIng, 50)
             });
-            outputLiquid = new LiquidStack(SLBliquids.liquidSilvirium, 0.25f);
+            outputLiquid = new LiquidStack(SLliquids.liquidSilvirium, 0.25f);
             size = 2;
             hasPower = true;
             hasItems = true;
@@ -175,13 +175,13 @@ public class SLBBlocks {
             envEnabled = Env.any;
             liquidCapacity = 12f;
             craftTime = 60;
-            lightLiquid = SLBliquids.liquidSilvirium;
+            lightLiquid = SLliquids.liquidSilvirium;
 
             consumePower(0.5f);
-            consumeItem(SLBItems.silvirium);
+            consumeItem(SLItems.silvirium);
             drawer = new DrawMulti(
                 new DrawDefault(),
-                new DrawLiquidRegion(SLBliquids.liquidSilvirium){{
+                new DrawLiquidRegion(SLliquids.liquidSilvirium){{
                 suffix = "-liquid";
                 }},
                 new DrawRegion("-rot"){{
@@ -189,8 +189,8 @@ public class SLBBlocks {
                         rotateSpeed = 10f;
                 }},
                 new DrawSoftParticles(){{
-                        color = SLBPal.silviriumColor;
-                        color2 = SLBPal.silviriumColor;
+                        color = SLPal.silviriumColor;
+                        color2 = SLPal.silviriumColor;
                         alpha = 0.3f;
                         particles = 7;
                         particleLife = 70f;
@@ -209,7 +209,7 @@ public class SLBBlocks {
         silvingfac = new GenericCrafter("silvirium-ingot-factory"){{
             alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 100),
+                new ItemStack(SLItems.silvirium, 100),
                 new ItemStack(Items.metaglass, 10),
                 new ItemStack(Items.silicon, 50),
             });
@@ -224,8 +224,8 @@ public class SLBBlocks {
             craftTime = 600;
 
             consumePower(0.5f);
-            consumeItem(SLBItems.silvirium,4);
-            outputItem = new ItemStack(SLBItems.silviriumIng, 1);
+            consumeItem(SLItems.silvirium,4);
+            outputItem = new ItemStack(SLItems.silviriumIng, 1);
         }};
         
         starfac = new GenericCrafter("star-factory"){{
@@ -245,12 +245,12 @@ public class SLBBlocks {
             craftTime = 600;
 
             consumePower(8f);
-            outputItem = new ItemStack(SLBItems.starFrag, 1);
+            outputItem = new ItemStack(SLItems.starFrag, 1);
         }};
         //ore
-        silvOre = new OreBlock("ore-silvirium", SLBItems.silvirium){{
+        silvOre = new OreBlock("ore-silvirium", SLItems.silvirium){{
             alwaysUnlocked = true;
-            status = SLBStatusEffects.disrupted;
+            status = SLStatusEffects.disrupted;
             statusDuration = 300f;
             speedMultiplier = 0.6f;
             oreDefault = true;
@@ -258,27 +258,27 @@ public class SLBBlocks {
             oreThreshold = 0.7f;
             emitLight = true;
             lightRadius = 12f;
-            lightColor = SLBPal.silviriumColor;
+            lightColor = SLPal.silviriumColor;
             variants = 2;
         }};
         //turrets
         HPT = new LiquidTurret("higth-presure-turret"){{
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 120),
+                new ItemStack(SLItems.silvirium, 120),
                 new ItemStack(Items.graphite, 90),
                 new ItemStack(Items.silicon, 100),
                 new ItemStack(Items.metaglass, 60)
             });
             ammo(
-                SLBliquids.liquidSilvirium,new LiquidBulletType(SLBliquids.liquidSilvirium){{
+                SLliquids.liquidSilvirium,new LiquidBulletType(SLliquids.liquidSilvirium){{
                     damage = 30;
                     speed = 16;
                     lifetime = 40;
                     knockback = 0.2f;
                     drag = 0.07f;
                     layer = Layer.bullet - 2f;
-                    status = SLBStatusEffects.disrupted;
+                    status = SLStatusEffects.disrupted;
                     statusDuration = 300;
                     pierce = pierceBuilding = true;
                     pierceCap = 2;
@@ -309,19 +309,19 @@ public class SLBBlocks {
         ST = new ItemTurret("silvirium-turret"){{
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
-                new ItemStack(SLBItems.silvirium, 110),
+                new ItemStack(SLItems.silvirium, 110),
             });
             ammoTypes.putAll(
-            SLBItems.silvirium, new BasicBulletType(2f,11f){{
+            SLItems.silvirium, new BasicBulletType(2f,11f){{
                 lifetime = 51;
                 width = 6;
                 height = 10;
                 pierce = pierceBuilding = true;
                 pierceCap = 2;
-                frontColor = SLBPal.silviriumColor;
-                backColor = SLBPal.silviriumColor;
-                status = SLBStatusEffects.disrupted;
-                trailColor  = SLBPal.silviriumColor;
+                frontColor = SLPal.silviriumColor;
+                backColor = SLPal.silviriumColor;
+                status = SLStatusEffects.disrupted;
+                trailColor  = SLPal.silviriumColor;
                 trailLength = 6;
                 statusDuration = 300;
             }});
@@ -335,7 +335,7 @@ public class SLBBlocks {
             range = 100f;
             health = 240;
             flags = EnumSet.of(BlockFlag.turret);
-            shootEffect = SLBFx.silviriumHit2Effect;
+            shootEffect = SLFx.silviriumHit2Effect;
         }};
         SST = new ItemTurret("sand-storm-turret"){{
             alwaysUnlocked = true;
@@ -348,7 +348,7 @@ public class SLBBlocks {
                     damage = 100;
                     splashDamage = 25;
                     splashDamageRadius = 40;
-                    trailEffect = SLBFx.sndLine;
+                    trailEffect = SLFx.sndLine;
                     ammoMultiplier = 1;
                     spawnBullets.add(new ExplosionBulletType(10,120){{
                         killShooter = false;
@@ -388,7 +388,7 @@ public class SLBBlocks {
             range = 240f;
             health = 2200;
             flags = EnumSet.of(BlockFlag.turret);
-            shootEffect = SLBFx.silviriumHit2Effect;
+            shootEffect = SLFx.silviriumHit2Effect;
         }};
         ABT = new ItemTurret("anti-building-turret"){{
             alwaysUnlocked = true;
@@ -443,14 +443,14 @@ public class SLBBlocks {
                 frontColor = Items.thorium.color;
                 backColor = Items.thorium.color.mul(0.8f);
             }},
-            SLBItems.starFrag, new BasicBulletType(8, 2100){{
+            SLItems.starFrag, new BasicBulletType(8, 2100){{
                 lifetime = 200;
                 width = 16;
                 height = 12;
                 pierce = pierceBuilding = true;
                 pierceDamageFactor = 0.1f;
-                frontColor = SLBItems.starFrag.color;
-                backColor = SLBItems.starFrag.color.mul(0.8f);
+                frontColor = SLItems.starFrag.color;
+                backColor = SLItems.starFrag.color.mul(0.8f);
             }});
         }@Override
             public void init(){
