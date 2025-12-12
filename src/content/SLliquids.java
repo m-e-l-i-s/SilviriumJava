@@ -3,15 +3,15 @@ package content;
 
 import mindustry.type.Liquid;
 
-public class SLBliquids {
+public class SLliquids {
 public static Liquid liquidSilvirium;
 
     public static void load(){
         liquidSilvirium = new Liquid("liquid-silvirium"){{
             alwaysUnlocked = true;
-            color = SLBPal.silviriumColor;
-            gasColor = SLBPal.silviriumligthColor;
-            effect = SLBStatusEffects.disrupted;
+            color = SLPal.silviriumColor;
+            gasColor = SLPal.silviriumligthColor;
+            effect = SLStatusEffects.disrupted;
             heatCapacity = 0.2f;
             boilPoint = 3f;
             temperature = 0.4f;
