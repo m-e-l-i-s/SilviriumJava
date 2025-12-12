@@ -2,18 +2,18 @@ package content;
 
 import mindustry.type.Item;
 
-public class SLBItems {
+public class SLItems {
 public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
 
     public static void load(){
         silvirium = new Item("silvirium"){{
             alwaysUnlocked = true;
             hardness = 2;
-            color = SLBPal.silviriumColor;
+            color = SLPal.silviriumColor;
         }};
         silviriumIng = new Item("silvirium-ingot"){{
             alwaysUnlocked = true;
-            color = SLBPal.silviriumOtherColor;
+            color = SLPal.silviriumOtherColor;
         }};
         starFrag = new Item("star-fragment"){{
             alwaysUnlocked = true;
@@ -21,7 +21,7 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
             charge = 0.05f;
             flammability = 0.6f;
             radioactivity = 0.2f;
-            color = SLBPal.starOrangeColor;
+            color = SLPal.starOrangeColor;
         }};
         antintuitivemater = new Item("antintuitive-matter"){{
             alwaysUnlocked = true;
