@@ -1,8 +1,8 @@
 {
     "displayName": "Silvirium",
-    "name": "slib",
+    "name": "sli",
     "author": "Melis",
-    "main": "Mod.SilviriumLib",
+    "main": "Mod.SilviriumJ",
     "description": "A java remake of my json unfinished mod.",
     "version": 1.1,
     "minGameVersion": 145,
