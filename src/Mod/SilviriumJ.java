@@ -11,7 +11,7 @@ import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 
-public class SilviriumLib extends Mod{
+public class SilviriumJ extends Mod{
 
     public SilviriumLib(){
     Events.on(ClientLoadEvent.class, e -> {
