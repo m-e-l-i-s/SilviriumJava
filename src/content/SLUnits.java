@@ -19,7 +19,7 @@ import mindustry.type.unit.MissileUnitType;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 
-public class SLBUnits {
+public class SLUnits {
     public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5, silvsile, silvone, silvioros, silvistar,star1;
     
     public static void load(){
@@ -31,9 +31,9 @@ public class SLBUnits {
             armor = 2;
             hitSize = 8;
             itemCapacity = 10;
-            immunities.add(SLBStatusEffects.disrupted);
+            immunities.add(SLStatusEffects.disrupted);
             ammoCapacity = 60;
-            ammoType = new ItemAmmoType(SLBItems.silvirium);
+            ammoType = new ItemAmmoType(SLItems.silvirium);
             outlines = false;
             speed = 1.9f;
             accel = 0.3f;
@@ -69,10 +69,10 @@ public class SLBUnits {
                         pierceCap = 2;
                         hittable = false;
                         smokeEffect = Fx.none;
-                        frontColor = SLBPal.silviriumColor;
-                        backColor = SLBPal.silviriumDarkColor;
-                        shootEffect = SLBFx.silviriumHit1Effect;
-                        status = SLBStatusEffects.disrupted;
+                        frontColor = SLPal.silviriumColor;
+                        backColor = SLPal.silviriumDarkColor;
+                        shootEffect = SLFx.silviriumHit1Effect;
+                        status = SLStatusEffects.disrupted;
                         statusDuration = 120f;
                         sprite = "circle-bullet";
                 }};}});
@@ -85,9 +85,9 @@ public class SLBUnits {
             armor = 3;
             hitSize = 8;
             itemCapacity = 10;
-            immunities.add(SLBStatusEffects.disrupted);
+            immunities.add(SLStatusEffects.disrupted);
             ammoCapacity = 60;
-            ammoType = new ItemAmmoType(SLBItems.silvirium);
+            ammoType = new ItemAmmoType(SLItems.silvirium);
             outlines = false;
             speed = 1.6f;
             accel = 0.4f;
@@ -109,23 +109,23 @@ public class SLBUnits {
                 buildingDamageMultiplier = 0.5f;
                 pierceBuilding = true;
                 pierceCap = 4;
-                status = SLBStatusEffects.disrupted;
+                status = SLStatusEffects.disrupted;
                 statusDuration = 300f;
                 knockback = -0.4f;
                 impact = true;
                 lifetime = 10f;
                 range = 80f;
-                hitEffect = SLBFx.silviriumHit1Effect;
+                hitEffect = SLFx.silviriumHit1Effect;
                 lightStroke = 24f;
                 oscScl = 0.04f;
                 oscMag = 0.02f;
                 drawFlare = false;
                 divisions = 25;
                 colors = new Color[]{
-                        SLBPal.silviriumDarkColor,
-                        SLBPal.silviriumMidColor,
-                        SLBPal.silviriumColor,
-                        SLBPal.silviriumligthColor,
+                        SLPal.silviriumDarkColor,
+                        SLPal.silviriumMidColor,
+                        SLPal.silviriumColor,
+                        SLPal.silviriumligthColor,
                         Color.white.cpy()
                 };
                 lengthWidthPans = new float[]{
@@ -155,9 +155,9 @@ public class SLBUnits {
                         lifetime = 10f;
                         range = 80f;
                         buildingDamageMultiplier = 0.5f;
-                        frontColor = trailColor  = SLBPal.silviriumColor;
+                        frontColor = trailColor  = SLPal.silviriumColor;
                         trailLength = 16;
-                        status = SLBStatusEffects.disrupted;
+                        status = SLStatusEffects.disrupted;
                         statusDuration = 1500f;
                 }};
             }},
@@ -211,7 +211,7 @@ public class SLBUnits {
             health = 480;
             armor = 5;
             createScorch = false;
-            immunities.add(SLBStatusEffects.disrupted);
+            immunities.add(SLStatusEffects.disrupted);
             legContinuousMove = true;
             hovering = true;
             
@@ -236,7 +236,7 @@ public class SLBUnits {
             range = 120;
             maxRange = 120;
             ammoCapacity = 300;
-            ammoType = new ItemAmmoType(SLBItems.silvirium);
+            ammoType = new ItemAmmoType(SLItems.silvirium);
             itemCapacity = 30;
             outlineRadius = 0;
             weapons.add(
@@ -254,8 +254,8 @@ public class SLBUnits {
                 shootSound = Sounds.lasershoot;
                 bullet = new BasicBulletType(2,0){{
                         chargeEffect = new WaveEffect(){{
-                                colorFrom = SLBPal.silviriumColor;
-                                colorTo = SLBPal.silviriumDarkColor;
+                                colorFrom = SLPal.silviriumColor;
+                                colorTo = SLPal.silviriumDarkColor;
                                 strokeFrom = 0.1f;
                                 strokeTo =  0.7f;
                                 sizeFrom = 8;
@@ -270,10 +270,10 @@ public class SLBUnits {
                         splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
                         hittable = false;
                         smokeEffect = Fx.none;
-                        frontColor = SLBPal.silviriumColor;
-                        backColor = SLBPal.silviriumDarkColor;
-                        shootEffect = SLBFx.silviriumHit1Effect;
-                        status = SLBStatusEffects.disrupted;
+                        frontColor = SLPal.silviriumColor;
+                        backColor = SLPal.silviriumDarkColor;
+                        shootEffect = SLFx.silviriumHit1Effect;
+                        status = SLStatusEffects.disrupted;
                         statusDuration = 600f;
                         sprite = "circle-bullet";
                 }};}});
@@ -289,7 +289,7 @@ public class SLBUnits {
                 health = 1255;
                 armor = 7;
                 createScorch = false;
-                immunities.add(SLBStatusEffects.disrupted);
+                immunities.add(SLStatusEffects.disrupted);
                 legContinuousMove = true;
                 hovering = true;
                 
@@ -314,7 +314,7 @@ public class SLBUnits {
                 range = 200;
                 maxRange = 200;
                 ammoCapacity = 400;
-                ammoType = new ItemAmmoType(SLBItems.silvirium);
+                ammoType = new ItemAmmoType(SLItems.silvirium);
                 itemCapacity = 50;
                 outlineRadius = 0;
                 weapons.add(
@@ -333,8 +333,8 @@ public class SLBUnits {
                         shootSound = Sounds.lasershoot;
                         parts.add(
                             new ShapePart(){{
-                                    color = SLBPal.silviriumColor;
-                                    colorTo = SLBPal.silviriumOtherColor;
+                                    color = SLPal.silviriumColor;
+                                    colorTo = SLPal.silviriumOtherColor;
                                     progress = PartProgress.recoil.inv();
                                     hollow = mirror = true;
                                     sides = 3;
@@ -349,7 +349,7 @@ public class SLBUnits {
                             }}
                         );
                         bullet = new BasicBulletType(2.5f,60f){{
-                                frontColor = trailColor  = SLBPal.silviriumColor;
+                                frontColor = trailColor  = SLPal.silviriumColor;
                                 trailLength = 8;
                                 lifetime = 80;
                                 homingPower = 0.08f;
@@ -389,7 +389,7 @@ public class SLBUnits {
                                                                 splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
                                                                 hittable = false;
                                                                 smokeEffect = Fx.none;
-                                                                status = SLBStatusEffects.disrupted;
+                                                                status = SLStatusEffects.disrupted;
                                                                 statusDuration = 300f;
                                                         }};
                                                 }}
@@ -409,7 +409,7 @@ public class SLBUnits {
                 health = 8100;
                 armor = 11;
                 createScorch = false;
-                immunities.add(SLBStatusEffects.disrupted);
+                immunities.add(SLStatusEffects.disrupted);
                 legContinuousMove = true;
                 hovering = true;
                 
@@ -434,7 +434,7 @@ public class SLBUnits {
                 range = 120;
                 maxRange = 120;
                 ammoCapacity = 300;
-                ammoType = new ItemAmmoType(SLBItems.silvirium);
+                ammoType = new ItemAmmoType(SLItems.silvirium);
                 itemCapacity = 60;
                 outlineRadius = 0;
                 weapons.add(
@@ -463,10 +463,10 @@ public class SLBUnits {
                                         pierceDamageFactor = 0.02f;
                                         hittable = false;
                                         smokeEffect = Fx.none;
-                                        frontColor = SLBPal.silviriumColor;
-                                        backColor = SLBPal.silviriumDarkColor;
-                                        shootEffect = SLBFx.silviriumHit1Effect;
-                                        status = SLBStatusEffects.disrupted;
+                                        frontColor = SLPal.silviriumColor;
+                                        backColor = SLPal.silviriumDarkColor;
+                                        shootEffect = SLFx.silviriumHit1Effect;
+                                        status = SLStatusEffects.disrupted;
                                         statusDuration = 600f;
                                         sprite = "circle-bullet";
                                 }};
@@ -483,7 +483,7 @@ public class SLBUnits {
                                 shootOnDeath = true;
                                 shoot.firstShotDelay = 180;
                                 shootSound = Sounds.lasershoot;
-                                shootStatus = SLBStatusEffects.rush;
+                                shootStatus = SLStatusEffects.rush;
                                 shootStatusDuration = 180;
                                 bullet = new ExplosionBulletType(220,120){{
                                         buildingDamageMultiplier = 0.5f;
@@ -491,7 +491,7 @@ public class SLBUnits {
                                         splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
                                         hittable = false;
                                         smokeEffect = Fx.none;
-                                        status = SLBStatusEffects.disrupted;
+                                        status = SLStatusEffects.disrupted;
                                         statusDuration = 300f;
                                         killShooter = true;
                                         absorbable = false;
@@ -510,7 +510,7 @@ public class SLBUnits {
                 health = 480;
                 armor = 5;
                 createScorch = false;
-                immunities.add(SLBStatusEffects.disrupted);
+                immunities.add(SLStatusEffects.disrupted);
                 legContinuousMove = true;
                 hovering = true;
                 
@@ -535,7 +535,7 @@ public class SLBUnits {
                 range = 120;
                 maxRange = 120;
                 ammoCapacity = 300;
-                ammoType = new ItemAmmoType(SLBItems.silvirium);
+                ammoType = new ItemAmmoType(SLItems.silvirium);
                 itemCapacity = 30;
                 outlineRadius = 0;
             }};
@@ -543,8 +543,8 @@ public class SLBUnits {
                 alwaysUnlocked = true;
                 constructor = UnitEntity::create;
                 flying = true;
-                immunities.add(SLBStatusEffects.disrupted);
-                ammoType = new ItemAmmoType(SLBItems.silvirium);
+                immunities.add(SLStatusEffects.disrupted);
+                ammoType = new ItemAmmoType(SLItems.silvirium);
                 outlines = false;
                 health = 40;
                 speed = 4f;
@@ -567,11 +567,11 @@ public class SLBUnits {
                                 length = 64;
                                 range = 64;
                                 pointEffectSpace = 16f;
-                                pierceEffect = SLBFx.silviriumRailHit;
-                                pointEffect = SLBFx.silviriumRail;
-                                hitEffect = SLBFx.silviriumWave1Effect;
+                                pierceEffect = SLFx.silviriumRailHit;
+                                pointEffect = SLFx.silviriumRail;
+                                hitEffect = SLFx.silviriumWave1Effect;
                                 smokeEffect = Fx.shootSmall;
-                                status = SLBStatusEffects.disrupted;
+                                status = SLStatusEffects.disrupted;
                                 statusDuration = 180f;
                                 damage = 60;
                                 pierceDamageFactor = 0.5f;
@@ -584,7 +584,7 @@ public class SLBUnits {
                 description = "the T1 flying silvirium unit, equipped with 1 building stuner cannon";
                 flying = true;
                 payloadCapacity = 64/*Mathf.pow(1*8,2) || (1*8)^2*/;
-                immunities.add(SLBStatusEffects.disrupted);
+                immunities.add(SLStatusEffects.disrupted);
                 outlines = false;
                 health = 115f;
                 hitSize = 8.005f;
@@ -596,8 +596,8 @@ public class SLBUnits {
                 targetAir = false;
                 parts.add(
                 new ShapePart(){{
-                        color = SLBPal.silviriumColor;
-                        colorTo = SLBPal.silviriumColor;
+                        color = SLPal.silviriumColor;
+                        colorTo = SLPal.silviriumColor;
                         progress = PartProgress.recoil.inv();
                         hollow = mirror = true;
                         sides = 3;
@@ -630,8 +630,8 @@ public class SLBUnits {
                                 range = 240f;
                                 collidesAir = false;
                                 collidesGround = pierce = true;
-                                frontColor = SLBPal.silviriumColor;
-                                backColor = SLBPal.silviriumDarkColor;
+                                frontColor = SLPal.silviriumColor;
+                                backColor = SLPal.silviriumDarkColor;
                                 trailLength = 8;
                                 trailWidth = 1;
                                 shootEffect = Fx.shootSmall;
@@ -653,7 +653,7 @@ public class SLBUnits {
             circleTarget = flying = true;
             payloadCapacity = 256/*Mathf.pow(2*8,2) || (2*8)^2*/;
             hitSize = 20;
-            immunities.add(SLBStatusEffects.disrupted);
+            immunities.add(SLStatusEffects.disrupted);
             outlines = false;
             health = 210f;
             speed = 5f;
@@ -664,7 +664,7 @@ public class SLBUnits {
             engineSize = 0f;
             parts.addAll(
             new HoverPart(){{
-                color = SLBPal.starOrangeColor;
+                color = SLPal.starOrangeColor;
                 sides = 6;
                 radius = 12;
                 x = -4.5f;
@@ -672,7 +672,7 @@ public class SLBUnits {
                 layer = 59.95f;
             }},
             new HoverPart(){{
-                color = SLBPal.starOrangeColor;
+                color = SLPal.starOrangeColor;
                 sides = 6;
                 radius = 12;
                 x = -4.5f;
@@ -680,7 +680,7 @@ public class SLBUnits {
                 layer = 59.95f;
             }},
             new HoverPart(){{
-                color = SLBPal.silviriumColor;
+                color = SLPal.silviriumColor;
                 sides = 6;
                 radius = 12;
                 x = 4.5f;
@@ -688,7 +688,7 @@ public class SLBUnits {
                 layer = 59.95f;
             }},
             new HoverPart(){{
-                color = SLBPal.silviriumColor;
+                color = SLPal.silviriumColor;
                 sides = 6;
                 radius = 12;
                 x = 4.5f;
@@ -708,11 +708,11 @@ public class SLBUnits {
                 bullet = new BasicBulletType(0.0795f, 5f){{
                         keepVelocity = false;
                         splashDamagePierce = collides = true;
-                        mixColorFrom = SLBPal.silviriumColor;
-                        mixColorTo = SLBPal.silviriumMidColor;
-                        trailColor = SLBPal.silviriumColor;
-                        shootEffect = SLBFx.silviriumInvHit3Effect;
-                        status = SLBStatusEffects.disrupted;
+                        mixColorFrom = SLPal.silviriumColor;
+                        mixColorTo = SLPal.silviriumMidColor;
+                        trailColor = SLPal.silviriumColor;
+                        shootEffect = SLFx.silviriumInvHit3Effect;
+                        status = SLStatusEffects.disrupted;
                         statusDuration = 600f;
                         sprite = "circle-bullet";
                         width = 6f;
@@ -754,8 +754,8 @@ public class SLBUnits {
                         explodeRange = 40;
                         keepVelocity = collides = false;
                         splashDamagePierce = collidesGround = true;
-                        mixColorFrom = SLBPal.starOrangeColor;
-                        mixColorTo = SLBPal.starRedDarkColor;
+                        mixColorFrom = SLPal.starOrangeColor;
+                        mixColorTo = SLPal.starRedDarkColor;
                         shootEffect = Fx.shootSmall;
                         lifetime = 200f;
                 }};
@@ -770,7 +770,7 @@ public class SLBUnits {
              hitSize = 8;
              itemCapacity = 10;
              ammoCapacity = 20;
-             ammoType = new ItemAmmoType(SLBItems.starFrag);
+             ammoType = new ItemAmmoType(SLItems.starFrag);
              outlines = false;
              speed = 2.2f;
              accel = 0.2f;
@@ -803,17 +803,17 @@ public class SLBUnits {
                         knockback = 0;
                         impact = true;
                         lifetime = 10f;
-                        hitEffect = SLBFx.starHit;
+                        hitEffect = SLFx.starHit;
                         lightStroke = 20f;
                         oscScl = 0.04f;
                         oscMag = 0.02f;
                         drawFlare = false;
                         divisions = 2;
                         colors = new Color[]{
-                                SLBPal.starRedDarkColor,
-                                SLBPal.starRedColor,
-                                SLBPal.starOrangeDarkColor,
-                                SLBPal.starOrangeColor,
+                                SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
                                 Color.white.cpy()
                         };
                         lengthWidthPans = new float[]{
@@ -835,7 +835,7 @@ public class SLBUnits {
              hitSize = 8;
              itemCapacity = 10;
              ammoCapacity = 20;
-             ammoType = new ItemAmmoType(SLBItems.starFrag);
+             ammoType = new ItemAmmoType(SLItems.starFrag);
              outlines = false;
              speed = 3f;
              accel = 0.2f;
@@ -880,17 +880,17 @@ public class SLBUnits {
                         knockback = 16;
                         impact = true;
                         lifetime = 5f;
-                        hitEffect = SLBFx.starHit;
+                        hitEffect = SLFx.starHit;
                         lightStroke = 10f;
                         oscScl = 0.04f;
                         oscMag = 0.02f;
                         drawFlare = false;
                         divisions = 6;
                         colors = new Color[]{
-                                SLBPal.starRedDarkColor,
-                                SLBPal.starRedColor,
-                                SLBPal.starOrangeDarkColor,
-                                SLBPal.starOrangeColor,
+                                SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
                                 Color.white.cpy()
                         };
                         lengthWidthPans = new float[]{
