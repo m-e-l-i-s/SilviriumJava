@@ -340,6 +340,7 @@ public class SLBlocks {
             shootEffect = SLFx.silviriumHit2Effect;
         }};
         SST = new ItemTurret("sand-storm-turret"){{
+            predictTarget = false;
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(Items.sand, 110),
@@ -354,7 +355,7 @@ public class SLBlocks {
                     ammoMultiplier = 1;
                     spawnBullets.add(new ExplosionBulletType(10,120){{
                         killShooter = false;
-                        fragBullet = new BasicBulletType(2,10){{
+                        fragBullet = new BasicBulletType(6,10){{
                             lifetime = 180;
                             homingPower = 0.05f;
                             homingRange = 24;
@@ -366,7 +367,7 @@ public class SLBlocks {
                         }; 
                     }}, new ExplosionBulletType(10,240){{
                         killShooter = false;
-                        fragBullet = new BasicBulletType(2,10){{
+                        fragBullet = new BasicBulletType(6,10){{
                             lifetime = 180;
                             homingPower = 0.05f;
                             homingRange = 24;
@@ -379,7 +380,7 @@ public class SLBlocks {
                     }});
                 }}
             );
-            size = 1;
+            size = 3;
             recoil = 1f;
             reload = 120f;
             inaccuracy = 0f;
