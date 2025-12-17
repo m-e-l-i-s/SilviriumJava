@@ -847,39 +847,39 @@ public class SLUnits {
              mechStride = 1f;
              weapons.add(
                  new HealtActivationWeapon("sil-star2"){{
-                    x = 15;
-                    y = 5;
-                    shootY = 2;
-                    reload = 5;
-                    shootCone = 2;
+                    x = 1;
+                    y = 0;
+                    shootX = 15;
+                    shootY = 8;
+                    reload = 120;
+                    shootCone = 25;
                     maxHealthRange = 0.90f;
                     minHealthRange = 0.00f;
-                    minWarmup = 0.9f;
-                    mirror = rotate = predictTarget = false;
-                    top = continuous = alwaysContinuous = true;
+                    minWarmup = 0.99f;
+                    mirror = alternate = predictTarget = alwaysContinuous = false;
+                    top = rotate = continuous = true;
                     shootSound = Sounds.flame;
                     mirror = true;
                     parts.add(
                         new RegionPart("-drone"){{
                             moveRot = 0f;
-                            moveX = -1f;
-                            moves.add(new PartMove(PartProgress.warmup.inv(), -15f, -5f, 70));
+                            moves.add(new PartMove(PartProgress.warmup, -15f, -5f, 90));
                             progress = PartProgress.warmup;
                             mirror = false;
                         }});
                         bullet = new ContinuousFlameBulletType(){{
                         length = 40f;
                         range = 40f;
-                        width = 2f;
+                        width = 8f;
                         damageInterval = 10f;
-                        damage = 48f /*30 * damageInterval / 60f*/;
+                        damage = 5f /*30 * damageInterval / 60f*/;
                         buildingDamageMultiplier = 4f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 60f;
-                        knockback = 16;
+                        knockback = 0;
                         impact = true;
-                        lifetime = 5f;
+                        lifetime = 60f;
                         hitEffect = SLFx.starHit;
                         lightStroke = 10f;
                         oscScl = 0.04f;
