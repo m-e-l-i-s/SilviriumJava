@@ -47,7 +47,7 @@ public class SLUnits {
             range = 160f; 
             maxRange = 160f;
             weapons.add(
-            new Weapon("slib-Silvanon-cannon"){{
+            new Weapon("sil-Silvanon-cannon"){{
                 x = 0;
                 y = 4;
                 shootY = 4;
@@ -161,7 +161,7 @@ public class SLUnits {
                         statusDuration = 1500f;
                 }};
             }},
-            new Weapon("slib-silvirror-side-R"){{
+            new Weapon("sil-silvirror-side-R"){{
                 x = 8f;
                 y = 1f;
                 reload = 60f;
@@ -180,7 +180,7 @@ public class SLUnits {
                 chargeSound = Sounds.none;
                 bullet = silvirrorBullet;
             }},
-            new Weapon("slib-silvirror-side-L"){{
+            new Weapon("sil-silvirror-side-L"){{
                 x = -8f;
                 y = 1f;
                 reload = 60f;
@@ -438,7 +438,7 @@ public class SLUnits {
                 itemCapacity = 60;
                 outlineRadius = 0;
                 weapons.add(
-                        new HealtActivationWeapon("slib-Silvruner-machingun"){{
+                        new HealtActivationWeapon("sil-Silvruner-machingun"){{
                                 x = 0;
                                 y = 2;
                                 maxHealthRange = 1f;
@@ -554,7 +554,7 @@ public class SLUnits {
                 maxRange = 64;
                 engineSize = 0.01f;
                 hitSize = 4;
-                weapons.add(new Weapon("slib-piercer"){{
+                weapons.add(new Weapon("sil-piercer"){{
                         x = 0f;
                         y = 0f;
                         mirror = false;
@@ -846,8 +846,8 @@ public class SLUnits {
              mechSideSway = 0.2f;
              mechStride = 1f;
              weapons.add(
-                 new HealtActivationWeapon("star-drone"){{
-                    x = 5;
+                 new HealtActivationWeapon("sil-star2"){{
+                    x = 15;
                     y = 5;
                     shootY = 2;
                     reload = 5;
@@ -860,10 +860,10 @@ public class SLUnits {
                     shootSound = Sounds.flame;
                     mirror = true;
                     parts.add(
-                        new RegionPart("-part"){{
+                        new RegionPart("-drone"){{
                             moveRot = 0f;
                             moveX = -1f;
-                            moves.add(new PartMove(PartProgress.warmup.inv(), -3.5f, -4f, 70));
+                            moves.add(new PartMove(PartProgress.warmup.inv(), -15f, -5f, 70));
                             progress = PartProgress.warmup;
                             mirror = false;
                         }});
@@ -871,8 +871,8 @@ public class SLUnits {
                         length = 40f;
                         range = 40f;
                         width = 2f;
-                        damageInterval = 120f;
-                        damage = 60f /*30 * damageInterval / 60f*/;
+                        damageInterval = 10f;
+                        damage = 48f /*30 * damageInterval / 60f*/;
                         buildingDamageMultiplier = 4f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
