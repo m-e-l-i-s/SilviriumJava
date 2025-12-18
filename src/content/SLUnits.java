@@ -793,7 +793,7 @@ public class SLUnits {
                     bullet = new ContinuousFlameBulletType(){{
                         length = 80f;
                         range = 80f;
-                        width = 5f;
+                        width = 8f;
                         damageInterval = 0.1f;
                         damage = 0.03f /*21 * damageInterval / 60f*/;
                         buildingDamageMultiplier = 2f;
@@ -817,11 +817,11 @@ public class SLUnits {
                                 Color.white.cpy()
                         };
                         lengthWidthPans = new float[]{
-                                1.0f,1.3f,0.35f,
-                                0.8f,1f,0.3f,
-                                0.6f,0.9f,0.2f,
-                                0.5f,0.8f,0.15f,
-                                0.3f,0.5f,0.1f
+                                1.0f,1.0f,0.6f,
+                                0.8f,1.0f,0.5f,
+                                0.6f,0.9f,0.4f,
+                                0.5f,0.8f,0.3f,
+                                0.3f,0.5f,0.2f
                         };
                     }};
                 }});
@@ -832,38 +832,37 @@ public class SLUnits {
              description = "a star unit equipped with a powerful star blowtorch flame";
              health = 360f;
              armor = 0;
-             hitSize = 8;
-             itemCapacity = 10;
+             hitSize = 12;
+             itemCapacity = 20;
              ammoCapacity = 20;
              ammoType = new ItemAmmoType(SLItems.starFrag);
              outlines = false;
-             speed = 3f;
-             accel = 0.2f;
-             drag = 0.2f;
+             speed = 6f;
+             accel = 0.005f;
+             drag = 0.01f;
              rotateMoveFirst = true;
              hoverable = false;
-             mechFrontSway = 0.3f;
+             mechFrontSway = 0.4f;
              mechSideSway = 0.2f;
-             mechStride = 1f;
+             mechStride = 2f;
              weapons.add(
-                 new HealtActivationWeapon("sil-star2"){{
+                 new HealtActivationWeapon("sil-star2-drone"){{
                     x = 1;
-                    y = 0;
+                    y = 1;
                     shootX = 15;
-                    shootY = 8;
+                    shootY = 15;
                     reload = 120;
                     shootCone = 25;
-                    maxHealthRange = 0.90f;
+                    maxHealthRange = 0.70f;
                     minHealthRange = 0.00f;
                     minWarmup = 0.99f;
                     mirror = alternate = predictTarget = alwaysContinuous = false;
-                    top = rotate = continuous = true;
+                    mirror = top = rotate = continuous = true;
                     shootSound = Sounds.flame;
-                    mirror = true;
                     parts.add(
-                        new RegionPart("-drone"){{
+                        new RegionPart("-part"){{
                             moveRot = 0f;
-                            moves.add(new PartMove(PartProgress.warmup, -15f, -5f, 90));
+                            moves.add(new PartMove(PartProgress.warmup, -15f, -15f, 90));
                             progress = PartProgress.warmup;
                             mirror = false;
                         }});
@@ -885,7 +884,7 @@ public class SLUnits {
                         oscScl = 0.04f;
                         oscMag = 0.02f;
                         drawFlare = false;
-                        divisions = 6;
+                        divisions = 2;
                         colors = new Color[]{
                                 SLPal.starRedDarkColor,
                                 SLPal.starRedColor,
@@ -899,6 +898,95 @@ public class SLUnits {
                                 0.6f,0.6f,0.1f,
                                 0.4f,0.4f,0.1f,
                                 0.2f,0.2f,0.1f
+                        };
+                    }};
+                }},
+                new HealtActivationWeapon("sil-star2-drone"){{
+                    x = 1;
+                    y = -1;
+                    shootX = -15;
+                    shootY = -15;
+                    reload = 120;
+                    shootCone = 25;
+                    maxHealthRange = 0.70f;
+                    minHealthRange = 0.00f;
+                    minWarmup = 0.99f;
+                    mirror = alternate = predictTarget = alwaysContinuous = false;
+                    mirror = top = rotate = continuous = true;
+                    shootSound = Sounds.flame;
+                    parts.add(
+                        new RegionPart("-part"){{
+                            moveRot = 0f;
+                            moves.add(new PartMove(PartProgress.warmup, 15f, 15f, 90));
+                            progress = PartProgress.warmup;
+                            mirror = false;
+                        }});
+                        bullet = new ContinuousFlameBulletType(){{
+                        length = 40f;
+                        range = 40f;
+                        width = 8f;
+                        damageInterval = 10f;
+                        damage = 2f /*30 * damageInterval / 60f*/;
+                        buildingDamageMultiplier = 4f;
+                        pierceBuilding = true;
+                        status = StatusEffects.burning;
+                        statusDuration = 60f;
+                        knockback = 0;
+                        impact = true;
+                        lifetime = 60f;
+                        hitEffect = SLFx.starHit;
+                        lightStroke = 10f;
+                        oscScl = 0.04f;
+                        oscMag = 0.02f;
+                        drawFlare = false;
+                        divisions = 2;
+                        colors = new Color[]{
+                                SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
+                                Color.white.cpy()
+                        };
+                        lengthWidthPans = new float[]{
+                                1.0f,1.0f,0.1f,
+                                0.8f,0.8f,0.1f,
+                                0.6f,0.6f,0.1f,
+                                0.4f,0.4f,0.1f,
+                                0.2f,0.2f,0.1f
+                        };
+                    }};
+                }},new HealtActivationWeapon("sil-star2-laser"){{
+                    x = 1;
+                    y = -1;
+                    shootX = 15;
+                    shootY = 8;
+                    reload = 120;
+                    shootCone = 25;
+                    maxHealthRange = 0.90f;
+                    minHealthRange = 0.00f;
+                    minWarmup = 0.99f;
+                    mirror = alternate = predictTarget = alwaysContinuous = false;
+                    mirror = top = rotate = continuous = true;
+                    shootSound = Sounds.flame;
+                    bullet = new LaserFlameBulletType(){{
+                        length = 40f;
+                        range = 40f;
+                        width = 8f;
+                        damage = 10f /*30 * damageInterval / 60f*/;
+                        buildingDamageMultiplier = 4f;
+                        pierceBuilding = true;
+                        status = StatusEffects.burning;
+                        statusDuration = 60f;
+                        knockback = 10;
+                        impact = true;
+                        lifetime = 20f;
+                        hitEffect = SLFx.starHit;
+                        colors = new Color[]{
+                                SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
+                                Color.white.cpy()
                         };
                     }};
                 }});
