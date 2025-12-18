@@ -968,7 +968,7 @@ public class SLUnits {
                     mirror = alternate = predictTarget = alwaysContinuous = false;
                     mirror = top = rotate = continuous = true;
                     shootSound = Sounds.flame;
-                    bullet = new LaserFlameBulletType(){{
+                    bullet = new LaserBulletType(){{
                         length = 40f;
                         range = 40f;
                         width = 8f;
