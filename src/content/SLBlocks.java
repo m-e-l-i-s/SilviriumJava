@@ -74,7 +74,8 @@ public class SLBlocks {
                 new UnitPlan(
                     SLUnits.silvanon, 900,
                     new ItemStack[]{
-                      new ItemStack(SLItems.silvirium, 35),
+                        new ItemStack(SLItems.silvirium, 25),
+                        new ItemStack(SLItems.silviriumIng, 10),
                     }
                 )
             );
@@ -216,8 +217,7 @@ public class SLBlocks {
             });
             size = 2;
             hasPower = true;
-            hasItems = true;
-            hasLiquids = true;
+            hasItems = true
             rotate = false;
             solid = true;
             envEnabled = Env.any;
@@ -278,7 +278,7 @@ public class SLBlocks {
                     lifetime = 40;
                     knockback = 0.2f;
                     drag = 0.07f;
-                    layer = Layer.bullet - 2f;
+                    layer = Layer.bullet - 1f;
                     status = SLStatusEffects.disrupted;
                     statusDuration = 300;
                     pierce = pierceBuilding = true;
@@ -355,26 +355,26 @@ public class SLBlocks {
                     ammoMultiplier = 1;
                     spawnBullets.add(new ExplosionBulletType(10,120){{
                         killShooter = false;
-                        fragBullet = new BasicBulletType(6,10){{
+                        fragBullet = new BasicBulletType(12,10){{
                             lifetime = 180;
                             homingPower = 0.05f;
                             homingRange = 24;
                         }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(10 * (b.fin()>0.5f?2:1) * Time.delta);
+                                b.vel.rotate(10 * (b.fin()>0.5f?2*b.fin():1) * Time.delta);
                             }
                         }; 
                     }}, new ExplosionBulletType(10,240){{
                         killShooter = false;
-                        fragBullet = new BasicBulletType(6,10){{
+                        fragBullet = new BasicBulletType(12,10){{
                             lifetime = 180;
                             homingPower = 0.05f;
                             homingRange = 24;
                         }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(-10 * (b.fin()>0.5f?2:1) * Time.delta);
+                                b.vel.rotate(-10 * (b.fin()>0.5f?2*b.fin():1) * Time.delta);
                             }
                         }; 
                     }});
