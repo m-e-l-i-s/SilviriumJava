@@ -27,46 +27,45 @@ public class SLUnits {
             alwaysUnlocked = true;
             constructor = MechUnit::create;
             description = "a silvirium unit equipped with a powerful short-range heavy cannon. \nless effective against buildings";
-            health = 90f;
-            armor = 2;
+            health = 50f;
+            armor = -5;
             hitSize = 8;
             itemCapacity = 10;
             immunities.add(SLStatusEffects.disrupted);
             ammoCapacity = 60;
             ammoType = new ItemAmmoType(SLItems.silvirium);
             outlines = false;
-            speed = 1.9f;
+            speed = 0.6f;
             accel = 0.3f;
             drag = 0.6f;
-            rotateSpeed = 20f;
+            rotateSpeed = 2f;
             rotateMoveFirst = true;
             hoverable = false;
-            mechFrontSway = 0.4f;
-            mechSideSway = 0.35f;
-            mechStride = 3f;
-            range = 160f; 
-            maxRange = 160f;
+            mechFrontSway = 0.8f;
+            mechSideSway = 0.75f;
+            mechStride = 6f;
+            range = 240f; 
+            maxRange = 240f;
             weapons.add(
             new Weapon("sil-Silvanon-cannon"){{
                 x = 0;
                 y = 4;
                 shootY = 4;
-                reload = 90;
-                shootCone = 3;
+                reload = 0;
+                shootCone = 1;
                 top = true;
                 mirror = rotate = false;
+                shootOnDeath = true;
                 shootSound = Sounds.lasershoot;
-                recoil = 5;
-                bullet = new BasicBulletType(4,0){{
-                        recoil = 15;
-                        knockback = 15;
-                        splashDamage = 15;
+                bullet = new BasicBulletType(2,0){{
+                        knockback = 25;
+                        splashDamage = 180;
                         splashDamageRadius = 12;
-                        buildingDamageMultiplier = 0.65f;
-                        lifetime = 40;
-                        range = 160;
-                        splashDamagePierce = pierce = pierceBuilding = collidesAir = collidesGround = true;
-                        pierceCap = 2;
+                        buildingDamageMultiplier = 0.5f;
+                        lifetime = 120;
+                        scaledLife = true;
+                        killShooter = true;
+                        range = 240;
                         hittable = false;
                         smokeEffect = Fx.none;
                         frontColor = SLPal.silviriumColor;
@@ -846,133 +845,22 @@ public class SLUnits {
              mechSideSway = 0.2f;
              mechStride = 2f;
              weapons.add(
-                 new HealtActivationWeapon("sil-star2-drone"){{
-                    x = 1;
-                    y = 1;
-                    shootX = 15;
-                    shootY = 15;
-                    reload = 120;
-                    shootCone = 25;
-                    maxHealthRange = 0.70f;
-                    minHealthRange = 0.00f;
-                    minWarmup = 0.99f;
-                    mirror = alternate = predictTarget = alwaysContinuous = false;
-                    mirror = top = rotate = continuous = true;
-                    shootSound = Sounds.flame;
-                    parts.add(
-                        new RegionPart("-part"){{
-                            moveRot = 0f;
-                            moves.add(new PartMove(PartProgress.warmup, -15f, -15f, 90));
-                            progress = PartProgress.warmup;
-                            mirror = false;
-                        }});
-                        bullet = new ContinuousFlameBulletType(){{
-                        length = 40f;
-                        range = 40f;
-                        width = 8f;
-                        damageInterval = 10f;
-                        damage = 5f /*30 * damageInterval / 60f*/;
-                        buildingDamageMultiplier = 4f;
-                        pierceBuilding = true;
-                        status = StatusEffects.burning;
-                        statusDuration = 60f;
-                        knockback = 0;
-                        impact = true;
-                        lifetime = 60f;
-                        hitEffect = SLFx.starHit;
-                        lightStroke = 10f;
-                        oscScl = 0.04f;
-                        oscMag = 0.02f;
-                        drawFlare = false;
-                        divisions = 2;
-                        colors = new Color[]{
-                                SLPal.starRedDarkColor,
-                                SLPal.starRedColor,
-                                SLPal.starOrangeDarkColor,
-                                SLPal.starOrangeColor,
-                                Color.white.cpy()
-                        };
-                        lengthWidthPans = new float[]{
-                                1.0f,1.0f,0.1f,
-                                0.8f,0.8f,0.1f,
-                                0.6f,0.6f,0.1f,
-                                0.4f,0.4f,0.1f,
-                                0.2f,0.2f,0.1f
-                        };
-                    }};
-                }},
-                new HealtActivationWeapon("sil-star2-drone"){{
-                    x = 1;
-                    y = -1;
-                    shootX = -15;
-                    shootY = -15;
-                    reload = 120;
-                    shootCone = 25;
-                    maxHealthRange = 0.70f;
-                    minHealthRange = 0.00f;
-                    minWarmup = 0.99f;
-                    mirror = alternate = predictTarget = alwaysContinuous = false;
-                    mirror = top = rotate = continuous = true;
-                    shootSound = Sounds.flame;
-                    parts.add(
-                        new RegionPart("-part"){{
-                            moveRot = 0f;
-                            moves.add(new PartMove(PartProgress.warmup, 15f, 15f, 90));
-                            progress = PartProgress.warmup;
-                            mirror = false;
-                        }});
-                        bullet = new ContinuousFlameBulletType(){{
-                        length = 40f;
-                        range = 40f;
-                        width = 8f;
-                        damageInterval = 10f;
-                        damage = 2f /*30 * damageInterval / 60f*/;
-                        buildingDamageMultiplier = 4f;
-                        pierceBuilding = true;
-                        status = StatusEffects.burning;
-                        statusDuration = 60f;
-                        knockback = 0;
-                        impact = true;
-                        lifetime = 60f;
-                        hitEffect = SLFx.starHit;
-                        lightStroke = 10f;
-                        oscScl = 0.04f;
-                        oscMag = 0.02f;
-                        drawFlare = false;
-                        divisions = 2;
-                        colors = new Color[]{
-                                SLPal.starRedDarkColor,
-                                SLPal.starRedColor,
-                                SLPal.starOrangeDarkColor,
-                                SLPal.starOrangeColor,
-                                Color.white.cpy()
-                        };
-                        lengthWidthPans = new float[]{
-                                1.0f,1.0f,0.1f,
-                                0.8f,0.8f,0.1f,
-                                0.6f,0.6f,0.1f,
-                                0.4f,0.4f,0.1f,
-                                0.2f,0.2f,0.1f
-                        };
-                    }};
-                }},new HealtActivationWeapon("sil-star2-laser"){{
-                    x = 1;
+                 new Weapon("sil-star2-laser"){{
+                    x = 0;
                     y = -1;
                     shootX = 15;
                     shootY = 8;
                     reload = 120;
                     shootCone = 25;
-                    maxHealthRange = 0.90f;
-                    minHealthRange = 0.00f;
                     minWarmup = 0.99f;
-                    mirror = alternate = predictTarget = alwaysContinuous = false;
-                    mirror = top = rotate = continuous = true;
+                    mirror = alternate = predictTarget = false;
+                    top = rotate = true;
                     shootSound = Sounds.flame;
                     bullet = new LaserBulletType(){{
-                        length = 40f;
-                        range = 40f;
-                        width = 8f;
-                        damage = 10f /*30 * damageInterval / 60f*/;
+                        length = 80f;
+                        range = 80f;
+                        width = 12f;
+                        damage = 100f;
                         buildingDamageMultiplier = 4f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
