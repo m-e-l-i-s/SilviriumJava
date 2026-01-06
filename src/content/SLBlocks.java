@@ -217,7 +217,7 @@ public class SLBlocks {
             });
             size = 2;
             hasPower = true;
-            hasItems = true
+            hasItems = true;
             rotate = false;
             solid = true;
             envEnabled = Env.any;
