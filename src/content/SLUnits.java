@@ -63,7 +63,7 @@ public class SLUnits {
                         splashDamageRadius = 12;
                         buildingDamageMultiplier = 0.5f;
                         lifetime = 120;
-                        scaledLife = true;
+                        scaleLife = true;
                         killShooter = true;
                         range = 240;
                         hittable = false;
