@@ -20,7 +20,7 @@ import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 
 public class SLUnits {
-    public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5, silvsile, silvone, silvioros, silvistar,star1;
+    public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5, silvsile, silvone, silvioros, silvistar,star1, star2;
     public static void load(){
         silvanon = new UnitType("Silvanon"){{
             alwaysUnlocked = true;
@@ -836,7 +836,7 @@ public class SLUnits {
                 }}
             );
         }};
-        star1 = new UnitType("star2"){{
+        star2 = new UnitType("star2"){{
             alwaysUnlocked = true;
             constructor = MechUnit::create;
             description = "a star unit equipped with a powerful star blowtorch flame";
