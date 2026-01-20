@@ -227,6 +227,7 @@ public class SLBlocks {
             consumePower(0.5f);
             consumeItem(SLItems.silvirium,4);
             outputItem = new ItemStack(SLItems.silviriumIng, 1);
+            drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("ffef99")));
         }};
         
         starfac = new GenericCrafter("star-factory"){{
