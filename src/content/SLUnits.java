@@ -25,7 +25,6 @@ public class SLUnits {
         silvanon = new UnitType("Silvanon"){{
             alwaysUnlocked = true;
             constructor = MechUnit::create;
-            description = "a silvirium unit equipped with a powerful short-range heavy cannon. \nless effective against buildings";
             health = 50f;
             armor = -5;
             hitSize = 8;
@@ -80,7 +79,6 @@ public class SLUnits {
         silvirror = new UnitType("Silvirror"){{
             alwaysUnlocked = true;
             constructor = MechUnit::create;
-            description = "the first silvirium unit, equipped with 2 short-range twin conrinuous blowtorch. \nless effective against buildings";
             health = 160f;
             armor = 3;
             hitSize = 8;
@@ -205,7 +203,6 @@ public class SLUnits {
         silvokeor = new UnitType("Silvokeor"){{
             alwaysUnlocked = true;
             constructor = LegsUnit::create;
-            description = "The second silvirium unit equipped with 2 charge guns.";
             speed = 1.2f;
             accel = 0.3f;
             rotateMoveFirst = true;
@@ -285,7 +282,6 @@ public class SLUnits {
         silvbane = new UnitType("Silvbane"){{
             alwaysUnlocked = true;
             constructor = LegsUnit::create;
-            description = "The third silvirium unit equipped with 2 weave homing guns and 1 roket lacucher.";
             speed = 1f;
             accel = 0.3f;
             rotateMoveFirst = true;
@@ -406,7 +402,6 @@ public class SLUnits {
         silvruner = new UnitType("Silvruner"){{
             alwaysUnlocked = true;
             constructor = LegsUnit::create;
-            description = "The second silvirium unit equipped with 2 charge guns.";
             speed = 1.3f;
             accel = 0.2f;
             rotateMoveFirst = true;
@@ -507,7 +502,6 @@ public class SLUnits {
         silv5 = new UnitType("Silv5"){{
             alwaysUnlocked = true;
             constructor = LegsUnit::create;
-            description = "The 5 silvirium unit (WIP:0.1%).";
             speed = 1.2f;
             accel = 0.3f;
             rotateMoveFirst = true;
@@ -588,7 +582,6 @@ public class SLUnits {
         silvioros = new UnitType("Silvioros"){{
             alwaysUnlocked = true;
             constructor = PayloadUnit::create;
-            description = "the T1 flying silvirium unit, equipped with 1 building stuner cannon";
             flying = true;
             payloadCapacity = 64/*Mathf.pow(1*8,2) || (1*8)^2*/;
             immunities.add(SLStatusEffects.disrupted);
@@ -656,7 +649,6 @@ public class SLUnits {
         silvistar = new UnitType("Silvistar"){{
             alwaysUnlocked = true;
             constructor = PayloadUnit::create;
-            description = "A flying unit made by mixing tecnologys, equipped with 1 accel orb cannon and 1 static star mines launcher.";
             circleTarget = flying = true;
             payloadCapacity = 256/*Mathf.pow(2*8,2) || (2*8)^2*/;
             hitSize = 20;
@@ -773,7 +765,6 @@ public class SLUnits {
         star1 = new UnitType("star1"){{
             alwaysUnlocked = true;
             constructor = MechUnit::create;
-            description = "a star unit equipped with a powerful star blowtorch flame";
             health = 160f;
             armor = 0;
             hitSize = 8;
@@ -839,7 +830,6 @@ public class SLUnits {
         star2 = new UnitType("star2"){{
             alwaysUnlocked = true;
             constructor = MechUnit::create;
-            description = "a star unit equipped with a powerful star blowtorch flame";
             health = 360f;
             armor = 0;
             hitSize = 12;
@@ -848,8 +838,8 @@ public class SLUnits {
             ammoType = new ItemAmmoType(SLItems.starFrag);
             outlines = false;
             speed = 6f;
-            accel = 0.01f;
-            drag = 0.1f;
+            accel = 0.08f;
+            drag = 0.07f;
             rotateMoveFirst = true;
             hoverable = false;
             mechFrontSway = 0.4f;
