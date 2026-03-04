@@ -41,7 +41,7 @@ public class SLStatusEffects {
                     }else{
                         e.apply(disrupted, time * 2f);
                     }
-                    unit.unapply(disrupted);
+                    if(unit.elevation>0) unit.unapply(disrupted);
                 }
             });
             super.update(unit, time);
@@ -55,19 +55,9 @@ public class SLStatusEffects {
             color = SLPal.silviriumColor;
             applyColor = SLPal.silviriumColor;
             outline = true;
-            effect = new ParticleEffect(){{
-                particles = 3;
-                line = true;
-                length = 0.8f;
-                baseLength = 2;
-                colorFrom = SLPal.silviriumColor;
-                colorTo = SLPal.silviriumOtherColor;
-                sizeFrom = 0;
-                sizeTo = 24;
-            }};
-        }};
-        
-        }
+            effect = sliviriumSpark;
+        }};    
+    }
 }
 /*
 for(int i = 0; i < unit.type.weapons.size; i++){
