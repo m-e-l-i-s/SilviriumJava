@@ -122,6 +122,19 @@ public class SLFx {
         lifetime = 20;
         cone = 0;
     }},
+    sliviriumSpark = new MultiEffect(
+        new ParticleEffect(){{
+            particles = 3;
+            line = true;
+            length = 0.8f;
+            baseLength = 2;
+            colorFrom = SLPal.silviriumColor;
+            colorTo = SLPal.silviriumOtherColor;
+            sizeFrom = 0;
+            sizeTo = 24;
+        }},
+        silviriumWave1Effect
+    ),
     starHit = new ParticleEffect(){{
         particles = 1;
         length = 0.5f;
