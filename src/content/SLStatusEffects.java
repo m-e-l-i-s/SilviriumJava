@@ -55,7 +55,7 @@ public class SLStatusEffects {
             color = SLPal.silviriumColor;
             applyColor = SLPal.silviriumColor;
             outline = true;
-            effect = sliviriumSpark;
+            effect = SLFx.sliviriumSpark;
         }};    
     }
 }
