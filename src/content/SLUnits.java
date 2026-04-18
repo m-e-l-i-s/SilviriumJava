@@ -946,7 +946,7 @@ public class SLUnits {
             unit.damageMultiplier = unit.damageMultiplier < 1 ? 1: unit.damageMultiplier;
             unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1: unit.reloadMultiplier;
             unit.healthMultiplier = unit.healthMultiplier < 1 ? 1: unit.healthMultiplier;
-            if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
+            //if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
             super.init();
         }};
     }
