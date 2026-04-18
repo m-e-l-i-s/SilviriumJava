@@ -55,7 +55,6 @@ public class SLUnits {
                     top = true;
                     mirror = rotate = false;
                     shootOnDeath = true;
-                    shootSound = Sounds.lasershoot;
                     bullet = new BasicBulletType(2,0){{
                         knockback = 25;
                         splashDamage = 180;
@@ -140,7 +139,6 @@ public class SLUnits {
                     x = 0f;
                     y = 2f;
                     reload = 120f;
-                    shootSound = Sounds.torch;
                     maxHealthRange = 0.80f;
                     minHealthRange = 0f;
                     shootCone = 8f;
@@ -166,7 +164,6 @@ public class SLUnits {
                     x = 8f;
                     y = 1f;
                     reload = 60f;
-                    shootSound = Sounds.torch;
                     shootCone = 8f;
                     shootX = 0f;
                     shootY = 2f;
@@ -185,7 +182,6 @@ public class SLUnits {
                     x = -8f;
                     y = 1f;
                     reload = 60f;
-                    shootSound = Sounds.torch;
                     shootCone = 10f;
                     shootX = 0f;
                     shootY = 2f;
@@ -252,7 +248,6 @@ public class SLUnits {
                     rotate = alternate = mirror = true;
                     top = false;
                     shoot.firstShotDelay = 30;
-                    shootSound = Sounds.lasershoot;
                     bullet = new BasicBulletType(2,0){{
                         chargeEffect = new WaveEffect(){{
                             colorFrom = SLPal.silviriumColor;
@@ -332,7 +327,6 @@ public class SLUnits {
                     top = false;
                     shoot.shots = 3;
                     shoot.shotDelay = 20f;
-                    shootSound = Sounds.lasershoot;
                     parts.add(
                         new ShapePart(){{
                             color = SLPal.silviriumColor;
@@ -371,7 +365,6 @@ public class SLUnits {
                     shootCone = 10f;
                     rotate = alternate = true;
                     top = mirror = false;
-                    shootSound = Sounds.lasershoot;
                     bullet = new /*Prox*/BulletType(){{
                         spawnUnit = silvsile = new MissileUnitType("Silvsile"){{
                             lifetime = 50;
@@ -455,7 +448,6 @@ public class SLUnits {
                     shoot.shots = 10;
                     shoot.shotDelay = 2;
                     inaccuracy = 10f;
-                    shootSound = Sounds.lasershoot;
                     bullet = new BasicBulletType(6,30){{
                         buildingDamageMultiplier = 0.5f;
                         lifetime = 20;
@@ -484,7 +476,6 @@ public class SLUnits {
                     shootCone = 360f;
                     shootOnDeath = true;
                     shoot.firstShotDelay = 180;
-                    shootSound = Sounds.lasershoot;
                     shootStatus = SLStatusEffects.rush;
                     shootStatusDuration = 180;
                     bullet = new ExplosionBulletType(220,120){{
@@ -562,7 +553,6 @@ public class SLUnits {
                     mirror = false;
                     top = false;
                     reload = 120f;
-                    shootSound = Sounds.shootBig;
                     rotate = false;
                     bullet = new RailBulletType(){{
                         shootEffect = Fx.none;
@@ -620,7 +610,6 @@ public class SLUnits {
                 mirror = false;
                 top = false;
                 reload = 60f;
-                shootSound = Sounds.shootBig;
                 rotate = true;
                 rotateSpeed = 15f;
                 recoil = 10;
@@ -704,7 +693,6 @@ public class SLUnits {
                     mirror = false;
                     top = false;
                     reload = 36f;
-                    shootSound = Sounds.shootBig;
                     rotate = false;
                     inaccuracy = 0f;
                     bullet = new BasicBulletType(0.0795f, 5f){{
@@ -736,7 +724,6 @@ public class SLUnits {
                     mirror = false;
                     top = false;
                     reload = 112f;
-                    shootSound = Sounds.shootBig;
                     rotate = false;
                     inaccuracy = 7f;
                     shoot.shots = 3;
@@ -791,7 +778,6 @@ public class SLUnits {
                     shootCone = 2;
                     mirror = rotate = predictTarget = false;
                     top = continuous = alwaysContinuous = true;
-                    shootSound = Sounds.flame;
                     bullet = new ContinuousFlameBulletType(){{
                         length = 80f;
                         range = 80f;
@@ -858,7 +844,6 @@ public class SLUnits {
                     minWarmup = 0.99f;
                     mirror = alternate = predictTarget = false;
                     top = rotate = true;
-                    shootSound = Sounds.flame;
                     bullet = new LaserBulletType(){{
                         length = 80f;
                         range = 80f;
@@ -912,7 +897,6 @@ public class SLUnits {
                     minWarmup = 0.99f;
                     mirror = alternate = alwaysContinuous = predictTarget = false;
                     top = rotate = continuous = true;
-                    shootSound = Sounds.flame;
                     bullet = new ContinuousFlameBulletType(){{
                         length = 240f;
                         range = 240f;
