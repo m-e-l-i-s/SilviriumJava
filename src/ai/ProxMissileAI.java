@@ -1,6 +1,5 @@
 package ai;
 
-import arc.math.*;
 import arc.util.*;
 import mindustry.ai.types.MissileAI;
 import mindustry.gen.*;

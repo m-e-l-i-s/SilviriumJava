@@ -1,26 +1,26 @@
 package content;
 
+import Entities.disruptPulse;
 import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.math.Mathf;
 import type.HealtActivationWeapon;
-import mindustry.ai.types.MissileAI;
+import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
-import mindustry.entities.pattern.ShootSpread;
-import mindustry.entities.pattern.ShootBarrel;
 import mindustry.gen.*;
 import mindustry.type.ammo.*;
-import ai.ProxMissileAI;
 import mindustry.type.unit.MissileUnitType;
+import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 
 public class SLUnits {
-    public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5, silvsile, silvone, silvioros, silvistar,star1, star2;
+    public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5,
+    silvone, silvioros,
+    silvistar, silvsile,
+    star1, star2, star6;
     public static void load(){
         silvanon = new UnitType("Silvanon"){{
             alwaysUnlocked = true;
@@ -35,7 +35,7 @@ public class SLUnits {
             outlines = false;
             speed = 0.6f;
             accel = 0.3f;
-            drag = 0.6f;
+            drag = 0.2f;
             rotateSpeed = 2f;
             rotateMoveFirst = true;
             hoverable = false;
@@ -44,6 +44,7 @@ public class SLUnits {
             mechStride = 6f;
             range = 240f; 
             maxRange = 240f;
+            abilities.add(new disruptPulse(600,0,0,120,600));
             weapons.add(
                 new Weapon("sil-Silvanon-cannon"){{
                     x = 0;
@@ -131,7 +132,8 @@ public class SLUnits {
                     0.8f,1f,0.3f,
                     0.6f,0.9f,0.2f,
                     0.5f,0.8f,0.15f,
-                    0.35f,0.5f,0.1f};
+                    0.35f,0.5f,0.1f
+                };
             }};
             weapons.add(
                 new HealtActivationWeapon("Silvirror-center"){{
@@ -880,6 +882,88 @@ public class SLUnits {
                     }};
                 }}
             );
+        }};
+        star6 = new UnitType("star6"){{
+            alwaysUnlocked = true;
+            constructor = MechUnit::create;
+            health = 55000f;
+            armor = -1.5f;
+            hitSize = 51;
+            itemCapacity = 360;
+            ammoCapacity = 2000;
+            ammoType = new ItemAmmoType(SLItems.starFrag);
+            outlines = false;
+            speed = 1f;
+            accel = 0.6f;
+            drag = 0.5f;
+            rotateMoveFirst = true;
+            hoverable = false;
+            mechFrontSway = 0.8f;
+            mechSideSway = 0.6f;
+            mechStride = 4f;
+            weapons.add(
+                new Weapon("sil-star2-laser"){{
+                    x = 0;
+                    y = 6;
+                    shootX = 0;
+                    shootY = 0;
+                    reload = 120;
+                    shootCone = 25;
+                    minWarmup = 0.99f;
+                    mirror = alternate = alwaysContinuous = predictTarget = false;
+                    top = rotate = continuous = true;
+                    shootSound = Sounds.flame;
+                    bullet = new ContinuousFlameBulletType(){{
+                        length = 240f;
+                        range = 240f;
+                        width = 8f;
+                        damageInterval = 0.1f;
+                        damage = 0.75f /*450 * damageInterval / 60f*/;
+                        buildingDamageMultiplier = 4f;
+                        pierceBuilding = true;
+                        status = StatusEffects.burning;
+                        statusDuration = 600f;
+                        knockback = 0.1f;
+                        impact = true;
+                        lifetime = 10f;
+                        hitEffect = SLFx.starHit;
+                        lightStroke = 20f;
+                        oscScl = 0.04f;
+                        oscMag = 0.02f;
+                        drawFlare = false;
+                        divisions = 2;
+                        colors = new Color[]{
+                            SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
+                                Color.white.cpy()
+                        };
+                        lengthWidthPans = new float[]{
+                                1.0f,1.0f,0.6f,
+                                0.8f,1.0f,0.5f,
+                                0.6f,0.9f,0.4f,
+                                0.5f,0.8f,0.3f,
+                                0.3f,0.5f,0.2f
+                        };
+                    }};
+                }}
+            );
+        }
+        @Override
+        public void update(Unit unit){
+            for(StatusEffect s:Vars.content.statusEffects()){
+                if(!unit.isImmune(s)){
+                    immunities.add(s);
+                }
+            }
+            unit.dragMultiplier = 1;
+            unit.speedMultiplier = unit.speedMultiplier < 1 ? 1: unit.speedMultiplier;
+            unit.damageMultiplier = unit.damageMultiplier < 1 ? 1: unit.damageMultiplier;
+            unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1: unit.reloadMultiplier;
+            unit.healthMultiplier = unit.healthMultiplier < 1 ? 1: unit.healthMultiplier;
+            if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
+            super.init();
         }};
     }
 }

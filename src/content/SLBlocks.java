@@ -19,14 +19,10 @@ import arc.graphics.*;
 import arc.struct.EnumSet;
 import arc.util.Time;
 import arc.math.Interp;
-import content.SLliquids;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.*;
-
-import static mindustry.type.ItemStack.*;
-import static mindustry.type.LiquidStack.*;
 
 
 public class SLBlocks {
