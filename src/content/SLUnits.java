@@ -1,0 +1,952 @@
+package content;
+
+import Entities.disruptPulse;
+import arc.graphics.Color;
+import type.HealtActivationWeapon;
+import mindustry.Vars;
+import mindustry.content.Fx;
+import mindustry.content.StatusEffects;
+import mindustry.entities.bullet.*;
+import mindustry.entities.effect.WaveEffect;
+import mindustry.entities.part.*;
+import mindustry.gen.*;
+import mindustry.type.ammo.*;
+import mindustry.type.unit.MissileUnitType;
+import mindustry.type.StatusEffect;
+import mindustry.type.UnitType;
+import mindustry.type.Weapon;
+
+public class SLUnits {
+    public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5,
+    silvone, silvioros,
+    silvistar, silvsile,
+    star1, star2, star6;
+    public static void load(){
+        silvanon = new UnitType("Silvanon"){{
+            alwaysUnlocked = true;
+            constructor = MechUnit::create;
+            health = 50f;
+            armor = -5;
+            hitSize = 8;
+            itemCapacity = 10;
+            immunities.add(SLStatusEffects.disrupted);
+            ammoCapacity = 60;
+            ammoType = new ItemAmmoType(SLItems.silvirium);
+            outlines = false;
+            speed = 0.6f;
+            accel = 0.3f;
+            drag = 0.2f;
+            rotateSpeed = 2f;
+            rotateMoveFirst = true;
+            hoverable = false;
+            mechFrontSway = 0.8f;
+            mechSideSway = 0.75f;
+            mechStride = 6f;
+            range = 240f; 
+            maxRange = 240f;
+            abilities.add(new disruptPulse(120,600));
+            weapons.add(
+                new Weapon("sil-Silvanon-cannon"){{
+                    x = 0;
+                    y = 4;
+                    shootY = 4;
+                    reload = 0;
+                    shootCone = 1;
+                    top = true;
+                    mirror = rotate = false;
+                    shootOnDeath = true;
+                    shoot.firstShotDelay = 120;
+                    bullet = new BasicBulletType(2,0){{
+                        chargeEffect = SLFx.silviriumChargeEffect;
+                        knockback = 25;
+                        splashDamage = 180;
+                        splashDamageRadius = 12;
+                        buildingDamageMultiplier = 0.5f;
+                        lifetime = 120;
+                        scaleLife = true;
+                        killShooter = true;
+                        range = 240;
+                        hittable = false;
+                        smokeEffect = Fx.none;
+                        frontColor = SLPal.silviriumColor;
+                        backColor = SLPal.silviriumDarkColor;
+                        shootEffect = SLFx.silviriumHit1Effect;
+                        status = SLStatusEffects.disrupted;
+                        statusDuration = 120f;
+                        sprite = "circle-bullet";
+                    }};
+                }}
+            );
+        }};
+        silvirror = new UnitType("Silvirror"){{
+            alwaysUnlocked = true;
+            constructor = MechUnit::create;
+            health = 160f;
+            armor = 3;
+            hitSize = 8;
+            itemCapacity = 10;
+            immunities.add(SLStatusEffects.disrupted);
+            ammoCapacity = 60;
+            ammoType = new ItemAmmoType(SLItems.silvirium);
+            outlines = false;
+            speed = 1.6f;
+            accel = 0.4f;
+            drag = 0.7f;
+            rotateSpeed = 5f;
+            rotateMoveFirst = true;
+            forceMultiTarget = true;
+            hoverable = true;
+            mechFrontSway = 0.1f;
+            mechSideSway = 0.3f;
+            mechStride = -0.6f;
+            range = 80f;
+            maxRange = 80f;
+            ContinuousFlameBulletType silvirrorBullet = new ContinuousFlameBulletType(){{
+                length = 80f;
+                width = 2f;
+                damageInterval = 5f;
+                damage = 1f /*12 * damageInterval / 60f*/;
+                buildingDamageMultiplier = 0.5f;
+                pierceBuilding = true;
+                pierceCap = 4;
+                status = SLStatusEffects.disrupted;
+                statusDuration = 300f;
+                knockback = -0.4f;
+                impact = true;
+                lifetime = 10f;
+                range = 80f;
+                hitEffect = SLFx.silviriumHit1Effect;
+                lightStroke = 24f;
+                oscScl = 0.04f;
+                oscMag = 0.02f;
+                drawFlare = false;
+                divisions = 25;
+                colors = new Color[]{
+                    SLPal.silviriumDarkColor,
+                    SLPal.silviriumMidColor,
+                    SLPal.silviriumColor,
+                    SLPal.silviriumligthColor,
+                    Color.white.cpy()
+                };
+                lengthWidthPans = new float[]{
+                    1.0f,1.3f,0.35f,
+                    0.8f,1f,0.3f,
+                    0.6f,0.9f,0.2f,
+                    0.5f,0.8f,0.15f,
+                    0.35f,0.5f,0.1f
+                };
+            }};
+            weapons.add(
+                new HealtActivationWeapon("Silvirror-center", 0.80f, 0f){{
+                    x = 0f;
+                    y = 2f;
+                    reload = 120f;
+                    shootCone = 8f;
+                    shootX = 0f;
+                    shootY = 2f;
+                    mirror = false;
+                    rotate = true;
+                    top = false;
+                    rotateSpeed = 2f;
+                    rotationLimit = 120f;
+                    bullet = new BasicBulletType(8f,15f){{
+                        sprite = "circle";
+                        lifetime = 10f;
+                        range = 80f;
+                        buildingDamageMultiplier = 0.5f;
+                        frontColor = trailColor  = SLPal.silviriumColor;
+                        trailLength = 16;
+                        status = SLStatusEffects.disrupted;
+                        statusDuration = 1500f;
+                    }};
+                }},
+                new Weapon("sil-silvirror-side-R"){{
+                    x = 8f;
+                    y = 1f;
+                    reload = 60f;
+                    shootCone = 8f;
+                    shootX = 0f;
+                    shootY = 2f;
+                    mirror = false;
+                    rotate = true;
+                    top = false;
+                    rotateSpeed = 2f;
+                    rotationLimit = 60f;
+                    predictTarget = false;
+                    continuous = true;
+                    alwaysContinuous = true;
+                    chargeSound = Sounds.none;
+                    bullet = silvirrorBullet;
+                }},
+                new Weapon("sil-silvirror-side-L"){{
+                    x = -8f;
+                    y = 1f;
+                    reload = 60f;
+                    shootCone = 10f;
+                    shootX = 0f;
+                    shootY = 2f;
+                    mirror = false;
+                    rotate = true;
+                    top = false;
+                    rotateSpeed = 2f;
+                    rotationLimit = 50f;
+                    predictTarget = false;
+                    continuous = true;
+                    alwaysContinuous = true;
+                    chargeSound = Sounds.none;
+                    bullet = silvirrorBullet;
+                }}
+            );
+        }};
+        silvokeor = new UnitType("Silvokeor"){{
+            alwaysUnlocked = true;
+            constructor = LegsUnit::create;
+            speed = 1.2f;
+            accel = 0.3f;
+            rotateMoveFirst = true;
+            hitSize = 16;
+            health = 480;
+            armor = 5;
+            createScorch = false;
+            immunities.add(SLStatusEffects.disrupted);
+            legContinuousMove = true;
+            hovering = true;
+            
+            legCount = 4;
+            legLength = 18;
+            legMaxLength = 2.5f;
+            legMinLength = 0f;
+            legForwardScl = 0.5f;
+            legMoveSpace = 1.8f;
+            legSpeed = 0.4f;
+            legSplashDamage =  10f;
+            legSplashRange =  8f;
+            legExtension = 4f;
+            legGroupSize = 2;
+            legPairOffset = 2f;
+            legLengthScl = 1.3f;
+            legBaseOffset = 0.5f;
+            
+            shadowElevation = 0.5f;
+            groundLayer = 61;
+            rippleScale = 0.5f;
+            range = 120;
+            maxRange = 120;
+            ammoCapacity = 300;
+            ammoType = new ItemAmmoType(SLItems.silvirium);
+            itemCapacity = 30;
+            outlineRadius = 0;
+            weapons.add(
+                new Weapon("Silvokeor-orb"){{
+                    x = 6;
+                    y = 4;
+                    shootY = 0;
+                    reload = 30;
+                    rotationLimit = 40f;
+                    rotateSpeed = 5f;
+                    shootCone = 12f;
+                    rotate = alternate = mirror = true;
+                    top = false;
+                    shoot.firstShotDelay = 30;
+                    bullet = new BasicBulletType(2,0){{
+                        chargeEffect = new WaveEffect(){{
+                            colorFrom = SLPal.silviriumColor;
+                            colorTo = SLPal.silviriumDarkColor;
+                            strokeFrom = 0.1f;
+                            strokeTo =  0.7f;
+                            sizeFrom = 8;
+                            sizeTo = 0;
+                            lifetime = 30;
+                        }};
+                        splashDamage = 55;
+                        splashDamageRadius = 12;
+                        buildingDamageMultiplier = 0.5f;
+                        lifetime = 60;
+                        range = 120;
+                        splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
+                        hittable = false;
+                        smokeEffect = Fx.none;
+                        frontColor = SLPal.silviriumColor;
+                        backColor = SLPal.silviriumDarkColor;
+                        shootEffect = SLFx.silviriumHit1Effect;
+                        status = SLStatusEffects.disrupted;
+                        statusDuration = 600f;
+                        sprite = "circle-bullet";
+                    }};
+                }}
+            );
+        }};
+        silvbane = new UnitType("Silvbane"){{
+            alwaysUnlocked = true;
+            constructor = LegsUnit::create;
+            speed = 1f;
+            accel = 0.3f;
+            rotateMoveFirst = true;
+            hitSize = 24;
+            health = 1255;
+            armor = 7;
+            createScorch = false;
+            immunities.add(SLStatusEffects.disrupted);
+            legContinuousMove = true;
+            hovering = true;
+            
+            legCount = 4;
+            legLength = 24;
+            legMaxLength = 1.2f;
+            legMinLength = 0.8f;
+            legForwardScl = 1.2f;
+            legMoveSpace = 0.9f;
+            legSpeed = 0.2f;
+            legSplashDamage =  16f;
+            legSplashRange =  10f;
+            legExtension = 5f;
+            legGroupSize = 2;
+            legPairOffset = 3f;
+            legLengthScl = 1.35f;
+            legBaseOffset = 0.7f;
+            
+            shadowElevation = 0.6f;
+            groundLayer = 61.1f;
+            rippleScale = 0.6f;
+            range = 200;
+            maxRange = 200;
+            ammoCapacity = 400;
+            ammoType = new ItemAmmoType(SLItems.silvirium);
+            itemCapacity = 50;
+            outlineRadius = 0;
+            weapons.add(
+                new Weapon("Silvbane-side"){{
+                    x = 8.75f;
+                    y = 7.5f;
+                    shootY = 0;
+                    reload = 90;
+                    rotationLimit = 90f;
+                    rotateSpeed = 5f;
+                    shootCone = 30f;
+                    rotate = alternate = mirror = true;
+                    top = false;
+                    shoot.shots = 3;
+                    shoot.shotDelay = 20f;
+                    parts.add(
+                        new ShapePart(){{
+                            color = SLPal.silviriumColor;
+                            colorTo = SLPal.silviriumOtherColor;
+                            progress = PartProgress.recoil.inv();
+                            hollow = mirror = true;
+                            sides = 3;
+                            rotateSpeed = 6;
+                            radius = 0;
+                            radiusTo = 4;
+                            stroke = 0;
+                            strokeTo = 1;
+                            x = 0;
+                            moveX = 0;
+                            y = 0;
+                        }}
+                    );
+                    bullet = new BasicBulletType(2.5f,60f){{
+                        frontColor = trailColor  = SLPal.silviriumColor;
+                        trailLength = 8;
+                        lifetime = 80;
+                        homingPower = 0.1f;
+                        homingRange = 48;
+                        range = 200;
+                        weaveScale = 5f;
+                        weaveMag = 5f;
+                    }};
+                }},
+                new Weapon("Silvbane-missile"){{
+                    x = 0;
+                    y = 3;
+                    shootY = 0;
+                    reload = 200;
+                    rotationLimit = 25f;
+                    rotateSpeed = 5f;
+                    shootCone = 10f;
+                    rotate = alternate = true;
+                    top = mirror = false;
+                    parts.add(
+                        new RegionPart()
+                    );
+                    bullet = new /*Prox*/BulletType(){{
+                        spawnUnit = silvsile = new MissileUnitType("Silvsile"){{
+                            lifetime = 50;
+                            speed = 4;
+                            outlines = false;
+                            maxRange = 30;
+                            weapons.add(
+                                new Weapon("Silvsile-exp"){{
+                                    x = y = 0;
+                                    reload = 1800;
+                                    shootCone = 360f;
+                                    shootOnDeath = true;
+                                    mirror = false;
+                                    bullet = new ExplosionBulletType(400,40){{
+                                        buildingDamageMultiplier = 0.5f;
+                                        range = 32;
+                                        splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
+                                        hittable = false;
+                                        smokeEffect = Fx.none;
+                                        status = SLStatusEffects.disrupted;
+                                        statusDuration = 300f;
+                                    }};
+                                }}
+                            );
+                        }};
+                    }};
+                }}
+            );
+        }};
+        silvruner = new UnitType("Silvruner"){{
+            alwaysUnlocked = true;
+            constructor = LegsUnit::create;
+            speed = 1.3f;
+            accel = 0.2f;
+            rotateMoveFirst = true;
+            hitSize = 40;
+            health = 8100;
+            armor = 11;
+            createScorch = false;
+            immunities.add(SLStatusEffects.disrupted);
+            legContinuousMove = true;
+            hovering = true;
+            
+            legCount = 6;
+            legLength = 32;
+            legMaxLength= 1.2f;
+            legMinLength= 0.8f;
+            legForwardScl = 1.2f;
+            legMoveSpace = 1f;
+            legSpeed = 0.6f;
+            legSplashDamage =  20f;
+            legSplashRange =  12f;
+            legExtension = 4f;
+            legGroupSize = 2;
+            legPairOffset = 2f;
+            legLengthScl = 1.3f;
+            legBaseOffset = 0.5f;
+            
+            shadowElevation = 0.7f;
+            groundLayer = 61;
+            rippleScale = 0.5f;
+            range = 120;
+            maxRange = 120;
+            ammoCapacity = 300;
+            ammoType = new ItemAmmoType(SLItems.silvirium);
+            itemCapacity = 60;
+            outlineRadius = 0;
+            weapons.add(
+                new HealtActivationWeapon("sil-Silvruner-machingun", 1f, 0.1f){{
+                    x = 0;
+                    y = 2;
+                    shootY = 0;
+                    reload = 30;
+                    rotationLimit = 40f;
+                    rotateSpeed = 5f;
+                    shootCone = 12f;
+                    top = rotate = true;
+                    mirror = false;
+                    shoot.shots = 10;
+                    shoot.shotDelay = 2;
+                    inaccuracy = 10f;
+                    bullet = new BasicBulletType(6,30){{
+                        buildingDamageMultiplier = 0.5f;
+                        lifetime = 20;
+                        range = 120;
+                        pierce = pierceBuilding = collidesAir = collidesGround = true;
+                        pierceCap = 3;
+                        pierceDamageFactor = 0.02f;
+                        hittable = false;
+                        smokeEffect = Fx.none;
+                        frontColor = SLPal.silviriumColor;
+                        backColor = SLPal.silviriumDarkColor;
+                        shootEffect = SLFx.silviriumHit1Effect;
+                        status = SLStatusEffects.disrupted;
+                        statusDuration = 600f;
+                        sprite = "circle-bullet";
+                    }};
+                }},
+                new HealtActivationWeapon("Silvruner-Explosion", 0.1f, 0f){{
+                    x = 0;
+                    y = 0;
+                    shootY = 0;
+                    shootCone = 12f;
+                    rotate = alternate = mirror = false;
+                    shootCone = 360f;
+                    shootOnDeath = true;
+                    shoot.firstShotDelay = 180;
+                    shootStatus = SLStatusEffects.rush;
+                    shootStatusDuration = 180;
+                    bullet = new ExplosionBulletType(220,120){{
+                        buildingDamageMultiplier = 0.5f;
+                        range = 40;
+                        splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
+                        hittable = false;
+                        smokeEffect = Fx.none;
+                        status = SLStatusEffects.disrupted;
+                        statusDuration = 300f;
+                        killShooter = true;
+                        absorbable = false;
+                    }};
+                }}
+            );
+        }};
+        silv5 = new UnitType("Silv5"){{
+            alwaysUnlocked = true;
+            constructor = LegsUnit::create;
+            speed = 1.2f;
+            accel = 0.3f;
+            rotateMoveFirst = true;
+            hitSize = 16;
+            health = 480;
+            armor = 5;
+            createScorch = false;
+            immunities.add(SLStatusEffects.disrupted);
+            legContinuousMove = true;
+            hovering = true;
+            
+            legCount = 4;
+            legLength = 18;
+            legMaxLength= 1.2f;
+            legMinLength= 0.8f;
+            legForwardScl = 1f;
+            legMoveSpace = 1f;
+            legSpeed = 0.2f;
+            legSplashDamage =  12f;
+            legSplashRange =  8f;
+            legExtension = 4f;
+            legGroupSize = 2;
+            legPairOffset = 2f;
+            legLengthScl = 1.3f;
+            legBaseOffset = 0.5f;
+            
+            shadowElevation = 0.5f;
+            groundLayer = 61;
+            rippleScale = 0.5f;
+            range = 120;
+            maxRange = 120;
+            ammoCapacity = 300;
+            ammoType = new ItemAmmoType(SLItems.silvirium);
+            itemCapacity = 30;
+            outlineRadius = 0;
+        }};
+        silvone = new UnitType("Silvone"){{
+            alwaysUnlocked = true;
+            constructor = UnitEntity::create;
+            flying = true;
+            immunities.add(SLStatusEffects.disrupted);
+            ammoType = new ItemAmmoType(SLItems.silvirium);
+            outlines = false;
+            health = 40;
+            speed = 4f;
+            accel = 0.1f;
+            drag = 0.005f;
+            range = 64;
+            maxRange = 64;
+            engineSize = 0.01f;
+            hitSize = 4;
+            weapons.add(
+                new Weapon("sil-piercer"){{
+                    x = 0f;
+                    y = 0f;
+                    mirror = false;
+                    top = false;
+                    reload = 120f;
+                    rotate = false;
+                    bullet = new RailBulletType(){{
+                        shootEffect = Fx.none;
+                        length = 64;
+                        range = 64;
+                        pointEffectSpace = 16f;
+                        pierceEffect = SLFx.silviriumRailHit;
+                        pointEffect = SLFx.silviriumRail;
+                        hitEffect = SLFx.silviriumWave1Effect;
+                        smokeEffect = Fx.shootSmall;
+                        status = SLStatusEffects.disrupted;
+                        statusDuration = 180f;
+                        damage = 60;
+                        pierceDamageFactor = 0.5f;
+                    }};
+                }}
+            );
+        }};
+        silvioros = new UnitType("Silvioros"){{
+            alwaysUnlocked = true;
+            constructor = PayloadUnit::create;
+            flying = true;
+            payloadCapacity = 64/*Mathf.pow(1*8,2) || (1*8)^2*/;
+            immunities.add(SLStatusEffects.disrupted);
+            outlines = false;
+            health = 115f;
+            hitSize = 8.005f;
+            speed = 2f;
+            accel = 0.2f;
+            range = 160f;
+            maxRange = 120f;
+            engineSize = 2.2f;
+            targetAir = false;
+            parts.add(
+                new ShapePart(){{
+                    color = SLPal.silviriumColor;
+                    colorTo = SLPal.silviriumColor;
+                    progress = PartProgress.recoil.inv();
+                    hollow = mirror = true;
+                    sides = 3;
+                    rotateSpeed = 6;
+                    radius = 4;
+                    radiusTo = 4;
+                    stroke = 0;
+                    strokeTo = 1;
+                    x = 0;
+                    moveX = 0;
+                    y = 9;
+                }}
+            );
+            weapons.add(new Weapon("Silvioros-cannon"){{
+                x = 0;
+                y = 9;
+                shootY = 0;
+                mirror = false;
+                top = false;
+                reload = 60f;
+                rotate = true;
+                rotateSpeed = 15f;
+                recoil = 10;
+                rotationLimit = 300f;
+                range = 240f;
+                maxRange = 240f;
+                bullet = new BasicBulletType(4f, 8f){{
+                    width = 8f;
+                    height = 12f;
+                    range = 240f;
+                    collidesAir = false;
+                    collidesGround = pierce = true;
+                    frontColor = SLPal.silviriumColor;
+                    backColor = SLPal.silviriumDarkColor;
+                    trailLength = 8;
+                    trailWidth = 1;
+                    shootEffect = Fx.shootSmall;
+                    lifetime = 40f;
+                    sprite = "shell";
+                }
+                @Override
+                public void hitTile(Bullet b, Building build, float x, float y, float initialHealth, boolean direct){
+                    super.hitTile(b, build, x, y, initialHealth, direct);
+                    build.applySlowdown(0f, 300f);
+                }};
+            }});
+        }};
+        silvistar = new UnitType("Silvistar"){{
+            alwaysUnlocked = true;
+            constructor = PayloadUnit::create;
+            circleTarget = flying = true;
+            payloadCapacity = 256/*Mathf.pow(2*8,2) || (2*8)^2*/;
+            hitSize = 20;
+            immunities.add(SLStatusEffects.disrupted);
+            outlines = false;
+            health = 210f;
+            speed = 5f;
+            accel = 0.1f;
+            drag = 0.04f;
+            range = 80f;
+            maxRange = 80f;
+            engineSize = 0f;
+            parts.addAll(
+                new HoverPart(){{
+                    color = SLPal.starOrangeColor;
+                    sides = 6;
+                    radius = 12;
+                    x = -4.5f;
+                    y = -3.5f;
+                    layer = 59.95f;
+                }},
+                new HoverPart(){{
+                    color = SLPal.starOrangeColor;
+                    sides = 6;
+                    radius = 12;
+                    x = -4.5f;
+                    y = 3.5f;
+                    layer = 59.95f;
+                }},
+                new HoverPart(){{
+                    color = SLPal.silviriumColor;
+                    sides = 6;
+                    radius = 12;
+                    x = 4.5f;
+                    y = -3.5f;
+                    layer = 59.95f;
+                }},
+                new HoverPart(){{
+                    color = SLPal.silviriumColor;
+                    sides = 6;
+                    radius = 12;
+                    x = 4.5f;
+                    y = 3.5f;
+                    layer = 59.95f;
+                }}
+            );
+            weapons.add(
+                new Weapon("Silvirium-orbs"){{
+                    x = 7f;
+                    y = 0f;
+                    mirror = false;
+                    top = false;
+                    reload = 36f;
+                    rotate = false;
+                    inaccuracy = 0f;
+                    bullet = new BasicBulletType(0.0795f, 5f){{
+                        keepVelocity = false;
+                        splashDamagePierce = collides = true;
+                        mixColorFrom = SLPal.silviriumColor;
+                        mixColorTo = SLPal.silviriumMidColor;
+                        trailColor = SLPal.silviriumColor;
+                        shootEffect = SLFx.silviriumHit1Effect;
+                        status = SLStatusEffects.disrupted;
+                        statusDuration = 600f;
+                        sprite = "circle-bullet";
+                        width = 6f;
+                        height = 6f;
+                        shrinkY = 0;
+                        range = 80f;
+                        drag = -0.1f;
+                        homingDelay = 12;
+                        homingPower = 0.09f;
+                        homingRange = 56;
+                        splashDamage = 10;
+                        splashDamageRadius = 16;
+                        buildingDamageMultiplier = 0.5f;
+                    }};
+                }},
+                new Weapon("Static-star-mines"){{
+                    x = -7f;
+                    y = 0f;
+                    mirror = false;
+                    top = false;
+                    reload = 112f;
+                    rotate = false;
+                    inaccuracy = 7f;
+                    shoot.shots = 3;
+                    shoot.shotDelay = 6;
+                    bullet = new FlakBulletType(10f, 0f){{
+                        sprite = "large-bomb-back";
+                        width = 10f;
+                        height = 10f;
+                        range = 80f;
+                        drag = 0.11f;
+                        homingDelay = 15;
+                        homingPower = 0.03f;
+                        homingRange = 40;
+                        splashDamage = 5;
+                        buildingDamageMultiplier = 3f;
+                        splashDamageRadius = 44;
+                        explodeRange = 40;
+                        keepVelocity = collides = false;
+                        splashDamagePierce = collidesGround = true;
+                        mixColorFrom = SLPal.starOrangeColor;
+                        mixColorTo = SLPal.starRedDarkColor;
+                        shootEffect = Fx.shootSmall;
+                        lifetime = 200f;
+                    }};
+                }}
+            );
+        }};
+        star1 = new UnitType("star1"){{
+            alwaysUnlocked = true;
+            constructor = MechUnit::create;
+            health = 160f;
+            armor = 0;
+            hitSize = 8;
+            itemCapacity = 10;
+            ammoCapacity = 20;
+            ammoType = new ItemAmmoType(SLItems.starFrag);
+            outlines = false;
+            speed = 2.2f;
+            accel = 0.2f;
+            drag = 0.6f;
+            rotateMoveFirst = true;
+            hoverable = false;
+            mechFrontSway = 0.3f;
+            mechSideSway = 0.2f;
+            mechStride = 1f;
+            weapons.add(
+                new Weapon("star-flame"){{
+                    x = 0;
+                    y = 3;
+                    shootY = 2;
+                    reload = 5;
+                    shootCone = 2;
+                    mirror = rotate = predictTarget = false;
+                    top = continuous = alwaysContinuous = true;
+                    bullet = new ContinuousFlameBulletType(){{
+                        length = 80f;
+                        range = 80f;
+                        width = 8f;
+                        damageInterval = 0.1f;
+                        damage = 0.03f /*21 * damageInterval / 60f*/;
+                        buildingDamageMultiplier = 2f;
+                        pierceBuilding = true;
+                        status = StatusEffects.burning;
+                        statusDuration = 60f;
+                        knockback = 0;
+                        impact = true;
+                        lifetime = 10f;
+                        hitEffect = SLFx.starHit;
+                        lightStroke = 20f;
+                        oscScl = 0.04f;
+                        oscMag = 0.02f;
+                        drawFlare = false;
+                        divisions = 2;
+                        colors = new Color[]{
+                            SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
+                                Color.white.cpy()
+                        };
+                        lengthWidthPans = new float[]{
+                                1.0f,1.0f,0.6f,
+                                0.8f,1.0f,0.5f,
+                                0.6f,0.9f,0.4f,
+                                0.5f,0.8f,0.3f,
+                                0.3f,0.5f,0.2f
+                        };
+                    }};
+                }}
+            );
+        }};
+        star2 = new UnitType("star2"){{
+            alwaysUnlocked = true;
+            constructor = MechUnit::create;
+            health = 360f;
+            armor = 0;
+            hitSize = 12;
+            itemCapacity = 20;
+            ammoCapacity = 20;
+            ammoType = new ItemAmmoType(SLItems.starFrag);
+            outlines = false;
+            speed = 6f;
+            accel = 0.08f;
+            drag = 0.07f;
+            rotateMoveFirst = true;
+            hoverable = false;
+            mechFrontSway = 0.4f;
+            mechSideSway = 0.2f;
+            mechStride = 2f;
+            weapons.add(
+                new Weapon("sil-star2-laser"){{
+                    x = 0;
+                    y = 4;
+                    shootX = 0;
+                    shootY = 0;
+                    reload = 120;
+                    shootCone = 25;
+                    minWarmup = 0.99f;
+                    mirror = alternate = predictTarget = false;
+                    top = rotate = true;
+                    bullet = new LaserBulletType(){{
+                        length = 80f;
+                        range = 80f;
+                        width = 12f;
+                        damage = 100f;
+                        buildingDamageMultiplier = 4f;
+                        pierceBuilding = true;
+                        status = StatusEffects.burning;
+                        statusDuration = 60f;
+                        knockback = 10;
+                        impact = true;
+                        lifetime = 20f;
+                        hitEffect = SLFx.starHit;
+                        colors = new Color[]{
+                                SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
+                                Color.white.cpy()
+                        };
+                    }};
+                }}
+            );
+        }};
+        star6 = new UnitType("star6"){{
+            alwaysUnlocked = true;
+            constructor = MechUnit::create;
+            health = 55000f;
+            armor = -1.5f;
+            hitSize = 51;
+            itemCapacity = 360;
+            ammoCapacity = 2000;
+            ammoType = new ItemAmmoType(SLItems.starFrag);
+            outlines = false;
+            speed = 1f;
+            accel = 0.6f;
+            drag = 0.5f;
+            rotateMoveFirst = true;
+            hoverable = false;
+            mechFrontSway = 0.8f;
+            mechSideSway = 0.6f;
+            mechStride = 4f;
+            weapons.add(
+                new HealtActivationWeapon("sil-star2-laser", 0.4f, 0f){{
+                    x = 0;
+                    y = 6;
+                    shootX = 0;
+                    shootY = 0;
+                    reload = 120;
+                    shootCone = 25;
+                    minWarmup = 0.99f;
+                    mirror = alternate = alwaysContinuous = predictTarget = false;
+                    top = rotate = continuous = true;
+                    bullet = new ContinuousFlameBulletType(){{
+                        length = 240f;
+                        range = 240f;
+                        width = 8f;
+                        damageInterval = 0.1f;
+                        damage = 0.75f /*450 * damageInterval / 60f*/;
+                        buildingDamageMultiplier = 4f;
+                        pierceBuilding = true;
+                        status = StatusEffects.burning;
+                        statusDuration = 600f;
+                        knockback = 2f;
+                        impact = true;
+                        lifetime = 600f;
+                        hitEffect = SLFx.starHit;
+                        lightStroke = 20f;
+                        oscScl = 0.04f;
+                        oscMag = 0.02f;
+                        drawFlare = false;
+                        divisions = 2;
+                        colors = new Color[]{
+                            SLPal.starRedDarkColor,
+                                SLPal.starRedColor,
+                                SLPal.starOrangeDarkColor,
+                                SLPal.starOrangeColor,
+                                Color.white.cpy()
+                        };
+                        lengthWidthPans = new float[]{
+                                1.0f,1.0f,0.6f,
+                                0.8f,1.0f,0.5f,
+                                0.6f,0.9f,0.4f,
+                                0.5f,0.8f,0.3f,
+                                0.3f,0.5f,0.2f
+                        };
+                    }};
+                }}
+            );
+        }
+        @Override
+        public void update(Unit unit){
+            for(StatusEffect s:Vars.content.statusEffects()){
+                if(!unit.isImmune(s)){
+                    immunities.add(s);
+                }
+            }
+            unit.dragMultiplier = 1;
+            unit.speedMultiplier = unit.speedMultiplier < 1 ? 1: unit.speedMultiplier;
+            unit.damageMultiplier = unit.damageMultiplier < 1 ? 1: unit.damageMultiplier;
+            unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1: unit.reloadMultiplier;
+            unit.healthMultiplier = unit.healthMultiplier < 1 ? 1: unit.healthMultiplier;
+            //if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
+            super.init();
+        }};
+    }
+}

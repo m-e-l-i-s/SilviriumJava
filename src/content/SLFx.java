@@ -1,0 +1,160 @@
+package content;
+
+import static arc.graphics.g2d.Draw.color;
+import static arc.math.Angles.randLenVectors;
+
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Fill;
+import arc.math.Angles;
+import arc.math.Interp;
+import arc.math.Mathf;
+import arc.math.geom.Vec2;
+import mindustry.content.Items;
+import mindustry.entities.Effect;
+import mindustry.entities.effect.*;
+import mindustry.graphics.Drawf;
+
+public class SLFx {
+    public static Vec2 vect1 = new Vec2();
+    public static Vec2 vect2 = new Vec2();
+    static float tmpx;
+    static float tmpy;
+    public static Effect
+    silviriumHit1Effect = new Effect(10, e ->{
+        float rds = 1f;
+        int amnt = 5;
+        float dst = 16f;
+        color(SLPal.silviriumColor, SLPal.silviriumDarkColor, e.fin());
+        randLenVectors(e.id, e.fin(), amnt, dst, (x, y, fin, fout) -> {
+            Fill.circle(e.x + x, e.y + y, 4f * fout * rds);
+        });
+    }),
+    silviriumWave1Effect = new WaveEffect(){{
+        colorFrom=SLPal.silviriumColor;
+        colorTo=SLPal.silviriumDarkColor;
+        strokeFrom=1f;
+        strokeTo=0.2f;
+        sizeFrom=4f;
+        sizeTo=12f;
+    }},
+    silviriumHit2Effect = new Effect(10, e ->{
+        float rds = 1f;
+        int amnt = 5;
+        float dst = 24f;
+        color(SLPal.silviriumColor, SLPal.silviriumDarkColor, e.fin());
+        randLenVectors(e.id, e.finpow(), amnt, dst, (x, y, fin, fout) -> {
+            Fill.circle(e.x + x, e.y + y, 4f * fout * rds);
+        });
+    }),
+    silviriumChargeEffect = new MultiEffect(
+        new ParticleEffect(){{
+            colorFrom = SLPal.silviriumDarkColor.a(0.2f);
+            colorTo = SLPal.silviriumColor;
+            particles = 4;
+            randLength = true;
+            length = 40;
+            baseLength = 0;
+            interp = Interp.pow2Out;
+            sizeInterp = Interp.one;
+            sizeFrom = 0f;
+            sizeTo = 24f;
+            cap = true;
+            lifetime = 120;
+        }},
+        new WaveEffect(){{
+            colorFrom=SLPal.silviriumColor;
+            colorTo=SLPal.silviriumDarkColor;
+            strokeFrom=1f;
+            strokeTo=0.2f;
+            sizeFrom=0f;
+            sizeTo=40f;
+        }}
+    ),
+    silviriumRailHit = new Effect(20, 200, (e) -> {
+        Draw.color(SLPal.silviriumOtherColor);
+        Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + 130);
+        Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + -130);
+        Draw.color(SLPal.silviriumColor);
+        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + 130);
+        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + -130);
+        Angles.randLenVectors((long)e.id, 3, 1f + 80f * e.fin(), e.rotation, 120f, (x, y) -> {
+            Draw.color(SLPal.silviriumOtherColor);
+            Drawf.tri(e.x + x, e.y + y, e.fslope() * 9f + 3f, e.fslope() * 9f + 3f, Mathf.angle(x, y)+180f);
+            Draw.color(SLPal.silviriumColor);
+            Drawf.tri(e.x + x, e.y + y, e.fslope() * 8f + 3f, e.fslope() * 8f + 3f, Mathf.angle(x, y)+180f);
+        });
+      }),
+      silviriumRail = new Effect(30, 200, (e) -> {
+        Draw.color(SLPal.silviriumOtherColor);
+        Drawf.tri(e.x, e.y, 8 * e.fout(), 12, e.rotation);
+        Drawf.tri(e.x, e.y, 8 * e.fout(), 4, e.rotation + 180);
+        Draw.color(SLPal.silviriumColor);
+        Drawf.tri(e.x, e.y, 6 * e.fout(), 10, e.rotation);
+        Drawf.tri(e.x, e.y, 6 * e.fout(), 3, e.rotation + 180);
+    }),
+    silvAmb = new ParticleEffect(){{
+        particles = 1;
+        length = 10;
+        baseLength = 60;
+        colorFrom = SLPal.silviriumColor;
+        colorTo = SLPal.silviriumOtherColor;
+        sizeFrom = 0.7f;
+        sizeTo = 2f;
+        lifetime = 60;
+    }},
+    silvline = new ParticleEffect(){{
+        particles = 1;
+        length = 0.5f;
+        baseLength = 1;
+        line = true;
+        colorFrom = SLPal.silviriumColor;
+        colorTo = SLPal.silviriumOtherColor;
+        strokeFrom = 2f;
+        strokeTo = 0f;
+        lenFrom = 12f;
+        lenTo = 12f;
+        lifetime = 20;
+        cone = 0;
+    }},
+    sndLine = new ParticleEffect(){{
+        particles = 1;
+        length = 0.5f;
+        baseLength = 1;
+        line = true;
+        colorFrom = Items.sand.color;
+        colorTo = Items.sand.color.mul(0.8f);
+        strokeFrom = 1f;
+        strokeTo = 0f;
+        lenFrom = 16f;
+        lenTo = 16f;
+        lifetime = 20;
+        cone = 0;
+    }},
+    sliviriumSpark = new MultiEffect(
+        new ParticleEffect(){{
+            particles = 3;
+            line = true;
+            length = 0.8f;
+            baseLength = 2;
+            colorFrom = SLPal.silviriumColor;
+            colorTo = SLPal.silviriumOtherColor;
+            sizeFrom = 0;
+            sizeTo = 24;
+        }},
+        silviriumWave1Effect
+    ),
+    starHit = new ParticleEffect(){{
+        particles = 1;
+        length = 0.5f;
+        baseLength = 1;
+        line = true;
+        colorFrom = SLPal.starOrangeColor;
+        colorTo = SLPal.starRedDarkColor;
+        strokeFrom = 2f;
+        strokeTo = 0f;
+        lenFrom = 12f;
+        lenTo = 2f;
+        lifetime = 10;
+        cone = 10;
+    }};
+}
