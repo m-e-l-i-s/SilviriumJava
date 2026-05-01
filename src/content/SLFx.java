@@ -8,19 +8,14 @@ import arc.graphics.g2d.Fill;
 import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
-import arc.math.geom.Vec2;
 import mindustry.content.Items;
 import mindustry.entities.Effect;
 import mindustry.entities.effect.*;
 import mindustry.graphics.Drawf;
 
 public class SLFx {
-    public static Vec2 vect1 = new Vec2();
-    public static Vec2 vect2 = new Vec2();
-    static float tmpx;
-    static float tmpy;
     public static Effect
-    silviriumHit1Effect = new Effect(10, e ->{
+    silviriumHit1Effect = new Effect(20, e ->{
         float rds = 1f;
         int amnt = 5;
         float dst = 16f;
@@ -37,15 +32,6 @@ public class SLFx {
         sizeFrom=4f;
         sizeTo=12f;
     }},
-    silviriumHit2Effect = new Effect(10, e ->{
-        float rds = 1f;
-        int amnt = 5;
-        float dst = 24f;
-        color(SLPal.silviriumColor, SLPal.silviriumDarkColor, e.fin());
-        randLenVectors(e.id, e.finpow(), amnt, dst, (x, y, fin, fout) -> {
-            Fill.circle(e.x + x, e.y + y, 4f * fout * rds);
-        });
-    }),
     silviriumChargeEffect = new MultiEffect(
         new ParticleEffect(){{
             colorFrom = SLPal.silviriumDarkColor.a(0.2f);
@@ -72,11 +58,11 @@ public class SLFx {
     ),
     silviriumRailHit = new Effect(20, 200, (e) -> {
         Draw.color(SLPal.silviriumOtherColor);
-        Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + 130);
-        Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + -130);
+        Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + 130+20*e.fout());
+        Drawf.tri(e.x, e.y, 8 * e.fout(), 24, e.rotation + -130-20*e.fout());
         Draw.color(SLPal.silviriumColor);
-        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + 130);
-        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + -130);
+        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + 130+20*e.fout());
+        Drawf.tri(e.x, e.y, 7 * e.fout(), 23, e.rotation + -130-20*e.fout());
         Angles.randLenVectors((long)e.id, 3, 1f + 80f * e.fin(), e.rotation, 120f, (x, y) -> {
             Draw.color(SLPal.silviriumOtherColor);
             Drawf.tri(e.x + x, e.y + y, e.fslope() * 9f + 3f, e.fslope() * 9f + 3f, Mathf.angle(x, y)+180f);
@@ -94,8 +80,8 @@ public class SLFx {
     }),
     silvAmb = new ParticleEffect(){{
         particles = 1;
-        length = 10;
-        baseLength = 60;
+        length = 60;
+        baseLength = 10;
         colorFrom = SLPal.silviriumColor;
         colorTo = SLPal.silviriumOtherColor;
         sizeFrom = 0.7f;
@@ -104,8 +90,8 @@ public class SLFx {
     }},
     silvline = new ParticleEffect(){{
         particles = 1;
-        length = 0.5f;
-        baseLength = 1;
+        length = 0f;
+        baseLength = 2;
         line = true;
         colorFrom = SLPal.silviriumColor;
         colorTo = SLPal.silviriumOtherColor;
@@ -122,7 +108,7 @@ public class SLFx {
         baseLength = 1;
         line = true;
         colorFrom = Items.sand.color;
-        colorTo = Items.sand.color.mul(0.8f);
+        colorTo = Items.sand.color.cpy().mul(0.8f);
         strokeFrom = 1f;
         strokeTo = 0f;
         lenFrom = 16f;

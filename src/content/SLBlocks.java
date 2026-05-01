@@ -19,6 +19,7 @@ import arc.graphics.*;
 import arc.struct.EnumSet;
 import arc.util.Time;
 import arc.math.Interp;
+import arc.math.Mathf;
 import mindustry.type.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
@@ -335,7 +336,7 @@ public class SLBlocks {
             health = 240;
             flags = EnumSet.of(BlockFlag.turret);
             coolant = consume(new ConsumeLiquid(SLliquids.liquidSilvirium, 0.05f));
-            shootEffect = SLFx.silviriumHit2Effect;
+            shootEffect = SLFx.silviriumHit1Effect;
         }};
         SST = new ItemTurret("sand-storm-turret"){{
             predictTarget = false;
@@ -351,36 +352,41 @@ public class SLBlocks {
                     splashDamageRadius = 40;
                     trailEffect = SLFx.sndLine;
                     ammoMultiplier = 1;
-                    spawnBullets.add(new ExplosionBulletType(10,120){{
-                        killShooter = false;
-                        fragBullet = new BasicBulletType(12,10){{
-                            lifetime = 180;
-                            homingPower = 0.05f;
-                            homingRange = 24;
-                        }
+                    spawnBullets.add(
+                        new ExplosionBulletType(10,120){{
+                            killShooter = false;
+                            fragBullets = 4;
+                            fragBullet = new BasicBulletType(12,10){{
+                                lifetime = 600;
+                                homingPower = 0.1f;
+                                homingRange = 24;
+                            }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(10 * (b.fin()>0.5f?2*b.fin():1) * Time.delta);
+                                b.vel.rotate((b.dst(b.originX,b.originY)*Mathf.PI * (b.fin()>0.5f?2*b.fin():1) * Time.delta) / b.vel.len());
                             }
-                        }; 
-                    }}, new ExplosionBulletType(10,240){{
-                        killShooter = false;
-                        fragBullet = new BasicBulletType(12,10){{
-                            lifetime = 180;
-                            homingPower = 0.05f;
-                            homingRange = 24;
-                        }
+                            }; 
+                        }},
+                        new ExplosionBulletType(10,240){{
+                            killShooter = false;
+                            fragBullets = 4;
+                            fragBullet = new BasicBulletType(12,10){{
+                                lifetime = 600;
+                                homingPower = 0.1f;
+                                homingRange = 24;
+                            }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate(-10 * (b.fin()>0.5f?2*b.fin():1) * Time.delta);
+                                b.vel.rotate((-b.dst(b.originX,b.originY)*Mathf.PI * (b.fin()>0.5f?2*b.fin():1) * Time.delta) / b.vel.len());
                             }
-                        }; 
-                    }});
+                            }; 
+                        }}
+                    );
                 }}
             );
             size = 3;
             recoil = 1f;
-            reload = 120f;
+            reload = 240f;
             inaccuracy = 0f;
             shootCone = 2f;
             maxAmmo = 27;
@@ -389,8 +395,9 @@ public class SLBlocks {
             range = 240f;
             health = 2200;
             flags = EnumSet.of(BlockFlag.turret);
-            shootEffect = SLFx.silviriumHit2Effect;
+            shootEffect = SLFx.silviriumHit1Effect;
         }};
+        
         ABT = new ItemTurret("anti-building-turret"){{
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{

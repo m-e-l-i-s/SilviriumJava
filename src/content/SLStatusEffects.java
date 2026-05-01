@@ -22,6 +22,7 @@ public class SLStatusEffects {
             applyColor = SLPal.silviriumColor;
             alwaysUnlocked = outline = true;
             effect = SLFx.silvAmb;
+            
         }
 
         @Override
@@ -41,7 +42,7 @@ public class SLStatusEffects {
             unit.healthMultiplier = 0.7f;
             super.update(unit, entry);
         }};
-        rush = new StatusEffect("rush"){{
+        rush = new StatusEffect("sli-rush"){{
             alwaysUnlocked = true;
             reloadMultiplier = 0f;
             speedMultiplier = 3f;
