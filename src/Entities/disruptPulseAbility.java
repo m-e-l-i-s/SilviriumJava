@@ -9,7 +9,7 @@ import mindustry.entities.Units;
 import mindustry.entities.abilities.Ability;
 import mindustry.gen.Unit;
 
-public class disruptPulse extends Ability{
+public class disruptPulseAbility extends Ability{
     public float 
     reload = 120, range = 60, time = 120,
     deathRange = 120, deathTime = 600;
@@ -18,9 +18,9 @@ public class disruptPulse extends Ability{
 
     protected float cd = 0;
 
-    public disruptPulse(){}
+    public disruptPulseAbility(){}
 
-    public disruptPulse(float reload, float range, float time, float deathRange, float deathTime,boolean targetsTeam, boolean targetsEnemy,boolean targetsTeamOnDeath, boolean targetsEnemyOnDeath, boolean canReapply){
+    public disruptPulseAbility(float reload, float range, float time, float deathRange, float deathTime,boolean targetsTeam, boolean targetsEnemy,boolean targetsTeamOnDeath, boolean targetsEnemyOnDeath, boolean canReapply){
         this.reload = reload;
         this.range = range;
         this.time = time;
@@ -33,11 +33,11 @@ public class disruptPulse extends Ability{
         this.canReapply = canReapply;
     }
 
-    public disruptPulse(float deathRange, float deathTime){
+    public disruptPulseAbility(float deathRange, float deathTime){
         this(-1,0,0,deathRange,deathTime,false, true, false, true, true);
     }
 
-    public disruptPulse(float reload, float range, float time){
+    public disruptPulseAbility(float reload, float range, float time){
         this(reload, range, time, 0, 0, false, true, false, true, true);
     }
 

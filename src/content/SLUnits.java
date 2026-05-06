@@ -1,6 +1,7 @@
 package content;
 
-import Entities.disruptPulse;
+import Entities.disruptPulseAbility;
+import ai.ProxMissileAI;
 import arc.graphics.Color;
 import type.HealtActivationWeapon;
 import mindustry.Vars;
@@ -21,6 +22,7 @@ public class SLUnits {
     silvone, silvioros,
     silvistar, silvsile,
     star1, star2, star6;
+
     public static void load(){
         silvanon = new UnitType("Silvanon"){{
             alwaysUnlocked = true;
@@ -44,7 +46,7 @@ public class SLUnits {
             mechStride = 6f;
             range = 240f; 
             maxRange = 240f;
-            abilities.add(new disruptPulse(120,600));
+            abilities.add(new disruptPulseAbility(120,600));
             weapons.add(
                 new Weapon("sil-Silvanon-cannon"){{
                     x = 0;
@@ -73,7 +75,8 @@ public class SLUnits {
                         shootEffect = SLFx.silviriumHit1Effect;
                         status = SLStatusEffects.disrupted;
                         statusDuration = 120f;
-                        sprite = "circle-bullet";
+                        sprite = "large-orb";
+                        backSprite = "large-orb-back";
                     }};
                 }}
             );
@@ -144,20 +147,21 @@ public class SLUnits {
                     shootCone = 8f;
                     shootX = 0f;
                     shootY = 2f;
-                    mirror = false;
-                    rotate = true;
-                    top = false;
                     rotateSpeed = 2f;
                     rotationLimit = 120f;
+                    mirror = top = false;
+                    rotate = true;
                     bullet = new BasicBulletType(8f,15f){{
                         sprite = "circle";
                         lifetime = 10f;
                         range = 80f;
                         buildingDamageMultiplier = 0.5f;
+                        pierce = pierceBuilding = true;
+                        pierceCap = 3;
                         frontColor = trailColor  = SLPal.silviriumColor;
                         trailLength = 16;
                         status = SLStatusEffects.disrupted;
-                        statusDuration = 1500f;
+                        statusDuration = 1800f;
                     }};
                 }},
                 new Weapon("sil-silvirror-side-R"){{
@@ -204,7 +208,7 @@ public class SLUnits {
             speed = 1.2f;
             accel = 0.3f;
             rotateMoveFirst = true;
-            hitSize = 16;
+            hitSize = 12;
             health = 480;
             armor = 5;
             createScorch = false;
@@ -282,7 +286,7 @@ public class SLUnits {
             speed = 1f;
             accel = 0.3f;
             rotateMoveFirst = true;
-            hitSize = 24;
+            hitSize = 16;
             health = 1255;
             armor = 7;
             createScorch = false;
@@ -344,7 +348,7 @@ public class SLUnits {
                             y = 0;
                         }}
                     );
-                    bullet = new BasicBulletType(2.5f,60f){{
+                    bullet = new BasicBulletType(2.5f,20f){{
                         frontColor = trailColor  = SLPal.silviriumColor;
                         trailLength = 8;
                         lifetime = 80;
@@ -359,21 +363,31 @@ public class SLUnits {
                     x = 0;
                     y = 3;
                     shootY = 0;
-                    reload = 200;
+                    reload = 240;
                     rotationLimit = 25f;
                     rotateSpeed = 5f;
                     shootCone = 10f;
+                    recoilTime = 220;
+                    recoil = 8f;
                     rotate = alternate = true;
                     top = mirror = false;
                     parts.add(
-                        new RegionPart()
+                        new RegionPart("sil-Silvsile"){{
+                            progress = PartProgress.recoil.inv();
+                            layerOffset = -0.1f;
+                            mirror = true;
+                            x = 0;
+                            moveX = 0;
+                            y = 0;
+                        }}
                     );
                     bullet = new /*Prox*/BulletType(){{
                         spawnUnit = silvsile = new MissileUnitType("Silvsile"){{
                             lifetime = 50;
                             speed = 4;
                             outlines = false;
-                            maxRange = 30;
+                            maxRange = 32;
+                            controller = u -> new ProxMissileAI();
                             weapons.add(
                                 new Weapon("Silvsile-exp"){{
                                     x = y = 0;
@@ -403,9 +417,9 @@ public class SLUnits {
             speed = 1.3f;
             accel = 0.2f;
             rotateMoveFirst = true;
-            hitSize = 40;
-            health = 8100;
-            armor = 11;
+            hitSize = 28;
+            health = 7900;
+            armor = 16;
             createScorch = false;
             immunities.add(SLStatusEffects.disrupted);
             legContinuousMove = true;
@@ -454,8 +468,8 @@ public class SLUnits {
                         lifetime = 20;
                         range = 120;
                         pierce = pierceBuilding = collidesAir = collidesGround = true;
-                        pierceCap = 3;
-                        pierceDamageFactor = 0.02f;
+                        pierceCap = -1;
+                        pierceDamageFactor = 0.01f;
                         hittable = false;
                         smokeEffect = Fx.none;
                         frontColor = SLPal.silviriumColor;
@@ -470,7 +484,7 @@ public class SLUnits {
                     x = 0;
                     y = 0;
                     shootY = 0;
-                    shootCone = 12f;
+                    reload = 30f;
                     rotate = alternate = mirror = false;
                     shootCone = 360f;
                     shootOnDeath = true;

@@ -25,11 +25,11 @@ public class SLStatusEffects {
             
         }
 
-        @Override
+/*        @Override
         public void setStats(){
             super.setStats();
-//            stats.add(Stat.range, "15");
-        }
+            stats.add(Stat.range, "15");
+        }//*/
 
         @Override
         public void update(Unit unit, StatusEntry entry){
@@ -42,6 +42,7 @@ public class SLStatusEffects {
             unit.healthMultiplier = 0.7f;
             super.update(unit, entry);
         }};
+
         rush = new StatusEffect("sli-rush"){{
             alwaysUnlocked = true;
             reloadMultiplier = 0f;
@@ -58,7 +59,6 @@ public class SLStatusEffects {
             unit.speedMultiplier = unit.speedMultiplier < 3 ? 3 : unit.speedMultiplier;
             unit.ammo = unit.ammo < 1 ? 1 : unit.ammo;
             unit.disarmed = false;
-            unit.update();
             unit.drownTime = -1;
             super.update(unit, entry);
         }
