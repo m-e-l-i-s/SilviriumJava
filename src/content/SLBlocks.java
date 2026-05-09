@@ -347,9 +347,9 @@ public class SLBlocks {
             });
             ammoTypes.putAll(
                 Items.sand, new PointBulletType(){{
-                    damage = 100;
-                    splashDamage = 25;
-                    splashDamageRadius = 40;
+                    damage = 0;
+                    splashDamage = 75;
+                    splashDamageRadius = 48;
                     trailEffect = SLFx.sndLine;
                     ammoMultiplier = 1;
                     spawnBullets.add(
@@ -358,12 +358,12 @@ public class SLBlocks {
                             fragBullets = 4;
                             fragBullet = new BasicBulletType(12,10){{
                                 lifetime = 600;
-                                homingPower = 0.1f;
+                                homingPower = 1f;
                                 homingRange = 24;
                             }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate((b.dst(b.originX,b.originY)*Mathf.PI * (b.fin()>0.5f?2*b.fin():1) * Time.delta) / b.vel.len());
+                                b.vel.rotate((b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) * b.vel.len());
                             }
                             }; 
                         }},
@@ -372,12 +372,12 @@ public class SLBlocks {
                             fragBullets = 4;
                             fragBullet = new BasicBulletType(12,10){{
                                 lifetime = 600;
-                                homingPower = 0.1f;
+                                homingPower = 1f;
                                 homingRange = 24;
                             }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate((-b.dst(b.originX,b.originY)*Mathf.PI * (b.fin()>0.5f?2*b.fin():1) * Time.delta) / b.vel.len());
+                                b.vel.rotate((-b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) * b.vel.len());
                             }
                             }; 
                         }}

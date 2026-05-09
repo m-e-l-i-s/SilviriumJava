@@ -3,13 +3,21 @@ package content;
 import Entities.disruptPulseAbility;
 import ai.ProxMissileAI;
 import arc.graphics.Color;
+import arc.math.Interp;
+import arc.scene.ui.layout.Table;
+import arc.util.Strings;
+import arc.util.Time;
 import type.HealtActivationWeapon;
 import mindustry.Vars;
+import mindustry.ai.types.MissileAI;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
+import mindustry.entities.abilities.Ability;
+import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.gen.*;
 import mindustry.type.ammo.*;
 import mindustry.type.unit.MissileUnitType;
@@ -372,13 +380,14 @@ public class SLUnits {
                     rotate = alternate = true;
                     top = mirror = false;
                     parts.add(
-                        new RegionPart("sil-Silvsile"){{
+                        new RegionPart(){{
+                            name = "sil-Silvsile";
                             progress = PartProgress.recoil.inv();
                             layerOffset = -0.1f;
                             mirror = true;
-                            x = 0;
-                            moveX = 0;
-                            y = 0;
+                            x = y = moveX = growX = 0;
+                            moveY = -10.5f;
+                            growY = -1;
                         }}
                     );
                     bullet = new /*Prox*/BulletType(){{
@@ -395,7 +404,7 @@ public class SLUnits {
                                     shootCone = 360f;
                                     shootOnDeath = true;
                                     mirror = false;
-                                    bullet = new ExplosionBulletType(400,40){{
+                                    bullet = new ExplosionBulletType(controller instanceof MissileAI ? 400 : 0,40){{
                                         buildingDamageMultiplier = 0.5f;
                                         range = 32;
                                         splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
@@ -411,6 +420,7 @@ public class SLUnits {
                 }}
             );
         }};
+
         silvruner = new UnitType("Silvruner"){{
             alwaysUnlocked = true;
             constructor = LegsUnit::create;
@@ -888,7 +898,7 @@ public class SLUnits {
             armor = -1.5f;
             hitSize = 51;
             itemCapacity = 360;
-            ammoCapacity = 2000;
+            ammoCapacity = 8000;
             ammoType = new ItemAmmoType(SLItems.starFrag);
             outlines = false;
             speed = 1f;
@@ -899,6 +909,52 @@ public class SLUnits {
             mechFrontSway = 0.8f;
             mechSideSway = 0.6f;
             mechStride = 4f;
+            abilities.add(new RegenAbility(){{
+                percentAmount = 0.01f;
+            }
+
+            @Override
+            public void addStats(Table t){
+                super.addStats(t);
+
+                boolean flat = amount >= 0.001f;
+                boolean percent = percentAmount >= 0.001f;
+
+                if(flat || percent){
+                    t.add(abilityStat("regen",
+                        (flat ? Strings.autoFixed(amount * 60f, 2) + (percent ? " [lightgray]+[stat] " : "") : "")
+                            + (percent ? Strings.autoFixed(percentAmount * 60f, 2) + "%" : "") + "[lightgray]no shooting multiplier[stat]4x"
+                    ));
+                }
+            }
+
+            @Override
+            public void update(Unit unit){
+                unit.heal(((unit.maxHealth * percentAmount / 100f + amount) * (unit.isShooting()?1:4)) * Time.delta);
+            }},
+            new Ability() {
+                protected float t=0;
+
+                @Override
+                public void addStats(Table t){
+                    super.addStats(t);
+
+                    t.add("[lightgray]Ammo Regen[stat]10/s [lightgray] when shooting: [stat] false");
+                }
+
+                @Override
+                public void update(Unit unit){
+                    if(!unit.isShooting()){
+                        if(t >= 1f){
+                            t = 0;
+                            unit.ammo += 10;
+                        }else{
+                            t += Time.delta;
+                        }
+                    }
+                }
+            }        
+            );
             weapons.add(
                 new HealtActivationWeapon("sil-star2-laser", 0.4f, 0f){{
                     x = 0;
@@ -913,20 +969,21 @@ public class SLUnits {
                     bullet = new ContinuousFlameBulletType(){{
                         length = 240f;
                         range = 240f;
-                        width = 8f;
+                        width = 48f;
                         damageInterval = 0.1f;
-                        damage = 0.75f /*450 * damageInterval / 60f*/;
+                        damage = 1f;
                         buildingDamageMultiplier = 4f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 600f;
-                        knockback = 2f;
+                        knockback = 4f;
                         impact = true;
                         lifetime = 600f;
+                        lengthInterp = Interp.one;
                         hitEffect = SLFx.starHit;
                         lightStroke = 20f;
-                        oscScl = 0.04f;
-                        oscMag = 0.02f;
+                        oscScl = 0.5f;
+                        oscMag = 0.05f;
                         drawFlare = false;
                         divisions = 2;
                         colors = new Color[]{
@@ -937,11 +994,11 @@ public class SLUnits {
                                 Color.white.cpy()
                         };
                         lengthWidthPans = new float[]{
-                                1.0f,1.0f,0.6f,
-                                0.8f,1.0f,0.5f,
-                                0.6f,0.9f,0.4f,
-                                0.5f,0.8f,0.3f,
-                                0.3f,0.5f,0.2f
+                                1.2f,1.2f,0.7f,
+                                1.0f,1.0f,0.7f,
+                                0.9f,0.9f,0.7f,
+                                0.7f,0.7f,0.7f,
+                                0.4f,0.4f,0.7f
                         };
                     }};
                 }}

@@ -34,7 +34,7 @@ public class SLFx {
     }},
     silviriumChargeEffect = new MultiEffect(
         new ParticleEffect(){{
-            colorFrom = SLPal.silviriumDarkColor.a(0.2f);
+            colorFrom = SLPal.silviriumDarkColor.a(0.1f);
             colorTo = SLPal.silviriumColor;
             particles = 4;
             randLength = true;
@@ -43,7 +43,7 @@ public class SLFx {
             interp = Interp.pow2Out;
             sizeInterp = Interp.one;
             sizeFrom = 0f;
-            sizeTo = 24f;
+            sizeTo = 1f;
             cap = true;
             lifetime = 120;
         }},

@@ -25,12 +25,13 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
         }};
         antintuitivemater = new Item("antintuitive-matter"){{
             alwaysUnlocked = true;
-            explosiveness = 0.2f;
-            charge = 1;
-            flammability = 0.05f;
-            radioactivity = 0.6f;
+            explosiveness = 2f;
+            charge = 2;
+            flammability = 2f;
+            radioactivity = 2f;
             frames = 2;
-            frameTime = 30;
+            transitionFrames = 2;
+            frameTime = 10;
         }};
     }
 }

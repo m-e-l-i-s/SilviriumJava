@@ -20,12 +20,10 @@ public class ProxMissileAI extends MissileAI{
         //move forward forever
         unit.moveAt(vec.trns(unit.rotation, unit.speed()));
 
-        var build = unit.buildOn();
-        //kill instantly on enemy building contact
-        if(build != null && build.team != unit.team && (build == target || !build.block.underBullets)){
-            unit.kill();
+        if(unit instanceof TimedKillUnit t){ 
+            t.time=0;
         }
-        
+
         if(shooter == null || (shooter != null && shooter.dst(unit.x,unit.y) > shooter.range())){
             unit.lookAt(0, 0);
         }
@@ -33,7 +31,6 @@ public class ProxMissileAI extends MissileAI{
 
     @Override
     public boolean retarget(){
-        //more frequent retarget due to high speed. TODO won't this lag?
         return timer.get(timerTarget, 4f);
     }
 }

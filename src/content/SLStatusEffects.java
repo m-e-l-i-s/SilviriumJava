@@ -35,15 +35,15 @@ public class SLStatusEffects {
         public void update(Unit unit, StatusEntry entry){
             unit.aimX += Mathf.random(-5, 5) * 8 * Time.delta;
             unit.aimY += Mathf.random(-5, 5) * 8 * Time.delta;
+            super.update(unit, entry);
             unit.speedMultiplier = 0.7f;
             unit.reloadMultiplier = 0.7f;
             unit.damageMultiplier = 0.7f;
             unit.buildSpeedMultiplier = 0.7f;
             unit.healthMultiplier = 0.7f;
-            super.update(unit, entry);
         }};
 
-        rush = new StatusEffect("sli-rush"){{
+        rush = new StatusEffect("rush"){{
             alwaysUnlocked = true;
             reloadMultiplier = 0f;
             speedMultiplier = 3f;
@@ -56,10 +56,11 @@ public class SLStatusEffects {
         }
         @Override
         public void update(Unit unit, StatusEntry entry){
-            unit.speedMultiplier = unit.speedMultiplier < 3 ? 3 : unit.speedMultiplier;
+            entry.speedMultiplier = unit.speedMultiplier < 3 ? (1/unit.speedMultiplier)*3 : 3;
             unit.ammo = unit.ammo < 1 ? 1 : unit.ammo;
             unit.disarmed = false;
             unit.drownTime = -1;
+            mindustry.gen.Groups.unit.intersect(unit.x - unit.hitSize, unit.y - unit.hitSize, unit.x + unit.hitSize, unit.y + unit.hitSize);
             super.update(unit, entry);
         }
     
