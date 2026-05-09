@@ -17,7 +17,6 @@ import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
-import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.gen.*;
 import mindustry.type.ammo.*;
 import mindustry.type.unit.MissileUnitType;
