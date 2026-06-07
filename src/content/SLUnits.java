@@ -22,7 +22,6 @@ import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
-import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
@@ -1086,7 +1085,7 @@ public class SLUnits {
             unit.damageMultiplier = unit.damageMultiplier < 1 ? 1: unit.damageMultiplier;
             unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1: unit.reloadMultiplier;
             unit.healthMultiplier = unit.healthMultiplier < 1 ? 1: unit.healthMultiplier;
-            if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
+            //if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
             super.update(unit);
         }};
     }
