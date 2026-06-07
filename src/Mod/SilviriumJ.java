@@ -1,5 +1,6 @@
 package Mod;
 
+import ai.ProxMissileAI;
 import arc.*;
 import arc.util.*;
 import content.SLBlocks;
@@ -7,6 +8,7 @@ import content.SLStatusEffects;
 import content.SLUnits;
 import content.SLItems;
 import content.SLliquids;
+import mindustry.ai.types.MissileAI;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
@@ -17,13 +19,15 @@ public class SilviriumJ extends Mod{
     Events.on(ClientLoadEvent.class, e -> {
             Time.runTask(30f, () -> {
                 BaseDialog dialog = new BaseDialog("Hello message");
-                dialog.cont.add("This is Silvirium").row();
+                dialog.cont.add("This is Silvirium:" + (new ProxMissileAI() instanceof MissileAI)).row();
                 dialog.cont.image(Core.atlas.find("sli-icon")).pad(100f).row();
                 dialog.cont.button("CLOSE", dialog::hide).size(150f,75f).fontScale(3);
                 dialog.show();
             });
         });
     }
+
+    
 
     @Override
     public void loadContent(){

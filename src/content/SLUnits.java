@@ -1,9 +1,14 @@
 package content;
 
+import static arc.graphics.g2d.Draw.*;
+
 import Entities.disruptPulseAbility;
 import ai.ProxMissileAI;
 import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
 import arc.math.Interp;
+import arc.math.Mathf;
+import arc.math.Scaled;
 import arc.scene.ui.layout.Table;
 import arc.util.Strings;
 import arc.util.Time;
@@ -17,8 +22,10 @@ import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
+import mindustry.entities.part.DrawPart.PartProgress;
+import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
-import mindustry.type.ammo.*;
+import mindustry.graphics.Layer;
 import mindustry.type.unit.MissileUnitType;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
@@ -27,6 +34,7 @@ import mindustry.type.Weapon;
 public class SLUnits {
     public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5,
     silvone, silvioros,
+    silvot,
     silvistar, silvsile,
     star1, star2, star6;
 
@@ -39,8 +47,6 @@ public class SLUnits {
             hitSize = 8;
             itemCapacity = 10;
             immunities.add(SLStatusEffects.disrupted);
-            ammoCapacity = 60;
-            ammoType = new ItemAmmoType(SLItems.silvirium);
             outlines = false;
             speed = 0.6f;
             accel = 0.3f;
@@ -96,8 +102,6 @@ public class SLUnits {
             hitSize = 8;
             itemCapacity = 10;
             immunities.add(SLStatusEffects.disrupted);
-            ammoCapacity = 60;
-            ammoType = new ItemAmmoType(SLItems.silvirium);
             outlines = false;
             speed = 1.6f;
             accel = 0.4f;
@@ -243,8 +247,6 @@ public class SLUnits {
             rippleScale = 0.5f;
             range = 120;
             maxRange = 120;
-            ammoCapacity = 300;
-            ammoType = new ItemAmmoType(SLItems.silvirium);
             itemCapacity = 30;
             outlineRadius = 0;
             weapons.add(
@@ -321,8 +323,6 @@ public class SLUnits {
             rippleScale = 0.6f;
             range = 200;
             maxRange = 200;
-            ammoCapacity = 400;
-            ammoType = new ItemAmmoType(SLItems.silvirium);
             itemCapacity = 50;
             outlineRadius = 0;
             weapons.add(
@@ -454,8 +454,6 @@ public class SLUnits {
             rippleScale = 0.5f;
             range = 120;
             maxRange = 120;
-            ammoCapacity = 300;
-            ammoType = new ItemAmmoType(SLItems.silvirium);
             itemCapacity = 60;
             outlineRadius = 0;
             weapons.add(
@@ -548,8 +546,6 @@ public class SLUnits {
             rippleScale = 0.5f;
             range = 120;
             maxRange = 120;
-            ammoCapacity = 300;
-            ammoType = new ItemAmmoType(SLItems.silvirium);
             itemCapacity = 30;
             outlineRadius = 0;
         }};
@@ -558,7 +554,6 @@ public class SLUnits {
             constructor = UnitEntity::create;
             flying = true;
             immunities.add(SLStatusEffects.disrupted);
-            ammoType = new ItemAmmoType(SLItems.silvirium);
             outlines = false;
             health = 40;
             speed = 4f;
@@ -631,7 +626,7 @@ public class SLUnits {
                 shootY = 0;
                 mirror = false;
                 top = false;
-                reload = 60f;
+                reload = 20f;
                 rotate = true;
                 rotateSpeed = 15f;
                 recoil = 10;
@@ -655,10 +650,114 @@ public class SLUnits {
                 @Override
                 public void hitTile(Bullet b, Building build, float x, float y, float initialHealth, boolean direct){
                     super.hitTile(b, build, x, y, initialHealth, direct);
-                    build.applySlowdown(0f, 300f);
+                    build.applySlowdown(0.01f, 60f);
                 }};
             }});
         }};
+        silvot = new UnitType("Silvot"){{
+            alwaysUnlocked = true;
+            constructor = LegsUnit::create;
+            hovering = true;
+            immunities.add(SLStatusEffects.disrupted);
+            outlines = false;
+            health = 150f;
+            speed = 3f;
+            accel = 0.3f;
+            drag = 0.2f;
+            range = 200f;
+            hitSize = 6;
+            abilities.add(new disruptPulseAbility(90,80,60));
+        }
+        @Override
+        public void draw(Unit unit){
+            float scl = xscl;
+            if(unit.inFogTo(Vars.player.team())) return;
+
+            if(buildSpeed > 0f){
+                unit.drawBuilding();
+            }
+
+            if(unit.mining()){
+                drawMining(unit);
+            }
+
+            boolean isPayload = !unit.isAdded();
+
+            float z =
+                isPayload ? Draw.z() :
+                //dead flying units are assumed to be falling, and to prevent weird clipping issue with the dark "fog", they always draw above it
+                unit.elevation > 0.5f || (flying && unit.dead) ? (flyingLayer) :
+                groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
+
+            if(!isPayload && (unit.isFlying() || shadowElevation > 0)){
+                Draw.z(Math.min(Layer.darkness, z - 1f));
+                drawShadow(unit);
+            }
+
+            Draw.z(z - 0.02f);
+
+            if(unit instanceof Legsc && !isPayload && unit.lastDrownFloor() == null){
+                drawLegs((Unit & Legsc)unit);
+            }
+
+            Draw.z(Math.min(z - 0.01f, Layer.bullet - 1f));
+
+            if(drawSoftShadow) drawSoftShadow(unit);
+
+            Draw.z(z);
+
+            if(drawBody) drawOutline(unit);
+            drawWeaponOutlines(unit);
+            if(engineLayer > 0) Draw.z(engineLayer);
+            if(trailLength > 0 && !naval && (unit.isFlying() || !useEngineElevation)){
+                drawTrail(unit);
+            }
+            if(engines.size > 0) drawEngines(unit);
+            Draw.z(z);
+            if(drawBody) drawBody(unit);
+            if(drawCell && !(unit instanceof Crawlc)) drawCell(unit);
+            Draw.scl(scl); //TODO this is a hack for neoplasm turrets
+            drawWeapons(unit);
+            if(drawItems) drawItems(unit);
+            if(!isPayload){
+                drawLight(unit);
+            }
+
+            if(unit.shieldAlpha > 0 && drawShields){
+                drawShield(unit);
+            }
+
+            //TODO how/where do I draw under?
+            if(parts.size > 0){
+                for(int i = 0; i < parts.size; i++){
+                    var part = parts.get(i);
+
+                    WeaponMount mount = unit.mounts.length > part.weaponIndex ? unit.mounts[part.weaponIndex] : null;
+                    if(mount != null){
+                        DrawPart.params.set(mount.warmup, mount.reload / mount.weapon.reload, mount.smoothReload, mount.heat, mount.recoil, mount.charge, unit.x, unit.y, unit.rotation);
+                    }else{
+                        DrawPart.params.set(0f, 0f, 0f, 0f, 0f, 0f, unit.x, unit.y, unit.rotation);
+                    }
+
+                    if(unit instanceof Scaled s){
+                        DrawPart.params.life = s.fin();
+                    }
+
+                    applyColor(unit);
+                    part.draw(DrawPart.params);
+                }
+            }
+
+            if(!isPayload){
+                for(Ability a : unit.abilities){
+                    Draw.reset();
+                    a.draw(unit);
+                }
+            }
+
+            Draw.reset();
+        }};
+
         silvistar = new UnitType("Silvistar"){{
             alwaysUnlocked = true;
             constructor = PayloadUnit::create;
@@ -738,6 +837,7 @@ public class SLUnits {
                         splashDamage = 10;
                         splashDamageRadius = 16;
                         buildingDamageMultiplier = 0.5f;
+                        lifetime = 40f;
                     }};
                 }},
                 new Weapon("Static-star-mines"){{
@@ -780,8 +880,6 @@ public class SLUnits {
             armor = 0;
             hitSize = 8;
             itemCapacity = 10;
-            ammoCapacity = 20;
-            ammoType = new ItemAmmoType(SLItems.starFrag);
             outlines = false;
             speed = 2.2f;
             accel = 0.2f;
@@ -844,8 +942,6 @@ public class SLUnits {
             armor = 0;
             hitSize = 12;
             itemCapacity = 20;
-            ammoCapacity = 20;
-            ammoType = new ItemAmmoType(SLItems.starFrag);
             outlines = false;
             speed = 6f;
             accel = 0.08f;
@@ -897,8 +993,6 @@ public class SLUnits {
             armor = -1.5f;
             hitSize = 51;
             itemCapacity = 360;
-            ammoCapacity = 8000;
-            ammoType = new ItemAmmoType(SLItems.starFrag);
             outlines = false;
             speed = 1f;
             accel = 0.6f;
@@ -922,7 +1016,7 @@ public class SLUnits {
                 if(flat || percent){
                     t.add(abilityStat("regen",
                         (flat ? Strings.autoFixed(amount * 60f, 2) + (percent ? " [lightgray]+[stat] " : "") : "")
-                            + (percent ? Strings.autoFixed(percentAmount * 60f, 2) + "%" : "") + "[lightgray]no shooting multiplier[stat]4x"
+                            + (percent ? Strings.autoFixed(percentAmount * 60f, 2) + "%" : "") + "[lightgray].\nNo shooting multiplier[stat]4x"
                     ));
                 }
             }
@@ -930,30 +1024,7 @@ public class SLUnits {
             @Override
             public void update(Unit unit){
                 unit.heal(((unit.maxHealth * percentAmount / 100f + amount) * (unit.isShooting()?1:4)) * Time.delta);
-            }},
-            new Ability() {
-                protected float t=0;
-
-                @Override
-                public void addStats(Table t){
-                    super.addStats(t);
-
-                    t.add("[lightgray]Ammo Regen[stat]10/s [lightgray] when shooting: [stat] false");
-                }
-
-                @Override
-                public void update(Unit unit){
-                    if(!unit.isShooting()){
-                        if(t >= 1f){
-                            t = 0;
-                            unit.ammo += 10;
-                        }else{
-                            t += Time.delta;
-                        }
-                    }
-                }
-            }        
-            );
+            }});
             weapons.add(
                 new HealtActivationWeapon("sil-star2-laser", 0.4f, 0f){{
                     x = 0;
@@ -975,7 +1046,7 @@ public class SLUnits {
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 600f;
-                        knockback = 4f;
+                        knockback = 8f;
                         impact = true;
                         lifetime = 600f;
                         lengthInterp = Interp.one;
@@ -1015,8 +1086,8 @@ public class SLUnits {
             unit.damageMultiplier = unit.damageMultiplier < 1 ? 1: unit.damageMultiplier;
             unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1: unit.reloadMultiplier;
             unit.healthMultiplier = unit.healthMultiplier < 1 ? 1: unit.healthMultiplier;
-            //if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
-            super.init();
+            if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
+            super.update(unit);
         }};
     }
 }

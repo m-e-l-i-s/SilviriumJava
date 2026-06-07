@@ -1,5 +1,7 @@
 package content;
 
+
+ 
 import arc.math.Mathf;
 import arc.util.Time;
 import mindustry.entities.units.StatusEntry;
@@ -24,13 +26,13 @@ public class SLStatusEffects {
             effect = SLFx.silvAmb;
             
         }
-
-/*        @Override
+/*/
+        @Override
         public void setStats(){
             super.setStats();
             stats.add(Stat.range, "15");
-        }//*/
-
+        }
+//*/
         @Override
         public void update(Unit unit, StatusEntry entry){
             unit.aimX += Mathf.random(-5, 5) * 8 * Time.delta;
@@ -57,13 +59,13 @@ public class SLStatusEffects {
         @Override
         public void update(Unit unit, StatusEntry entry){
             entry.speedMultiplier = unit.speedMultiplier < 3 ? (1/unit.speedMultiplier)*3 : 3;
-            unit.ammo = unit.ammo < 1 ? 1 : unit.ammo;
             unit.disarmed = false;
             unit.drownTime = -1;
-            mindustry.gen.Groups.unit.intersect(unit.x - unit.hitSize, unit.y - unit.hitSize, unit.x + unit.hitSize, unit.y + unit.hitSize);
             super.update(unit, entry);
         }
     
         };
     }
 }
+
+//*/
