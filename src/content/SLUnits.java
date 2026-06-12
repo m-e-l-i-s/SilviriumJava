@@ -4,6 +4,7 @@ import static arc.graphics.g2d.Draw.*;
 
 import Entities.disruptPulseAbility;
 import ai.ProxMissileAI;
+import arc.func.Prov;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.math.Interp;
@@ -15,6 +16,7 @@ import arc.util.Time;
 import type.HealtActivationWeapon;
 import mindustry.Vars;
 import mindustry.ai.types.MissileAI;
+import mindustry.content.Blocks;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
@@ -22,10 +24,13 @@ import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
 import mindustry.type.unit.MissileUnitType;
+import mindustry.world.blocks.environment.Floor;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -632,14 +637,16 @@ public class SLUnits {
                 rotationLimit = 300f;
                 range = 240f;
                 maxRange = 240f;
-                bullet = new BasicBulletType(4f, 8f){{
+                bullet = new BasicBulletType(6f, 8f){{
                     width = 8f;
+                    lifesteal = 0.1f;
                     height = 12f;
                     range = 240f;
                     collidesAir = false;
                     collidesGround = pierce = true;
                     frontColor = SLPal.silviriumColor;
                     backColor = SLPal.silviriumDarkColor;
+                    trailColor = SLPal.silviriumOtherColor;
                     trailLength = 8;
                     trailWidth = 1;
                     shootEffect = Fx.shootSmall;
@@ -653,19 +660,62 @@ public class SLUnits {
                 }};
             }});
         }};
+        //TODO:make this a proper class
         silvot = new UnitType("Silvot"){{
             alwaysUnlocked = true;
-            constructor = LegsUnit::create;
+            constructor = (Prov<? extends Unit>) new LegsUnit(){
+                public float floorSpeedMultiplier() {
+                    Floor on = !this.isFlying() && !this.type.hovering ? this.floorOn() : Blocks.air.asFloor();
+                    return (float)Math.pow((double)(on.isLiquid?on.isDeep()?on.speedMultiplier*1.5:on.speedMultiplier*1.3:on.speedMultiplier), (double)this.type.floorMultiplier) * this.speedMultiplier;
+                }
+            };
             hovering = true;
+            canDrown = false;
             immunities.add(SLStatusEffects.disrupted);
             outlines = false;
-            health = 150f;
-            speed = 3f;
-            accel = 0.3f;
-            drag = 0.2f;
+            health = 145f;
+            speed = 3.5f;
+            accel = 0.25f;
+            drag = 0.1f;
             range = 200f;
-            hitSize = 6;
+            hitSize = 9f;
             abilities.add(new disruptPulseAbility(90,80,60));
+            weapons.add(
+                new Weapon("Silvot-missiles"){{
+                    x = 0;
+                    y = 12;
+                    reload = 180;
+                    mirror = false;
+                    parts.add(
+                        new ShapePart(){{
+                            color = SLPal.silviriumDarkestColor;
+                            colorTo = SLPal.silviriumligthColor;
+                            progress = PartProgress.reload;
+                            hollow = mirror = true;
+                            sides = 5;
+                            rotateSpeed = 3;
+                            radius = 0;
+                            radiusTo = 4;
+                            stroke = 0;
+                            strokeTo = 1;
+                            x = 0;
+                            moveX = 0;
+                            y = 0;
+                        }}
+                    );
+                    shootCone = 30;
+                    inaccuracy = 45;
+                    shoot.firstShotDelay = 120;
+                    shoot.shotDelay = 9;
+                    shoot.shots = 10;
+                    bullet = new MissileBulletType(12,20){{
+                        chargeEffect = SLFx.silviriumChargeEffect;
+                        backColor = SLPal.silviriumColor;
+                        frontColor = SLPal.silviriumDarkColor;
+                        lifetime = 17;
+                    }};                    
+                }}
+            );
         }
         @Override
         public void draw(Unit unit){
@@ -695,8 +745,11 @@ public class SLUnits {
 
             Draw.z(z - 0.02f);
 
-            if(unit instanceof Legsc && !isPayload && unit.lastDrownFloor() == null){
+            if(unit instanceof Legsc && !isPayload && unit.floorOn() != null && unit.floorOn().isLiquid){
+                ((Unit & Legsc) unit).resetLegs();
                 drawLegs((Unit & Legsc)unit);
+            }else{
+                ((Unit & Legsc) unit).resetLegs(0);
             }
 
             Draw.z(Math.min(z - 0.01f, Layer.bullet - 1f));
