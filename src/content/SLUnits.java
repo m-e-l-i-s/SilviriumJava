@@ -4,7 +4,6 @@ import static arc.graphics.g2d.Draw.*;
 
 import Entities.disruptPulseAbility;
 import ai.ProxMissileAI;
-import arc.func.Prov;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.math.Interp;
@@ -16,7 +15,6 @@ import arc.util.Time;
 import type.HealtActivationWeapon;
 import mindustry.Vars;
 import mindustry.ai.types.MissileAI;
-import mindustry.content.Blocks;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
@@ -24,13 +22,11 @@ import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
-import mindustry.entities.part.DrawPart.PartProgress;
+import mindustry.entities.pattern.ShootBarrel;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
 import mindustry.type.unit.MissileUnitType;
-import mindustry.world.blocks.environment.Floor;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -179,7 +175,7 @@ public class SLUnits {
                         statusDuration = 1800f;
                     }};
                 }},
-                new Weapon("sil-silvirror-side-R"){{
+                new Weapon("silvirror-side-R"){{
                     x = 8f;
                     y = 1f;
                     reload = 60f;
@@ -384,7 +380,7 @@ public class SLUnits {
                     top = mirror = false;
                     parts.add(
                         new RegionPart(){{
-                            name = "sil-Silvsile";
+                            name = "Silvsile";
                             progress = PartProgress.recoil.inv();
                             layerOffset = -0.1f;
                             mirror = true;
@@ -663,12 +659,7 @@ public class SLUnits {
         //TODO:make this a proper class
         silvot = new UnitType("Silvot"){{
             alwaysUnlocked = true;
-            constructor = (Prov<? extends Unit>) new LegsUnit(){
-                public float floorSpeedMultiplier() {
-                    Floor on = !this.isFlying() && !this.type.hovering ? this.floorOn() : Blocks.air.asFloor();
-                    return (float)Math.pow((double)(on.isLiquid?on.isDeep()?on.speedMultiplier*1.5:on.speedMultiplier*1.3:on.speedMultiplier), (double)this.type.floorMultiplier) * this.speedMultiplier;
-                }
-            };
+            constructor = LegsUnit::create;
             hovering = true;
             canDrown = false;
             immunities.add(SLStatusEffects.disrupted);
@@ -704,7 +695,7 @@ public class SLUnits {
                         }}
                     );
                     shootCone = 30;
-                    inaccuracy = 45;
+                    inaccuracy = 40;
                     shoot.firstShotDelay = 120;
                     shoot.shotDelay = 9;
                     shoot.shots = 10;
@@ -1077,6 +1068,7 @@ public class SLUnits {
             public void update(Unit unit){
                 unit.heal(((unit.maxHealth * percentAmount / 100f + amount) * (unit.isShooting()?1:4)) * Time.delta);
             }});
+
             weapons.add(
                 new HealtActivationWeapon("sil-star2-laser", 0.4f, 0f){{
                     x = 0;
@@ -1088,17 +1080,27 @@ public class SLUnits {
                     minWarmup = 0.99f;
                     mirror = alternate = alwaysContinuous = predictTarget = false;
                     top = rotate = continuous = true;
+                    shoot = new ShootBarrel(){{
+                        barrels = new float[]{
+                            -6,0,10,
+                            -3,1,5,
+                            0,2,0,
+                            3,1,-5,
+                            6,0,-10
+                        };
+                        shoot.shots = 5;
+                    }};
                     bullet = new ContinuousFlameBulletType(){{
                         length = 240f;
                         range = 240f;
                         width = 48f;
-                        damageInterval = 0.1f;
-                        damage = 1f;
-                        buildingDamageMultiplier = 4f;
+                        damageInterval = 30f;
+                        damage = 25f;
+                        buildingDamageMultiplier = 5f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 600f;
-                        knockback = 8f;
+                        knockback = 25f;
                         impact = true;
                         lifetime = 600f;
                         lengthInterp = Interp.one;
@@ -1110,17 +1112,17 @@ public class SLUnits {
                         divisions = 2;
                         colors = new Color[]{
                             SLPal.starRedDarkColor,
-                                SLPal.starRedColor,
-                                SLPal.starOrangeDarkColor,
-                                SLPal.starOrangeColor,
-                                Color.white.cpy()
+                            SLPal.starRedColor,
+                            SLPal.starOrangeDarkColor,
+                            SLPal.starOrangeColor,
+                            Color.white.cpy()
                         };
                         lengthWidthPans = new float[]{
-                                1.2f,1.2f,0.7f,
-                                1.0f,1.0f,0.7f,
-                                0.9f,0.9f,0.7f,
-                                0.7f,0.7f,0.7f,
-                                0.4f,0.4f,0.7f
+                            1.2f,1.2f,0.4f,
+                            1.0f,1.0f,0.4f,
+                            0.9f,0.9f,0.4f,
+                            0.7f,0.7f,0.4f,
+                            0.4f,0.4f,0.4f
                         };
                     }};
                 }}
@@ -1129,15 +1131,14 @@ public class SLUnits {
         @Override
         public void update(Unit unit){
             for(StatusEffect s:Vars.content.statusEffects()){
-                if(!unit.isImmune(s)){
-                    immunities.add(s);
-                }
+                if(s.dynamic||unit.isImmune(s)) return;
+                immunities.add(s);
             }
             unit.dragMultiplier = 1;
-            unit.speedMultiplier = unit.speedMultiplier < 1 ? 1: unit.speedMultiplier;
-            unit.damageMultiplier = unit.damageMultiplier < 1 ? 1: unit.damageMultiplier;
-            unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1: unit.reloadMultiplier;
-            unit.healthMultiplier = unit.healthMultiplier < 1 ? 1: unit.healthMultiplier;
+            unit.speedMultiplier = unit.speedMultiplier < 1 ? 1 : unit.speedMultiplier;
+            unit.damageMultiplier = unit.damageMultiplier < 1 ? 1 : unit.damageMultiplier;
+            unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1 : unit.reloadMultiplier;
+            unit.healthMultiplier = unit.healthMultiplier < 1 ? 1 : unit.healthMultiplier;
             //if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
             super.update(unit);
         }};
