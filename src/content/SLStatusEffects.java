@@ -2,7 +2,6 @@ package content;
 
 
  
-import arc.math.Mathf;
 import arc.util.Time;
 import mindustry.entities.units.StatusEntry;
 import mindustry.gen.Unit;
@@ -12,19 +11,18 @@ import mindustry.type.StatusEffect;
 public class SLStatusEffects {
     public static StatusEffect
     disrupted, rush;
-    
+
     public static void load(){
         disrupted = new StatusEffect("disrupted"){{
-            reloadMultiplier = 0.7f;
-            damageMultiplier = 0.7f;
-            buildSpeedMultiplier = 0.7f;
-            speedMultiplier = 0.7f;
-            healthMultiplier = 0.7f;
+            reloadMultiplier = 0.8f;
+            damageMultiplier = 0.8f;
+            buildSpeedMultiplier = 0.8f;
+            speedMultiplier = 0.8f;
+            healthMultiplier = 0.8f;
             color = SLPal.silviriumColor;
             applyColor = SLPal.silviriumColor;
             alwaysUnlocked = outline = true;
             effect = SLFx.silvAmb;
-            
         }
 /*/
         @Override
@@ -33,17 +31,19 @@ public class SLStatusEffects {
             stats.add(Stat.range, "15");
         }
 //*/
+
         @Override
         public void update(Unit unit, StatusEntry entry){
-            unit.aimX += Mathf.random(-5, 5) * 8 * Time.delta;
-            unit.aimY += Mathf.random(-5, 5) * 8 * Time.delta;
+            if(unit.isShooting()) entry.time += Time.delta;
             super.update(unit, entry);
-            unit.speedMultiplier = 0.7f;
-            unit.reloadMultiplier = 0.7f;
-            unit.damageMultiplier = 0.7f;
-            unit.buildSpeedMultiplier = 0.7f;
-            unit.healthMultiplier = 0.7f;
-        }};
+            unit.speedMultiplier = 0.8f;
+            unit.reloadMultiplier = 0.8f;
+            unit.damageMultiplier = 0.8f;
+            unit.buildSpeedMultiplier = 0.8f;
+            unit.healthMultiplier = 0.8f;
+        }
+    
+        };
 
         rush = new StatusEffect("rush"){{
             alwaysUnlocked = true;
@@ -62,6 +62,7 @@ public class SLStatusEffects {
             unit.disarmed = false;
             unit.drownTime = -1;
             super.update(unit, entry);
+            
         }
     
         };

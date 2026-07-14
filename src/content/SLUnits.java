@@ -2,6 +2,7 @@ package content;
 
 import static arc.graphics.g2d.Draw.*;
 
+import Entities.HeatAreaAbility;
 import Entities.disruptPulseAbility;
 import ai.ProxMissileAI;
 import arc.graphics.Color;
@@ -922,7 +923,7 @@ public class SLUnits {
             health = 160f;
             armor = 0;
             hitSize = 8;
-            itemCapacity = 10;
+            itemCapacity = 8;
             outlines = false;
             speed = 2.2f;
             accel = 0.2f;
@@ -984,7 +985,7 @@ public class SLUnits {
             health = 360f;
             armor = 0;
             hitSize = 12;
-            itemCapacity = 20;
+            itemCapacity = 24;
             outlines = false;
             speed = 6f;
             accel = 0.08f;
@@ -1035,11 +1036,11 @@ public class SLUnits {
             health = 55000f;
             armor = -1.5f;
             hitSize = 51;
-            itemCapacity = 360;
+            itemCapacity = 372;
             outlines = false;
             speed = 1f;
-            accel = 0.6f;
-            drag = 0.5f;
+            accel = 0.2f;
+            drag = 0.1f;
             rotateMoveFirst = true;
             hoverable = false;
             mechFrontSway = 0.8f;
@@ -1067,7 +1068,8 @@ public class SLUnits {
             @Override
             public void update(Unit unit){
                 unit.heal(((unit.maxHealth * percentAmount / 100f + amount) * (unit.isShooting()?1:4)) * Time.delta);
-            }});
+            }},
+            new HeatAreaAbility());
 
             weapons.add(
                 new HealtActivationWeapon("sil-star2-laser", 0.4f, 0f){{
