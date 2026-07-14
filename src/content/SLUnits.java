@@ -23,6 +23,7 @@ import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.pattern.ShootBarrel;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
@@ -97,7 +98,7 @@ public class SLUnits {
         }};
         silvirror = new UnitType("Silvirror"){{
             alwaysUnlocked = true;
-            constructor = MechUnit::create;
+            constructor = LegsUnit::create;
             health = 160f;
             armor = 3;
             hitSize = 8;
@@ -106,18 +107,31 @@ public class SLUnits {
             outlines = false;
             speed = 1.6f;
             accel = 0.4f;
-            drag = 0.7f;
+            drag = 0.3f;
             rotateSpeed = 5f;
             rotateMoveFirst = true;
             forceMultiTarget = true;
             hoverable = true;
-            mechFrontSway = 0.1f;
-            mechSideSway = 0.3f;
-            mechStride = -0.6f;
+
+            legCount = 4;
+            legLength = 8;
+            legMaxLength = 2.5f;
+            legMinLength = 0.8f;
+            legForwardScl = 0.8f;
+            legMoveSpace = 1.6f;
+            legSpeed = 0.1f;
+            legSplashDamage =  1f;
+            legSplashRange =  4f;
+            legExtension = 4f;
+            legGroupSize = 2;
+            legPairOffset = 6f;
+            legLengthScl = 1.5f;
+            legBaseOffset = 0.5f;
+
             range = 80f;
             maxRange = 80f;
             ContinuousFlameBulletType silvirrorBullet = new ContinuousFlameBulletType(){{
-                length = 80f;
+                length = range;
                 width = 2f;
                 damageInterval = 5f;
                 damage = 1f /*12 * damageInterval / 60f*/;
@@ -152,7 +166,7 @@ public class SLUnits {
                 };
             }};
             weapons.add(
-                new HealtActivationWeapon("Silvirror-center", 0.80f, 0f){{
+                new HealtActivationWeapon("sli-Silvirror-center", 0.80f, 0f){{
                     x = 0f;
                     y = 2f;
                     reload = 120f;
@@ -1043,9 +1057,9 @@ public class SLUnits {
             drag = 0.1f;
             rotateMoveFirst = true;
             hoverable = false;
-            mechFrontSway = 0.8f;
-            mechSideSway = 0.6f;
-            mechStride = 4f;
+            mechFrontSway = 1.2f;
+            mechSideSway = 0.9f;
+            mechStride = 8f;
             abilities.add(new RegenAbility(){{
                 percentAmount = 0.01f;
             }
