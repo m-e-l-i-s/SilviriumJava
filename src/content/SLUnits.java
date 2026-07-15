@@ -20,10 +20,10 @@ import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
 import mindustry.entities.abilities.Ability;
+import mindustry.entities.abilities.EmptyDataAbility;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
-import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.pattern.ShootBarrel;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
@@ -128,10 +128,9 @@ public class SLUnits {
             legLengthScl = 1.5f;
             legBaseOffset = 0.5f;
 
-            range = 80f;
-            maxRange = 80f;
+            float brange = range = maxRange = 80f;
             ContinuousFlameBulletType silvirrorBullet = new ContinuousFlameBulletType(){{
-                length = range;
+                length = brange;
                 width = 2f;
                 damageInterval = 5f;
                 damage = 1f /*12 * damageInterval / 60f*/;
@@ -143,7 +142,7 @@ public class SLUnits {
                 knockback = -0.4f;
                 impact = true;
                 lifetime = 10f;
-                range = 80f;
+                range = brange;
                 hitEffect = SLFx.silviriumHit1Effect;
                 lightStroke = 24f;
                 oscScl = 0.04f;
@@ -158,11 +157,11 @@ public class SLUnits {
                     Color.white.cpy()
                 };
                 lengthWidthPans = new float[]{
-                    1.0f,1.3f,0.35f,
-                    0.8f,1f,0.3f,
+                    1.0f,1.3f,0.1f,
+                    0.8f,1f,0.15f,
                     0.6f,0.9f,0.2f,
-                    0.5f,0.8f,0.15f,
-                    0.35f,0.5f,0.1f
+                    0.5f,0.8f,0.25f,
+                    0.35f,0.5f,0.3f
                 };
             }};
             weapons.add(
@@ -1083,15 +1082,15 @@ public class SLUnits {
             public void update(Unit unit){
                 unit.heal(((unit.maxHealth * percentAmount / 100f + amount) * (unit.isShooting()?1:4)) * Time.delta);
             }},
-            new HeatAreaAbility());
+            new HeatAreaAbility()
+            );
 
             weapons.add(
-                new HealtActivationWeapon("sil-star2-laser", 0.4f, 0f){{
+                new HealtActivationWeapon("sil-star2-laser", /*0.4f*/1f, 0f){{
                     x = 0;
                     y = 6;
-                    shootX = 0;
-                    shootY = 0;
-                    reload = 120;
+                    shootX = shootY = 0;
+                    reload = /*120f*/0;
                     shootCone = 25;
                     minWarmup = 0.99f;
                     mirror = alternate = alwaysContinuous = predictTarget = false;
@@ -1134,11 +1133,11 @@ public class SLUnits {
                             Color.white.cpy()
                         };
                         lengthWidthPans = new float[]{
-                            1.2f,1.2f,0.4f,
-                            1.0f,1.0f,0.4f,
-                            0.9f,0.9f,0.4f,
-                            0.7f,0.7f,0.4f,
-                            0.4f,0.4f,0.4f
+                            1.2f,1.2f,-0.4f,
+                            1.0f,1.0f,-0.4f,
+                            0.9f,0.9f,-0.4f,
+                            0.7f,0.7f,-0.4f,
+                            0.4f,0.4f,-0.4f
                         };
                     }};
                 }}
@@ -1150,12 +1149,23 @@ public class SLUnits {
                 if(s.dynamic||unit.isImmune(s)) return;
                 immunities.add(s);
             }
+
             unit.dragMultiplier = 1;
             unit.speedMultiplier = unit.speedMultiplier < 1 ? 1 : unit.speedMultiplier;
             unit.damageMultiplier = unit.damageMultiplier < 1 ? 1 : unit.damageMultiplier;
             unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1 : unit.reloadMultiplier;
             unit.healthMultiplier = unit.healthMultiplier < 1 ? 1 : unit.healthMultiplier;
-            //if(unit.abilities != abilities.toArray()) unit.abilities(abilities.toArray());
+            if(unit.mounts().length != unit.type.weapons.size) unit.setupWeapons(unit.type);
+            if(unit.abilities.length != unit.type.abilities.size || (unit.abilities.length > 0 && unit.abilities[0] instanceof EmptyDataAbility)){
+                var old = unit.abilities;
+                unit.abilities = new Ability[unit.type.abilities.size];
+                for(int i = 0; i < unit.type.abilities.size; i ++){
+                    unit.abilities[i] = unit.type.abilities.get(i).copy();
+                    if(i < old.length){
+                        unit.abilities[i].data = old[i].data;
+                    }
+                }
+            }
             super.update(unit);
         }};
     }

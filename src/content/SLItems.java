@@ -9,10 +9,12 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
         silvirium = new Item("silvirium"){{
             alwaysUnlocked = true;
             hardness = 2;
+            cost = 0.5f;
             color = SLPal.silviriumColor;
         }};
         silviriumIng = new Item("silvirium-ingot"){{
             alwaysUnlocked = true;
+            cost = 2.2f;
             color = SLPal.silviriumOtherColor;
         }};
         starFrag = new Item("star-fragment"){{
@@ -30,8 +32,8 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
             flammability = 2f;
             radioactivity = 2f;
             frames = 2;
-            transitionFrames = 2;
-            frameTime = 10;
+            transitionFrames = 4;
+            frameTime = 3;
         }};
     }
 }
