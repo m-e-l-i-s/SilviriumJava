@@ -46,7 +46,7 @@ public class SLStatusEffects {
             unit.healthMultiplier = 0.8f;
         }};
 
-        daggered = new StatusEffect("disrupted"){{
+        daggered = new StatusEffect("daggered"){{
             reloadMultiplier = 0.8f;
             damageMultiplier = 0.8f;
             buildSpeedMultiplier = 0.8f;
