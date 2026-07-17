@@ -15,7 +15,7 @@ public class ProxMissileAI extends MissileAI{
 
         if(shooter != null && !shooter.dead()){
             unit.lookAt(shooter.aimX, shooter.aimY);
-        }
+        }else unit.kill();
 
         //move forward forever
         unit.moveAt(vec.trns(unit.rotation, unit.speed()));

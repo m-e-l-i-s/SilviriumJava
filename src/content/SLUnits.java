@@ -5,6 +5,7 @@ import static arc.graphics.g2d.Draw.*;
 import Entities.HeatAreaAbility;
 import Entities.disruptPulseAbility;
 import ai.ProxMissileAI;
+import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.math.Interp;
@@ -24,6 +25,7 @@ import mindustry.entities.abilities.EmptyDataAbility;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.pattern.ShootBarrel;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
@@ -394,12 +396,12 @@ public class SLUnits {
                     top = mirror = false;
                     parts.add(
                         new RegionPart(){{
-                            name = "Silvsile";
-                            progress = PartProgress.recoil.inv();
+                            name = "sli-Silvsile";
+                            progress = PartProgress.recoil.curve(Interp.exp5).inv();
                             layerOffset = -0.1f;
                             mirror = true;
                             x = y = moveX = growX = 0;
-                            moveY = -10.5f;
+                            moveY = -9f;
                             growY = -1;
                         }}
                     );
@@ -1065,15 +1067,18 @@ public class SLUnits {
 
             @Override
             public void addStats(Table t){
-                super.addStats(t);
+                if(Core.bundle.has(getBundle() + ".description")){
+                    t.add(Core.bundle.get(getBundle() + ".description")).wrap().width(descriptionWidth);
+                    t.row();
+                }
 
                 boolean flat = amount >= 0.001f;
                 boolean percent = percentAmount >= 0.001f;
 
                 if(flat || percent){
                     t.add(abilityStat("regen",
-                        (flat ? Strings.autoFixed(amount * 60f, 2) + (percent ? " [lightgray]+[stat] " : "") : "")
-                            + (percent ? Strings.autoFixed(percentAmount * 60f, 2) + "%" : "") + "[lightgray].\nNo shooting multiplier[stat]4x"
+                        (flat ? Strings.autoFixed(amount * 60f, 4) + (percent ? " [lightgray]+[stat] " : "") : "")
+                            + (percent ? Strings.autoFixed(percentAmount , 4) + "%" : "") + "[lightgray].\nNo shooting multiplier[stat]4x"
                     ));
                 }
             }
@@ -1093,38 +1098,51 @@ public class SLUnits {
                     reload = /*120f*/0;
                     shootCone = 25;
                     minWarmup = 0.99f;
-                    mirror = alternate = alwaysContinuous = predictTarget = false;
-                    top = rotate = continuous = true;
-                    shoot = new ShootBarrel(){{
-                        barrels = new float[]{
-                            -6,0,10,
-                            -3,1,5,
-                            0,2,0,
-                            3,1,-5,
-                            6,0,-10
-                        };
-                        shoot.shots = 5;
-                    }};
+                    rotate = mirror = alternate = alwaysContinuous = predictTarget = false;
+                    top = continuous = true;
                     bullet = new ContinuousFlameBulletType(){{
+                        recoil = 20f;
                         length = 240f;
                         range = 240f;
-                        width = 48f;
-                        damageInterval = 30f;
-                        damage = 25f;
+                        width = 16f;
+                        damageInterval = 1.5f;
+                        damage = 10f;
                         buildingDamageMultiplier = 5f;
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 600f;
-                        knockback = 25f;
+                        knockback = 40f;
                         impact = true;
                         lifetime = 600f;
                         lengthInterp = Interp.one;
                         hitEffect = SLFx.starHit;
                         lightStroke = 20f;
-                        oscScl = 0.5f;
-                        oscMag = 0.05f;
+                        lightColor = SLPal.starRedColor;
+                        oscScl = 1.5f;
+                        oscMag = 0.01f;
                         drawFlare = false;
-                        divisions = 2;
+                        divisions = 4;
+                        bulletInterval = 12f;
+                        intervalBullet = new BasicBulletType(4,80){{
+                            lifetime = 60f;
+                            homingPower = 0.1f;
+                            homingDelay = 40f;
+                            homingRange = 80f;
+                            parts.addAll(
+                                new FlarePart(){{
+                                    color1 = SLPal.starRedColor;
+                                    color2 = SLPal.starOrangeColor;
+                                    progress = PartProgress.time;
+                                    sides = 5;
+                                    radius = 8;
+                                    radiusTo = 32;
+                                    rotation = -90;
+                                    rotMove = 90;
+                                    spinSpeed = 0;
+                                    x = y = 0f;
+                                    layer = 59.95f;
+                                }});
+                        }};
                         colors = new Color[]{
                             SLPal.starRedDarkColor,
                             SLPal.starRedColor,
@@ -1133,11 +1151,11 @@ public class SLUnits {
                             Color.white.cpy()
                         };
                         lengthWidthPans = new float[]{
-                            1.2f,1.2f,-0.4f,
-                            1.0f,1.0f,-0.4f,
-                            0.9f,0.9f,-0.4f,
-                            0.7f,0.7f,-0.4f,
-                            0.4f,0.4f,-0.4f
+                            1.2f,1.2f,0.3f,
+                            1.0f,1.0f,0.3f,
+                            0.9f,0.9f,0.3f,
+                            0.7f,0.7f,0.3f,
+                            0.4f,0.4f,0.3f
                         };
                     }};
                 }}

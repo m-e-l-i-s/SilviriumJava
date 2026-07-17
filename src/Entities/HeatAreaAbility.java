@@ -32,10 +32,15 @@ public class HeatAreaAbility extends Ability{
     public void update(Unit unit){
         vel = Mathf.approachDelta(vel,(velMin-unit.vel.len())/(velMin-velMax),velMax-velMin/4);
         Units.nearby(null, unit.x, unit.y, range+(brange*vel), e -> {
-            lStroke();
-            Lines.dashCircle(e.x, e.y, e.hitSize);
-            e.damage((damage+(bdamage*vel))*Time.delta);
-            
+            if(e==unit){
+
+            }else if(e.team() != unit.team()){
+                lStroke();
+                Lines.dashCircle(e.x, e.y, e.hitSize);
+                e.damage((damage+(bdamage*vel))*Time.delta);
+            }else{
+                e.damage((damage+(bdamage*vel))*Time.delta*0.1f);
+            }
         });
     }
 
