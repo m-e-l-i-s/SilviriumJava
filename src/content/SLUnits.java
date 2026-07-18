@@ -1147,7 +1147,7 @@ public class SLUnits {
                                 }},
                                 new FlarePart(){{
                                     color1 = SLPal.starOrangeDarkColor;
-                                    color2 = SLPal.starOrangeColor;s
+                                    color2 = SLPal.starOrangeColor;
                                     progress = PartProgress.life.curve(0.25f,0.25f);
                                     sides = 5;
                                     radius = 4;
