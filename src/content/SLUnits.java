@@ -19,12 +19,14 @@ import mindustry.Vars;
 import mindustry.ai.types.MissileAI;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
+import mindustry.content.UnitTypes;
 import mindustry.entities.bullet.*;
 import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.EmptyDataAbility;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
@@ -113,21 +115,21 @@ public class SLUnits {
             forceMultiTarget = true;
             hoverable = true;
 
-            legCount = 4;
-            legLength = 8;
-            legMaxLength = 2.5f;
-            legMinLength = 0.8f;
-            legForwardScl = 0.8f;
-            legMoveSpace = 1.6f;
+            legCount = 2;
+            legLength = 10;
+            legMaxLength = 1.4f;
+            legMinLength = 1;
+            legForwardScl = 1;
+            legMoveSpace = 2;
             legSpeed = 0.1f;
-            legSplashDamage =  1f;
-            legSplashRange =  4f;
-            legExtension = 4f;
+            legSplashDamage =  1;
+            legSplashRange =  4;
+            legExtension = 3;
             legGroupSize = 2;
-            legPairOffset = 6f;
-            legLengthScl = 1.5f;
-            legBaseOffset = 0.5f;
-
+            legPairOffset = 0;
+            legLengthScl = 0.6f;
+            legBaseOffset = 1;
+            
             float brange = range = maxRange = 80f;
             ContinuousFlameBulletType silvirrorBullet = new ContinuousFlameBulletType(){{
                 length = brange;
@@ -148,7 +150,7 @@ public class SLUnits {
                 oscScl = 0.04f;
                 oscMag = 0.02f;
                 drawFlare = false;
-                divisions = 25;
+                divisions = 16;
                 colors = new Color[]{
                     SLPal.silviriumDarkColor,
                     SLPal.silviriumMidColor,
@@ -754,7 +756,7 @@ public class SLUnits {
                 ((Unit & Legsc) unit).resetLegs();
                 drawLegs((Unit & Legsc)unit);
             }else{
-                ((Unit & Legsc) unit).resetLegs(0);
+                ((Unit & Legsc) unit).resetLegs(0.1f);
             }
 
             Draw.z(Math.min(z - 0.01f, Layer.bullet - 1f));
@@ -894,7 +896,7 @@ public class SLUnits {
                         splashDamage = 10;
                         splashDamageRadius = 16;
                         buildingDamageMultiplier = 0.5f;
-                        lifetime = 40f;
+                        lifetime = 42f;
                     }};
                 }},
                 new Weapon("Static-star-mines"){{
@@ -1109,7 +1111,7 @@ public class SLUnits {
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 600f;
-                        knockback = 40f;
+                        knockback = 1f;
                         impact = true;
                         lifetime = 600f;
                         lengthInterp = Interp.one;
@@ -1120,26 +1122,43 @@ public class SLUnits {
                         oscMag = 0.01f;
                         drawFlare = false;
                         divisions = 4;
-                        bulletInterval = 12f;
-                        intervalBullet = new BasicBulletType(4,80){{
-                            lifetime = 60f;
+                        bulletInterval = 6f;
+                        intervalSpread = 60;
+                        intervalRandomSpread = 5;
+                        intervalBullets = 2;
+                        intervalBullet = new BasicBulletType(4,20){{
+                            lifetime = 80f;
                             homingPower = 0.1f;
-                            homingDelay = 40f;
+                            homingDelay = 20f;
                             homingRange = 80f;
                             parts.addAll(
                                 new FlarePart(){{
-                                    color1 = SLPal.starRedColor;
-                                    color2 = SLPal.starOrangeColor;
-                                    progress = PartProgress.time;
+                                    color1 = SLPal.starRedDarkColor;
+                                    color2 = SLPal.starRedColor;
+                                    progress = PartProgress.life.curve(0.25f,0.25f);
                                     sides = 5;
                                     radius = 8;
                                     radiusTo = 32;
                                     rotation = -90;
-                                    rotMove = 90;
-                                    spinSpeed = 0;
+                                    rotMove = spinSpeed = 0;
                                     x = y = 0f;
-                                    layer = 59.95f;
-                                }});
+                                    stroke = 20;
+                                    layer = 110.1f;
+                                }},
+                                new FlarePart(){{
+                                    color1 = SLPal.starOrangeDarkColor;
+                                    color2 = SLPal.starOrangeColor;s
+                                    progress = PartProgress.life.curve(0.25f,0.25f);
+                                    sides = 5;
+                                    radius = 4;
+                                    radiusTo = 16;
+                                    rotation = -90;
+                                    rotMove = spinSpeed = 0;
+                                    x = y = 0f;
+                                    stroke = 10;
+                                    layer = 110.2f;
+                                }}
+                            );
                         }};
                         colors = new Color[]{
                             SLPal.starRedDarkColor,

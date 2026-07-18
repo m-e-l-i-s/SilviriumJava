@@ -16,7 +16,7 @@ public static Liquid liquidSilvirium;
             boilPoint = 3f;
             temperature = 0.2f;
             flammability = -0.1f;
-            viscosity = 100f;
+            viscosity = 0.95f;
             alwaysUnlocked = true;
             moveThroughBlocks = true;
         }};

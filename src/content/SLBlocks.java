@@ -4,6 +4,7 @@ import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.bullet.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 //import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
 import mindustry.gen.*;
@@ -48,7 +49,7 @@ public class SLBlocks {
             });
             size = 2;
             health = 220;
-            consume(new ConsumePower(0.5f, 600.0f, true));
+            consumePower(0.5f);
             consumeLiquid(SLliquids.liquidSilvirium, 0.5f);
             plans.addAll(
                 new UnitPlan(
@@ -180,7 +181,7 @@ public class SLBlocks {
             craftTime = 60;
             lightLiquid = SLliquids.liquidSilvirium;
 
-            consume(new ConsumePower(0.5f, 600.0f, true));
+            consumePower(0.5f);
             consumeItem(SLItems.silvirium);
             drawer = new DrawMulti(
                 new DrawDefault(),
@@ -225,7 +226,7 @@ public class SLBlocks {
             itemCapacity = 16;
             craftTime = 600;
 
-            consume(new ConsumePower(0.5f, 600.0f, true));
+            consumePower(0.5f);
             consumeItem(SLItems.silvirium,4);
             outputItem = new ItemStack(SLItems.silviriumIng, 1);
             drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("ffef99")));
@@ -247,25 +248,28 @@ public class SLBlocks {
             itemCapacity = 1;
             craftTime = 1200;
 
-            consume(new ConsumePower(8f, 4800.0f, true));
+            consumePower(0.75f);
             outputItem = new ItemStack(SLItems.starFrag, 2);
         }};
         //ore
         silvOre = new OreBlock("ore-silvirium", SLItems.silvirium){{
             alwaysUnlocked = true;
             oreDefault = true;
-            oreScale = 9f;
-            oreThreshold = 0.7f;
+            oreScale = 10f;
+            oreThreshold = 0.5f;
             emitLight = true;
-            lightRadius = 12f;
+            lightRadius = 9f;
             lightColor = SLPal.silviriumColor;
             variants = 2;
         }};
         //floors
         slivFloor = new Floor("silvirium-floor", 2){{
+            liquidDrop = SLliquids.liquidSilvirium;
+            liquidMultiplier = 0.001f;
             walkEffect = SLFx.silvAmb;
             status = SLStatusEffects.disrupted;
             statusDuration = 6f;
+            dragMultiplier = 5;
             //attributes.set(Attribute.silvirium,1f);
         }};
         //envirmental walls

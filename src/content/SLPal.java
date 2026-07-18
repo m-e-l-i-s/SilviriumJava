@@ -11,8 +11,8 @@ public class SLPal {
     silviriumDarkestColor = Color.valueOf("222744"),
     silviriumMidColor = Color.valueOf("00c096"),
     silviriumDarkColor = Color.valueOf("06745b"),
-    starOrangeColor = Color.valueOf("FF7733"),
-    starOrangeDarkColor = Color.valueOf("FF5511"),
+    starOrangeColor = Color.valueOf("FF6622"),
+    starOrangeDarkColor = Color.valueOf("ff4411"),
     starRedColor = Color.valueOf("FF3300"),
     starRedDarkColor = Color.valueOf("EE1100");
 }

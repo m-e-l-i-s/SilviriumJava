@@ -46,17 +46,7 @@ public class SLStatusEffects {
             unit.healthMultiplier = 0.8f;
         }};
 
-        daggered = new StatusEffect("daggered"){{
-            reloadMultiplier = 0.8f;
-            damageMultiplier = 0.8f;
-            buildSpeedMultiplier = 0.8f;
-            speedMultiplier = 0.8f;
-            healthMultiplier = 0.8f;
-            color = SLPal.silviriumColor;
-            applyColor = SLPal.silviriumColor;
-            alwaysUnlocked = outline = true;
-            effect = SLFx.silvAmb;
-        }
+        daggered = new StatusEffect("daggered"){
 
         @Override
         public void setStats(){
