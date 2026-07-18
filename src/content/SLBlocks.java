@@ -4,8 +4,6 @@ import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.bullet.*;
-import mindustry.entities.part.DrawPart.PartProgress;
-//import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
