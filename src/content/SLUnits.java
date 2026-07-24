@@ -165,7 +165,7 @@ public class SLUnits {
                 };
             }};
             weapons.add(
-                new HealtActivationWeapon("sli-Silvirror-center", 0.80f, 0f){{
+                new HealtActivationWeapon("sli-silvirror-center", 0.80f, 0f){{
                     x = 0f;
                     y = 2f;
                     reload = 120f;
@@ -1076,14 +1076,14 @@ public class SLUnits {
                 if(flat || percent){
                     t.add(abilityStat("regen",
                         (flat ? Strings.autoFixed(amount * 60f, 4) + (percent ? " [lightgray]+[stat] " : "") : "")
-                            + (percent ? Strings.autoFixed(percentAmount , 4) + "%" : "") + "[lightgray].\nNo shooting multiplier[stat]4x"
+                            + (percent ? Strings.autoFixed(percentAmount , 4) + "% lost HP" : "") + "[lightgray].\nNo shooting multiplier:[stat]4x"
                     ));
                 }
             }
 
             @Override
             public void update(Unit unit){
-                unit.heal(((unit.maxHealth * percentAmount / 100f + amount) * (unit.isShooting()?1:4)) * Time.delta);
+                unit.heal((((unit.maxHealth-unit.health) * percentAmount / 100f + amount) * (unit.isShooting()?1:4)) * Time.delta);
             }},
             new HeatAreaAbility()
             );
@@ -1183,11 +1183,6 @@ public class SLUnits {
                 immunities.add(s);
             }
 
-            unit.dragMultiplier = 1;
-            unit.speedMultiplier = unit.speedMultiplier < 1 ? 1 : unit.speedMultiplier;
-            unit.damageMultiplier = unit.damageMultiplier < 1 ? 1 : unit.damageMultiplier;
-            unit.reloadMultiplier = unit.reloadMultiplier < 1 ? 1 : unit.reloadMultiplier;
-            unit.healthMultiplier = unit.healthMultiplier < 1 ? 1 : unit.healthMultiplier;
             if(unit.mounts().length != unit.type.weapons.size) unit.setupWeapons(unit.type);
             if(unit.abilities.length != unit.type.abilities.size || (unit.abilities.length > 0 && unit.abilities[0] instanceof EmptyDataAbility)){
                 var old = unit.abilities;

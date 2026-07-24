@@ -72,7 +72,7 @@ public class HeatAreaAbility extends Ability{
         ).row();
         t.add(
             abilityStat("damage",
-                ":[stat]"+damage/tilesize + "-" + bdamage/tilesize
+                ":[stat]"+damage + "-" + bdamage
             )
         ).row();
     }

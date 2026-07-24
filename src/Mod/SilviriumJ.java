@@ -2,11 +2,7 @@ package Mod;
 
 import arc.*;
 import arc.util.*;
-import content.SLBlocks;
-import content.SLStatusEffects;
-import content.SLUnits;
-import content.SLItems;
-import content.SLliquids;
+import content.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
