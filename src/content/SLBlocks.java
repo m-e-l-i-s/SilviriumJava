@@ -252,7 +252,7 @@ public class SLBlocks {
 
             consume(new ConsumePower(2, 4800.0f, true));
             outputsPower = true;
-            outputItem = new ItemStack(SLItems.starFrag, 2);
+            outputItem = new ItemStack(SLItems.starFrag, 1);
         }};
         //ore
         silvOre = new OreBlock("ore-silvirium", SLItems.silvirium){{
@@ -326,7 +326,6 @@ public class SLBlocks {
         }};
         ST = new ItemTurret("silvirium-turret"){{
             alwaysUnlocked = true;
-            coolant = consumeCoolant(0.1f);
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 110),
             });
@@ -354,7 +353,9 @@ public class SLBlocks {
             range = 100f;
             health = 240;
             flags = EnumSet.of(BlockFlag.turret);
-            coolant = consume(new ConsumeLiquid(SLliquids.liquidSilvirium, 0.05f));
+            coolant = consume(new ConsumeLiquidFilter(liquid -> liquid==SLliquids.liquidSilvirium, 0.1f));
+            coolantMultiplier = 10f;
+            coolEffect = SLFx.sliviriumSpark;
             shootEffect = SLFx.silviriumHit1Effect;
         }};
         SST = new ItemTurret("sand-storm-turret"){{

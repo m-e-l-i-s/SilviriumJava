@@ -139,8 +139,8 @@ public class SLFx {
         strokeFrom = 2f;
         strokeTo = 0f;
         lenFrom = 12f;
-        lenTo = 2f;
+        lenTo = 1f;
         lifetime = 10;
-        cone = 10;
+        cone = 60;
     }};
 }

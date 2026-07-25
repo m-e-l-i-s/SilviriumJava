@@ -8,7 +8,7 @@ import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 
 public class SilviriumJ extends Mod{
-    static String name(String s){
+    public static String name(String s){
         return "sli-" + s;
     }
     public SilviriumJ(){
@@ -16,7 +16,7 @@ public class SilviriumJ extends Mod{
             Time.runTask(30f, () -> {
                 BaseDialog dialog = new BaseDialog("Hello message");
                 dialog.cont.add("This is Silvirium:").row();
-                dialog.cont.image(Core.atlas.find("sli-icon")).pad(200f).row();
+                dialog.cont.image(Core.atlas.find("sli-icon")).pad(100f).row();
                 dialog.cont.button("CLOSE", dialog::hide).size(150f,75f).fontScale(5);
                 dialog.show();
             });

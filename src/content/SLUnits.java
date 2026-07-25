@@ -12,6 +12,7 @@ import arc.math.Interp;
 import arc.math.Mathf;
 import arc.math.Scaled;
 import arc.scene.ui.layout.Table;
+import arc.struct.EnumSet;
 import arc.util.Strings;
 import arc.util.Time;
 import type.HealtActivationWeapon;
@@ -25,13 +26,17 @@ import mindustry.entities.abilities.EmptyDataAbility;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.type.unit.MissileUnitType;
+import mindustry.world.meta.BlockFlag;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
+
+import static Mod.SilviriumJ.*;
 
 public class SLUnits {
     public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5,
@@ -63,7 +68,7 @@ public class SLUnits {
             maxRange = 240f;
             abilities.add(new disruptPulseAbility(120,600));
             weapons.add(
-                new Weapon("sil-Silvanon-cannon"){{
+                new Weapon(name("Silvanon-cannon")){{
                     x = 0;
                     y = 4;
                     shootY = 4;
@@ -165,7 +170,7 @@ public class SLUnits {
                 };
             }};
             weapons.add(
-                new HealtActivationWeapon("sli-silvirror-center", 0.80f, 0f){{
+                new HealtActivationWeapon("silvirror-center", 0.80f, 0f){{
                     x = 0f;
                     y = 2f;
                     reload = 120f;
@@ -192,7 +197,7 @@ public class SLUnits {
             );
             for(int side : Mathf.signs){
                 weapons.add(
-                    new Weapon("sil-silvirror-side-"+(side<0?"R":"L")){{
+                    new Weapon(name("silvirror-side-")+(side<0?"R":"L")){{
                         x = 8f*side;
                         y = 1f;
                         reload = 10f;
@@ -380,7 +385,7 @@ public class SLUnits {
                     top = mirror = false;
                     parts.add(
                         new RegionPart(){{
-                            name = "sli-Silvsile";
+                            name = name("Silvsile");
                             progress = PartProgress.recoil.curve(Interp.exp5).inv();
                             layerOffset = -0.1f;
                             mirror = true;
@@ -457,7 +462,7 @@ public class SLUnits {
             itemCapacity = 60;
             outlineRadius = 0;
             weapons.add(
-                new HealtActivationWeapon("sil-Silvruner-machingun", 1f, 0.1f){{
+                new HealtActivationWeapon("Silvruner-machingun", 1f, 0.1f){{
                     x = 0;
                     y = 2;
                     shootY = 0;
@@ -564,7 +569,7 @@ public class SLUnits {
             engineSize = 0.01f;
             hitSize = 4;
             weapons.add(
-                new Weapon("sil-piercer"){{
+                new Weapon("piercer"){{
                     x = 0f;
                     y = 0f;
                     mirror = false;
@@ -603,6 +608,7 @@ public class SLUnits {
             maxRange = 120f;
             engineSize = 2.2f;
             targetAir = false;
+            targetFlags = new BlockFlag[]{BlockFlag.reactor,BlockFlag.generator};
             parts.add(
                 new ShapePart(){{
                     color = SLPal.silviriumColor;
@@ -951,7 +957,7 @@ public class SLUnits {
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 60f;
-                        knockback = 0;
+                        knockback = 0.001f;
                         impact = true;
                         lifetime = 10f;
                         hitEffect = SLFx.starHit;
@@ -996,7 +1002,7 @@ public class SLUnits {
             mechSideSway = 0.2f;
             mechStride = 2f;
             weapons.add(
-                new Weapon("sil-star2-laser"){{
+                new Weapon(name("star2-laser")){{
                     x = 0;
                     y = 4;
                     shootX = 0;
@@ -1076,11 +1082,11 @@ public class SLUnits {
             );
 
             weapons.add(
-                new HealtActivationWeapon("sil-star2-laser", /*0.4f*/1f, 0f){{
+                new HealtActivationWeapon(name("star2-laser"), /*0.4f*/1f, 0f){{
                     x = 0;
                     y = 6;
                     shootX = shootY = 0;
-                    reload = /*120f*/0;
+                    reload = 120f;
                     shootCone = 25;
                     minWarmup = 0.99f;
                     rotate = mirror = alternate = alwaysContinuous = predictTarget = false;
@@ -1107,7 +1113,7 @@ public class SLUnits {
                         oscMag = 0.01f;
                         drawFlare = false;
                         divisions = 4;
-                        bulletInterval = 60f;
+                        bulletInterval = 30f;
                         intervalSpread = intervalRandomSpread = 0;
                         intervalBullets = 1;
                         intervalBullet = new BasicBulletType(4,100){{
@@ -1163,7 +1169,7 @@ public class SLUnits {
             if(unit.abilities.length != unit.type.abilities.size || (unit.abilities.length > 0 && unit.abilities[0] instanceof EmptyDataAbility)){
                 var old = unit.abilities;
                 unit.abilities = new Ability[unit.type.abilities.size];
-                for(int i = 0; i < unit.type.abilities.size; i ++){
+                for(int i = 0; i < unit.type.abilities.size; i++){
                     unit.abilities[i] = unit.type.abilities.get(i).copy();
                     if(i < old.length){
                         unit.abilities[i].data = old[i].data;
