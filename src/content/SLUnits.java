@@ -73,13 +73,13 @@ public class SLUnits {
                     mirror = rotate = false;
                     shootOnDeath = true;
                     shoot.firstShotDelay = 120;
-                    bullet = new BasicBulletType(2,0){{
+                    bullet = new BasicBulletType(6,0){{
                         chargeEffect = SLFx.silviriumChargeEffect;
                         knockback = 25;
                         splashDamage = 180;
                         splashDamageRadius = 12;
                         buildingDamageMultiplier = 0.5f;
-                        lifetime = 120;
+                        lifetime = 40f;
                         scaleLife = true;
                         killShooter = true;
                         range = 240;
@@ -188,44 +188,30 @@ public class SLUnits {
                         status = SLStatusEffects.disrupted;
                         statusDuration = 1800f;
                     }};
-                }},
-                new Weapon("silvirror-side-R"){{
-                    x = 8f;
-                    y = 1f;
-                    reload = 60f;
-                    shootCone = 8f;
-                    shootX = 0f;
-                    shootY = 2f;
-                    mirror = false;
-                    rotate = true;
-                    top = false;
-                    rotateSpeed = 2f;
-                    rotationLimit = 60f;
-                    predictTarget = false;
-                    continuous = true;
-                    alwaysContinuous = true;
-                    chargeSound = Sounds.none;
-                    bullet = silvirrorBullet;
-                }},
-                new Weapon("sil-silvirror-side-L"){{
-                    x = -8f;
-                    y = 1f;
-                    reload = 60f;
-                    shootCone = 10f;
-                    shootX = 0f;
-                    shootY = 2f;
-                    mirror = false;
-                    rotate = true;
-                    top = false;
-                    rotateSpeed = 2f;
-                    rotationLimit = 50f;
-                    predictTarget = false;
-                    continuous = true;
-                    alwaysContinuous = true;
-                    chargeSound = Sounds.none;
-                    bullet = silvirrorBullet;
                 }}
             );
+            for(int side : Mathf.signs){
+                weapons.add(
+                    new Weapon("sil-silvirror-side-"+(side<0?"R":"L")){{
+                        x = 8f*side;
+                        y = 1f;
+                        reload = 10f;
+                        shootCone = 8f;
+                        shootX = 0f;
+                        shootY = 2f;
+                        mirror = false;
+                        rotate = true;
+                        top = false;
+                        rotateSpeed = 2f;
+                        rotationLimit = 50f;
+                        predictTarget = false;
+                        continuous = true;
+                        alwaysContinuous = true;
+                        chargeSound = Sounds.none;
+                        bullet = silvirrorBullet;
+                    }}
+                );
+            }
         }};
         silvokeor = new UnitType("Silvokeor"){{
             alwaysUnlocked = true;
@@ -417,7 +403,7 @@ public class SLUnits {
                                     shootCone = 360f;
                                     shootOnDeath = true;
                                     mirror = false;
-                                    bullet = new ExplosionBulletType(controller instanceof MissileAI ? 400 : 0,40){{
+                                    bullet = new ExplosionBulletType(controller instanceof MissileAI ? 400 : 0, 40){{
                                         buildingDamageMultiplier = 0.5f;
                                         range = 32;
                                         splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
@@ -441,7 +427,7 @@ public class SLUnits {
             accel = 0.2f;
             rotateMoveFirst = true;
             hitSize = 28;
-            health = 7900;
+            health = 7300;
             armor = 16;
             createScorch = false;
             immunities.add(SLStatusEffects.disrupted);
@@ -996,7 +982,8 @@ public class SLUnits {
             alwaysUnlocked = true;
             constructor = MechUnit::create;
             health = 360f;
-            armor = 0;
+            armor = -0.5f;
+            floorMultiplier = 0;
             hitSize = 12;
             itemCapacity = 24;
             outlines = false;
@@ -1099,7 +1086,7 @@ public class SLUnits {
                     rotate = mirror = alternate = alwaysContinuous = predictTarget = false;
                     top = continuous = true;
                     bullet = new ContinuousFlameBulletType(){{
-                        recoil = 20f;
+                        recoil = 0.01f;
                         length = 240f;
                         range = 240f;
                         width = 16f;
@@ -1120,41 +1107,30 @@ public class SLUnits {
                         oscMag = 0.01f;
                         drawFlare = false;
                         divisions = 4;
-                        bulletInterval = 6f;
-                        intervalSpread = 60;
-                        intervalRandomSpread = 5;
-                        intervalBullets = 2;
-                        intervalBullet = new BasicBulletType(4,20){{
+                        bulletInterval = 60f;
+                        intervalSpread = intervalRandomSpread = 0;
+                        intervalBullets = 1;
+                        intervalBullet = new BasicBulletType(4,100){{
                             lifetime = 80f;
                             homingPower = 0.1f;
                             homingDelay = 20f;
                             homingRange = 80f;
+                            trailColor = SLPal.starRedColor;
+                            trailLength = 12;
                             parts.addAll(
                                 new FlarePart(){{
-                                    color1 = SLPal.starRedDarkColor;
-                                    color2 = SLPal.starRedColor;
-                                    progress = PartProgress.life.curve(0.25f,0.25f);
+                                    color1 = SLPal.starRedColor;
+                                    color2 = SLPal.starOrangeColor;
+                                    progress = PartProgress.life.curve(0.1f,0.4f);
                                     sides = 5;
                                     radius = 8;
                                     radiusTo = 32;
-                                    rotation = -90;
-                                    rotMove = spinSpeed = 0;
-                                    x = y = 0f;
-                                    stroke = 20;
-                                    layer = 110.1f;
-                                }},
-                                new FlarePart(){{
-                                    color1 = SLPal.starOrangeDarkColor;
-                                    color2 = SLPal.starOrangeColor;
-                                    progress = PartProgress.life.curve(0.25f,0.25f);
-                                    sides = 5;
-                                    radius = 4;
-                                    radiusTo = 16;
-                                    rotation = -90;
-                                    rotMove = spinSpeed = 0;
+                                    rotation = 180;
+                                    rotMove = 180;
+                                    spinSpeed = 0;
                                     x = y = 0f;
                                     stroke = 10;
-                                    layer = 110.2f;
+                                    layer = 110.1f;
                                 }}
                             );
                         }};

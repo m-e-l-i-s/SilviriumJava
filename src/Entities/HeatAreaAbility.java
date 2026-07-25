@@ -32,11 +32,10 @@ public class HeatAreaAbility extends Ability{
     public void update(Unit unit){
         vel = Mathf.approachDelta(vel,(velMin-unit.vel.len())/(velMin-velMax),velMax-velMin/4);
         Units.nearby(null, unit.x, unit.y, range+(brange*vel), e -> {
-            if(e==unit){
-
-            }else if(e.team() != unit.team()){
-                lStroke();
-                Lines.dashCircle(e.x, e.y, e.hitSize);
+            if(e==unit) return;
+            lStroke();
+            Lines.dashCircle(e.x, e.y, e.hitSize);
+            if(e.team() != unit.team()){
                 e.damage((damage+(bdamage*vel))*Time.delta);
             }else{
                 e.damage((damage+(bdamage*vel))*Time.delta*0.1f);
@@ -45,7 +44,7 @@ public class HeatAreaAbility extends Ability{
     }
 
     public void lStroke(){
-        Lines.stroke(1f+(1f*vel), Tmp.c4.set(SLPal.starOrangeColor).lerp(SLPal.starRedColor,vel).a(0.4f+(0.2f*vel)));
+        Lines.stroke(0.5f+(1f*vel), Tmp.c4.set(SLPal.starOrangeColor).lerp(SLPal.starRedColor,vel).a(0.4f+(0.2f*vel)));
     }
 
     @Override

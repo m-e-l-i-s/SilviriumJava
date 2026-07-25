@@ -8,7 +8,9 @@ import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 
 public class SilviriumJ extends Mod{
-
+    static String name(String s){
+        return "sli-" + s;
+    }
     public SilviriumJ(){
     Events.on(ClientLoadEvent.class, e -> {
             Time.runTask(30f, () -> {

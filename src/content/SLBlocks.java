@@ -4,6 +4,7 @@ import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.bullet.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
@@ -47,7 +48,8 @@ public class SLBlocks {
             });
             size = 2;
             health = 220;
-            consumePower(0.5f);
+            consumesPower = connectedPower = conductivePower = false;
+            
             consumeLiquid(SLliquids.liquidSilvirium, 0.5f);
             plans.addAll(
                 new UnitPlan(
@@ -138,6 +140,7 @@ public class SLBlocks {
         }};
         
         starFacT1 = new UnitFactory("star-molder"){{
+            payloadSpeed = 5;
             alwaysUnlocked = true;
             requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
@@ -245,8 +248,10 @@ public class SLBlocks {
             envEnabled = Env.any;
             itemCapacity = 1;
             craftTime = 1200;
+            flammabilityScale = 0;
 
-            consumePower(0.75f);
+            consume(new ConsumePower(2, 4800.0f, true));
+            outputsPower = true;
             outputItem = new ItemStack(SLItems.starFrag, 2);
         }};
         //ore
@@ -291,13 +296,13 @@ public class SLBlocks {
                     damage = 30;
                     speed = 16;
                     lifetime = 40;
-                    knockback = 0.2f;
+                    knockback = 0.3f;
                     drag = 0.07f;
                     layer = Layer.bullet - 1f;
                     status = SLStatusEffects.disrupted;
                     statusDuration = 300;
                     pierce = pierceBuilding = true;
-                    pierceCap = 2;
+                    pierceCap = 3;
                     pierceDamageFactor = 0.01f;
                     puddleSize = 16;
                     orbSize = 3;
@@ -321,6 +326,7 @@ public class SLBlocks {
         }};
         ST = new ItemTurret("silvirium-turret"){{
             alwaysUnlocked = true;
+            coolant = consumeCoolant(0.1f);
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 110),
             });
@@ -376,7 +382,7 @@ public class SLBlocks {
                             }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate((b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / b.vel.len());
+                                b.vel.rotate((b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / (2*b.vel.len()));
                             }
                             }; 
                         }},
@@ -390,9 +396,8 @@ public class SLBlocks {
                             }
                             @Override
                             public void updateWeaving(Bullet b){
-                                b.vel.rotate((-b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / b.vel.len());
-                            }
-                            }; 
+                                b.vel.rotate((-b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / (2*b.vel.len()));
+                            }}; 
                         }}
                     );
                 }}
@@ -419,6 +424,8 @@ public class SLBlocks {
                 new ItemStack(Items.silicon, 1000),
                 new ItemStack(Items.graphite, 500)
             });
+            liquidCapacity = 120f;
+            coolant = consumeCoolant(2f);
             range = 1600;
             size = 6;
             reload = 1200;
