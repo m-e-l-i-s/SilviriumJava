@@ -3,24 +3,29 @@ package content;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
+import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
+import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.world.Block;
-import mindustry.world.blocks.defense.Wall;
+import mindustry.world.blocks.defense.turrets.BaseTurret;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LiquidTurret;
+import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.environment.StaticWall;
 import mindustry.world.blocks.units.UnitFactory;
 import mindustry.world.blocks.units.Reconstructor;
 import mindustry.world.consumers.*;
+
 import arc.graphics.*;
 import arc.struct.EnumSet;
 import arc.util.Time;
+import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
 import mindustry.type.*;
@@ -250,7 +255,7 @@ public class SLBlocks {
             craftTime = 1200;
             flammabilityScale = 0;
 
-            consume(new ConsumePower(2, 4800.0f, true));
+            consumePower(2f);
             outputsPower = true;
             outputItem = new ItemStack(SLItems.starFrag, 1);
         }};
@@ -376,28 +381,75 @@ public class SLBlocks {
                         new ExplosionBulletType(10,120){{
                             killShooter = false;
                             fragBullets = 4;
+                            shootEffect = Fx.dynamicExplosion;
                             fragBullet = new BasicBulletType(12,10){{
                                 lifetime = 600;
                                 homingPower = 1f;
                                 homingRange = 24;
                             }
                             @Override
-                            public void updateWeaving(Bullet b){
-                                b.vel.rotate((b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / (2*b.vel.len()));
-                            }
-                            }; 
+                            public void updateHoming(Bullet b){
+                                if(homingPower > 0.0001f && b.time >= homingDelay){
+                                    float realAimX = b.aimX < 0 ? b.x : b.aimX;
+                                    float realAimY = b.aimY < 0 ? b.y : b.aimY;
+
+                                    Teamc target;
+                                    //home in on allies if possible
+                                    if(heals()){
+                                        target = Units.closestTarget(null, realAimX, realAimY, homingRange, b.team,
+                                            e -> e.checkTarget(collidesAir, collidesGround) && e.team != b.team && !b.hasCollided(e.id),
+                                            t -> collidesGround && (t.team != b.team || t.damaged()) && !b.hasCollided(t.id));
+                                    }else{
+                                        if(b.aimTile != null && b.aimTile.build != null && b.aimTile.build.team != b.team && collidesGround && !b.hasCollided(b.aimTile.build.id)){
+                                            target = b.aimTile.build;
+                                        }else{
+                                            target = Units.closestTarget(b.team, realAimX, realAimY, homingRange,
+                                                e -> e != null && e.checkTarget(collidesAir, collidesGround) && !b.hasCollided(e.id),
+                                                t -> t != null && collidesGround && !b.hasCollided(t.id));
+                                        }
+                                    }
+
+                                    if(target != null){
+                                        b.vel.setAngle(Angles.moveToward(b.rotation(), b.angleTo(target), homingPower * Time.delta * 50f));
+                                    }else b.vel.rotate(-b.fin()>0.3f?(-b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / (2*b.vel.len()):-1);
+                                }
+                            }}; 
                         }},
                         new ExplosionBulletType(10,240){{
                             killShooter = false;
                             fragBullets = 4;
+                            shootEffect = Fx.dynamicExplosion;
                             fragBullet = new BasicBulletType(12,10){{
                                 lifetime = 600;
                                 homingPower = 1f;
                                 homingRange = 24;
                             }
                             @Override
-                            public void updateWeaving(Bullet b){
-                                b.vel.rotate((-b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / (2*b.vel.len()));
+                            public void updateHoming(Bullet b){
+                                if(homingPower > 0.0001f && b.time >= homingDelay){
+                                    float realAimX = b.aimX < 0 ? b.x : b.aimX;
+                                    float realAimY = b.aimY < 0 ? b.y : b.aimY;
+
+                                    Teamc target;
+                                    //home in on allies if possible
+                                    if(heals()){
+                                        target = Units.closestTarget(null, realAimX, realAimY, homingRange, b.team,
+                                            e -> e.checkTarget(collidesAir, collidesGround) && e.team != b.team && !b.hasCollided(e.id),
+                                            t -> collidesGround && (t.team != b.team || t.damaged()) && !b.hasCollided(t.id));
+                                    }else{
+                                        if(b.aimTile != null && b.aimTile.build != null && b.aimTile.build.team != b.team && collidesGround && !b.hasCollided(b.aimTile.build.id)){
+                                            target = b.aimTile.build;
+                                        }else{
+                                            target = Units.closestTarget(b.team, realAimX, realAimY, homingRange,
+                                                e -> e != null && e.checkTarget(collidesAir, collidesGround) && !b.hasCollided(e.id),
+                                                t -> t != null && collidesGround && !b.hasCollided(t.id));
+                                        }
+                                    }
+
+                                    if(target != null){
+                                        b.vel.setAngle(Angles.moveToward(b.rotation(), b.angleTo(target), homingPower * Time.delta * 50f));
+                                    }else b.vel.rotate(b.fin()>0.3f?(-b.dst(b.originX,b.originY) * Mathf.PI * Time.delta) / (2*b.vel.len()):1);
+                                }
                             }}; 
                         }}
                     );
@@ -431,7 +483,7 @@ public class SLBlocks {
             size = 6;
             reload = 1200;
             ammoPerShot = 20;
-            maxAmmo = 40;
+            maxAmmo = 20;
             recoil = 12;
             flags = EnumSet.of(BlockFlag.turret);
             drawer = new DrawTurret(){{
@@ -441,9 +493,12 @@ public class SLBlocks {
                     under = true;
                     x = -2;
                     y = 18;
+                    moveX = -4;
                     moveY = -8;
+                    moveRot = -25;
                 }});
             }};
+            
             unitSort = UnitSorts.strongest;
             unitFilter = (u) -> {
                 return false;
@@ -452,34 +507,50 @@ public class SLBlocks {
                 return this.targetUnderBlocks || !b.block.underBullets;
             };
             ammoTypes.putAll(
-            Items.silicon, new BasicBulletType(4, 400){{
+            Items.silicon, new BasicBulletType(4, 500){{
+                ammoMultiplier = 1;
                 lifetime = 400;
                 width = 16;
                 height = 12;
                 pierce = pierceBuilding = true;
+                absorbable = false;
                 pierceCap = 3;
                 frontColor = Items.silicon.color;
-                backColor = Items.silicon.color.mul(0.8f);
+                backColor = Items.silicon.color.cpy().mul(0.8f);
                 homingPower = 0.05f;
                 homingRange = 24;
             }},
             Items.thorium, new BasicBulletType(16, 5000){{
+                ammoMultiplier = 1;
                 lifetime = 100;
                 width = 16;
                 height = 12;
                 pierce = pierceBuilding = true;
-                pierceDamageFactor = 0.6f;
+                absorbable = false;
+                pierceDamageFactor = 0.01f;
                 frontColor = Items.thorium.color;
-                backColor = Items.thorium.color.mul(0.8f);
+                backColor = Items.thorium.color.cpy().mul(0.8f);
             }},
-            SLItems.starFrag, new BasicBulletType(8, 2100){{
+            SLItems.starFrag, new BasicBulletType(8, 2000){{
+                ammoMultiplier = 1;
                 lifetime = 200;
                 width = 16;
                 height = 12;
-                pierce = pierceBuilding = true;
-                pierceDamageFactor = 0.1f;
+                splashDamageRadius = 80;
+                splashDamage = 4000;
+                splashDamagePierce = true;
+                absorbable = pierce = pierceBuilding = false;
+                fragBullet = new ShrapnelBulletType(){{
+                    speed = -1;
+                    damage = 4000;
+                    length = 80;
+                    width = 16;
+                    fromColor = SLPal.starOrangeColor;
+                    toColor = SLPal.starRedColor;
+                    pierce = pierceBuilding = hitLarge = true;
+                }};
                 frontColor = SLItems.starFrag.color;
-                backColor = SLItems.starFrag.color.mul(0.8f);
+                backColor = SLItems.starFrag.color.cpy().mul(0.8f);
             }});
         }@Override
             public void init(){
@@ -488,16 +559,37 @@ public class SLBlocks {
             }
         };
         //util
-        decoy = new Wall("decoy"){{
+        decoy = new PowerTurret("decoy"){{
             alwaysUnlocked = true;
             requirements(Category.effect, new ItemStack[]{
                 new ItemStack(Items.silicon, 80),
                 new ItemStack(Items.copper, 50),
                 new ItemStack(Items.graphite, 30)
             });
-            health = 111;
+
+            shootType = new ExplosionBulletType(10,120){{
+                impact = killShooter = splashDamagePierce = false;
+                knockback = -15;
+            }
+            @Override
+            public void hitEntity(Bullet b, Hitboxc entity, float health){
+                super.hitEntity(b, entity, health);
+
+                if(b.owner !=null && entity instanceof Unit unit && unit.canTarget((Teamc) b.owner)){
+                    for(WeaponMount w : unit.mounts){
+                        w.target = (Teamc) b.owner;
+                    }
+                }
+            }};
+
+            range = 120;
+            reload = 60;
+            armor = -12000;
+            health = 12000;
+            alwaysUpdateInUnits = true;
             priority = 9;
             flags = EnumSet.of(BlockFlag.all);
             variants = 3;
+            consumePower(2f);
         }};
     }}

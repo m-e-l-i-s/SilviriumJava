@@ -12,7 +12,6 @@ import arc.math.Interp;
 import arc.math.Mathf;
 import arc.math.Scaled;
 import arc.scene.ui.layout.Table;
-import arc.struct.EnumSet;
 import arc.util.Strings;
 import arc.util.Time;
 import type.HealtActivationWeapon;
@@ -396,10 +395,11 @@ public class SLUnits {
                     );
                     bullet = new /*Prox*/BulletType(){{
                         spawnUnit = silvsile = new MissileUnitType("Silvsile"){{
-                            lifetime = 50;
+                            lifetime = 240;
                             speed = 4;
                             outlines = false;
                             maxRange = 32;
+                            rotateSpeed = 3;
                             controller = u -> new ProxMissileAI();
                             weapons.add(
                                 new Weapon("Silvsile-exp"){{
@@ -408,7 +408,7 @@ public class SLUnits {
                                     shootCone = 360f;
                                     shootOnDeath = true;
                                     mirror = false;
-                                    bullet = new ExplosionBulletType(controller instanceof MissileAI ? 400 : 0, 40){{
+                                    bullet = new ExplosionBulletType(400, 40){{
                                         buildingDamageMultiplier = 0.5f;
                                         range = 32;
                                         splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
@@ -746,7 +746,7 @@ public class SLUnits {
                 ((Unit & Legsc) unit).resetLegs();
                 drawLegs((Unit & Legsc)unit);
             }else{
-                ((Unit & Legsc) unit).resetLegs(0.1f);
+                ((Unit & Legsc) unit).resetLegs(4f);
             }
 
             Draw.z(Math.min(z - 0.01f, Layer.bullet - 1f));
@@ -862,10 +862,10 @@ public class SLUnits {
                     y = 0f;
                     mirror = false;
                     top = false;
-                    reload = 36f;
+                    reload = 18f;
                     rotate = false;
                     inaccuracy = 0f;
-                    bullet = new BasicBulletType(0.0795f, 5f){{
+                    bullet = new BasicBulletType(0.0795f, 6f){{
                         keepVelocity = false;
                         splashDamagePierce = collides = true;
                         mixColorFrom = SLPal.silviriumColor;
@@ -886,7 +886,7 @@ public class SLUnits {
                         splashDamage = 10;
                         splashDamageRadius = 16;
                         buildingDamageMultiplier = 0.5f;
-                        lifetime = 42f;
+                        lifetime = 53f;
                     }};
                 }},
                 new Weapon("Static-star-mines"){{
@@ -1092,7 +1092,7 @@ public class SLUnits {
                     rotate = mirror = alternate = alwaysContinuous = predictTarget = false;
                     top = continuous = true;
                     bullet = new ContinuousFlameBulletType(){{
-                        recoil = 0.01f;
+                        recoil = 0.012f;
                         length = 240f;
                         range = 240f;
                         width = 16f;
@@ -1102,14 +1102,14 @@ public class SLUnits {
                         pierceBuilding = true;
                         status = StatusEffects.burning;
                         statusDuration = 600f;
-                        knockback = 1f;
+                        knockback = 1.5f;
                         impact = true;
                         lifetime = 600f;
                         lengthInterp = Interp.one;
                         hitEffect = SLFx.starHit;
                         lightStroke = 20f;
                         lightColor = SLPal.starRedColor;
-                        oscScl = 1.5f;
+                        oscScl = 1.0f;
                         oscMag = 0.01f;
                         drawFlare = false;
                         divisions = 4;
@@ -1128,6 +1128,7 @@ public class SLUnits {
                                     color1 = SLPal.starRedColor;
                                     color2 = SLPal.starOrangeColor;
                                     progress = PartProgress.life.curve(0.1f,0.4f);
+                                    followRotation = true;
                                     sides = 5;
                                     radius = 8;
                                     radiusTo = 32;
@@ -1149,10 +1150,10 @@ public class SLUnits {
                         };
                         lengthWidthPans = new float[]{
                             1.2f,1.2f,0.3f,
-                            1.0f,1.0f,0.3f,
-                            0.9f,0.9f,0.3f,
-                            0.7f,0.7f,0.3f,
-                            0.4f,0.4f,0.3f
+                            1.0f,1.0f,0.32f,
+                            0.9f,0.9f,0.34f,
+                            0.7f,0.7f,0.36f,
+                            0.4f,0.4f,0.38f
                         };
                     }};
                 }}
@@ -1175,6 +1176,7 @@ public class SLUnits {
                         unit.abilities[i].data = old[i].data;
                     }
                 }
+                
             }
             super.update(unit);
         }};

@@ -1,7 +1,5 @@
 package content;
 
-
- 
 import arc.util.Time;
 import mindustry.content.Fx;
 import mindustry.content.UnitTypes;
@@ -16,6 +14,7 @@ public class SLStatusEffects {
     disrupted ,daggered, rush;
 
     public static void load(){
+
         disrupted = new StatusEffect("disrupted"){{
             reloadMultiplier = 0.8f;
             damageMultiplier = 0.8f;
@@ -27,23 +26,14 @@ public class SLStatusEffects {
             alwaysUnlocked = outline = true;
             effect = SLFx.silvAmb;
         }
-/*/
-        @Override
-        public void setStats(){
-            super.setStats();
-            stats.add(Stat.range, "15");
-        }
-//*/
 
         @Override
         public void update(Unit unit, StatusEntry entry){
-            if(unit.isShooting()) entry.time += Time.delta;
+            if(unit.isShooting()) {
+                unit.damageContinuousPierce(10*Time.delta);
+                entry.time += Time.delta;
+            }
             super.update(unit, entry);
-            unit.speedMultiplier = 0.8f;
-            unit.reloadMultiplier = 0.8f;
-            unit.damageMultiplier = 0.8f;
-            unit.buildSpeedMultiplier = 0.8f;
-            unit.healthMultiplier = 0.8f;
         }};
 
         daggered = new StatusEffect("daggered"){
@@ -79,11 +69,8 @@ public class SLStatusEffects {
             unit.drownTime = -1;
             unit.clearStatuses();
             unit.apply(rush,entry.time);
-            super.update(unit, entry);
-            
-        }
-    
-        };
+            super.update(unit, entry);   
+        }};
     }
 }
 

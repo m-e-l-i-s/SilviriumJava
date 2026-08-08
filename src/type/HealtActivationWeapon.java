@@ -17,9 +17,10 @@ import mindustry.type.Weapon;
 import static mindustry.Vars.*;
 
 public class HealtActivationWeapon extends Weapon{
-    public float maxHealthRange;
-    public float minHealthRange;
-    
+    public float
+        maxHealthRange,
+        minHealthRange;
+    public boolean drawWhenDisabled=true;
 
     public HealtActivationWeapon(String name){
         this(name, 1f, 0f);
@@ -29,6 +30,11 @@ public class HealtActivationWeapon extends Weapon{
         super(name);
         this.maxHealthRange = maxHealthRange;
         this.minHealthRange = minHealthRange;
+    }
+
+    @Override
+    public void draw(Unit unit, WeaponMount mount){
+        if (drawWhenDisabled || (unit.health <= maxHealthRange*unit.maxHealth && unit.health >= minHealthRange*unit.maxHealth)) super.draw(unit, mount);
     }
 
     @Override
