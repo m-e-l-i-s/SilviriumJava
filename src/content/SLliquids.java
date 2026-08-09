@@ -19,6 +19,7 @@ public static Liquid liquidSilvirium;
             viscosity = 0.95f;
             alwaysUnlocked = true;
             moveThroughBlocks = true;
+            capPuddles = false;
         }};
     }
 }

@@ -25,14 +25,19 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
             radioactivity = 0.2f;
             color = SLPal.starOrangeColor;
         }};
+        silvirium = new Item("shapinite"){{
+            alwaysUnlocked = true;
+            hardness = 3;
+            cost = 2f;
+            color = SLPal.silviriumColor;
+        }};
         antintuitivemater = new Item("antintuitive-matter"){{
             alwaysUnlocked = true;
-            explosiveness = 2f;
-            charge = 2;
-            flammability = 2f;
-            radioactivity = 2f;
-            frames = 2;
-            transitionFrames = 4;
+            explosiveness = 5f;
+            charge = 5;
+            flammability = 5f;
+            radioactivity = 5f;
+            frames = 4;
             frameTime = 3;
         }};
     }

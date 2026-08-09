@@ -477,7 +477,8 @@ public class SLBlocks {
                 new ItemStack(Items.silicon, 1000),
                 new ItemStack(Items.graphite, 500)
             });
-            liquidCapacity = 120f;
+            coolantMultiplier = 1.5f;
+            liquidCapacity = 900f;
             coolant = consumeCoolant(2f);
             range = 1600;
             size = 6;
@@ -507,7 +508,7 @@ public class SLBlocks {
                 return this.targetUnderBlocks || !b.block.underBullets;
             };
             ammoTypes.putAll(
-            Items.silicon, new BasicBulletType(4, 500){{
+            Items.silicon, new BasicBulletType(4, 700){{
                 ammoMultiplier = 1;
                 lifetime = 400;
                 width = 16;
@@ -519,6 +520,7 @@ public class SLBlocks {
                 backColor = Items.silicon.color.cpy().mul(0.8f);
                 homingPower = 0.05f;
                 homingRange = 24;
+                reloadMultiplier = 4;
             }},
             Items.thorium, new BasicBulletType(16, 5000){{
                 ammoMultiplier = 1;
