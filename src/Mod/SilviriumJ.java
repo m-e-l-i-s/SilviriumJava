@@ -16,8 +16,8 @@ public class SilviriumJ extends Mod{
             Time.runTask(30f, () -> {
                 BaseDialog dialog = new BaseDialog("Hello message");
                 dialog.cont.add("This is Silvirium:").row();
-                dialog.cont.image(Core.atlas.find("sli-icon")).pad(100f).row();
-                dialog.cont.button("CLOSE", dialog::hide).size(150f,75f).fontScale(5);
+                dialog.cont.image(Core.atlas.find("sli-icon")).pad(50f).expand().row();
+                dialog.cont.button("CLOSE", dialog::hide).size(150f,75f).fontScale(10);
                 dialog.show();
             });
         });

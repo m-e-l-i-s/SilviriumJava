@@ -180,6 +180,22 @@ public class SLUnits {
                     rotationLimit = 120f;
                     mirror = top = false;
                     rotate = true;
+                    parts.add(
+                        new ShapePart(){{
+                            color = SLPal.silviriumOtherColor;
+                            colorTo = SLPal.silviriumColor;
+                            progress = PartProgress.recoil;
+                            hollow = mirror = true;
+                            sides = 4;
+                            rotateSpeed = 2;
+                            radius = 8;
+                            radiusTo = 1;
+                            stroke = 1;
+                            strokeTo = 0.2f;
+                            x = moveX = y = 0;
+                            moveX = -1;
+                        }}
+                    );
                     bullet = new BasicBulletType(8f,15f){{
                         sprite = "circle";
                         lifetime = 10f;

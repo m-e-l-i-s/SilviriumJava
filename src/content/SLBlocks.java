@@ -5,6 +5,7 @@ import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
@@ -47,7 +48,7 @@ public class SLBlocks {
             requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.lead, 40),
-                new ItemStack(Items.silicon, 70)
+                new ItemStack(SLItems.shapinite, 70)
             });
             size = 2;
             health = 220;
@@ -59,21 +60,21 @@ public class SLBlocks {
                     SLUnits.silvirror, 1200,
                     new ItemStack[]{
                       new ItemStack(SLItems.silvirium, 30),
-                      new ItemStack(Items.silicon, 20)
+                      new ItemStack(SLItems.shapinite, 20)
                     }
                 ),
                 new UnitPlan(
                     SLUnits.silvone, 900,
                     new ItemStack[]{
                       new ItemStack(SLItems.silvirium, 20),
-                      new ItemStack(Items.silicon, 10)
+                      new ItemStack(SLItems.shapinite, 10)
                     }
                 ),
                 new UnitPlan(
                     SLUnits.silvioros, 1200,
                     new ItemStack[]{
                       new ItemStack(SLItems.silvirium, 20),
-                      new ItemStack(Items.silicon, 10)
+                      new ItemStack(SLItems.shapinite, 10)
                     }
                 ),
                 new UnitPlan(
@@ -90,7 +91,7 @@ public class SLBlocks {
             requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
-                new ItemStack(Items.silicon, 70),
+                new ItemStack(SLItems.shapinite, 70),
                 new ItemStack(Items.metaglass, 50)
             });
             size = 3;
@@ -98,7 +99,7 @@ public class SLBlocks {
             health = 495;
             consumeItems(new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 80),
-                new ItemStack(Items.silicon, 40),
+                new ItemStack(SLItems.shapinite, 40),
             });
             constructTime = 900f;
             addUpgrade(SLUnits.silvirror, SLUnits.silvokeor);
@@ -109,7 +110,7 @@ public class SLBlocks {
             requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.graphite, 40),
-                new ItemStack(Items.silicon, 70),
+                new ItemStack(SLItems.shapinite, 70),
                 new ItemStack(Items.metaglass, 50)
             });
             size = 4;
@@ -117,7 +118,7 @@ public class SLBlocks {
             health = 880;
             consumeItems(new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
-                new ItemStack(Items.silicon, 150),
+                new ItemStack(SLItems.shapinite, 150),
             });
             constructTime = 1800f;
             addUpgrade(SLUnits.silvokeor, SLUnits.silvbane);
@@ -128,7 +129,7 @@ public class SLBlocks {
             requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
-                new ItemStack(Items.silicon, 70),
+                new ItemStack(SLItems.shapinite, 70),
                 new ItemStack(Items.metaglass, 50)
             });
             size = 5;
@@ -136,7 +137,7 @@ public class SLBlocks {
             health = 1375;
             consumeItems(new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 1200),
-                new ItemStack(Items.silicon, 400),
+                new ItemStack(SLItems.shapinite, 400),
             });
             constructTime = 2400f;
             addUpgrade(SLUnits.silvbane, SLUnits.silvruner);
@@ -148,7 +149,7 @@ public class SLBlocks {
             requirements(Category.units, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.lead, 40),
-                new ItemStack(Items.silicon, 70)
+                new ItemStack(SLItems.shapinite, 70)
             });
             size = 2;
             health = 220;
@@ -158,7 +159,7 @@ public class SLBlocks {
                     SLUnits.star1, 0,
                     new ItemStack[]{
                       new ItemStack(SLItems.starFrag, 30),
-                      new ItemStack(Items.silicon, 20)
+                      new ItemStack(SLItems.shapinite, 20)
                     }
                 )
             );
@@ -169,7 +170,7 @@ public class SLBlocks {
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(Items.metaglass, 40),
-                new ItemStack(Items.silicon, 70),
+                new ItemStack(SLItems.shapinite, 70),
                 new ItemStack(SLItems.silviriumIng, 50)
             });
             outputLiquid = new LiquidStack(SLliquids.liquidSilvirium, 0.25f);
@@ -215,7 +216,7 @@ public class SLBlocks {
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 100),
                 new ItemStack(Items.metaglass, 10),
-                new ItemStack(Items.silicon, 50),
+                new ItemStack(SLItems.shapinite, 50),
             });
             size = 2;
             hasPower = hasItems = solid = true;
@@ -234,7 +235,7 @@ public class SLBlocks {
             alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(Items.metaglass, 50),
-                new ItemStack(Items.silicon, 110),
+                new ItemStack(SLItems.shapinite, 110),
             });
             size = 2;
             hasPower = hasItems = hasLiquids = solid = true;
@@ -289,7 +290,7 @@ public class SLBlocks {
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 120),
                 new ItemStack(Items.graphite, 90),
-                new ItemStack(Items.silicon, 100),
+                new ItemStack(SLItems.shapinite, 100),
                 new ItemStack(Items.metaglass, 60)
             });
             ammo(
@@ -364,7 +365,7 @@ public class SLBlocks {
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
                 new ItemStack(Items.sand, 110),
-                new ItemStack(Items.silicon, 110)
+                new ItemStack(SLItems.shapinite, 110)
             });
             ammoTypes.putAll(
                 Items.sand, new PointBulletType(){{
@@ -468,10 +469,11 @@ public class SLBlocks {
         ABT = new ItemTurret("anti-building-turret"){{
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
-                new ItemStack(Items.copper, 3000),
-                new ItemStack(Items.lead, 3000),
-                new ItemStack(Items.silicon, 1000),
-                new ItemStack(Items.graphite, 500)
+                new ItemStack(Items.copper, 3200),
+                new ItemStack(Items.lead, 3200),
+                new ItemStack(Items.silicon, 900),
+                new ItemStack(SLItems.shapinite, 300),
+                new ItemStack(Items.graphite, 700)
             });
             coolantMultiplier = 1.5f;
             liquidCapacity = 900f;
@@ -485,7 +487,7 @@ public class SLBlocks {
             flags = EnumSet.of(BlockFlag.turret);
             drawer = new DrawTurret(){{
                 parts.add(new RegionPart("-barrel"){{
-                    progress = PartProgress.recoil.add(PartProgress.heat.mul(0.5f));
+                    progress = PartProgress.recoil.add(PartProgress.heat);
                     mirror = true;
                     under = true;
                     x = -2;
@@ -560,7 +562,7 @@ public class SLBlocks {
         decoy = new PowerTurret("decoy"){{
             alwaysUnlocked = true;
             requirements(Category.effect, new ItemStack[]{
-                new ItemStack(Items.silicon, 80),
+                new ItemStack(SLItems.shapinite, 80),
                 new ItemStack(Items.copper, 50),
                 new ItemStack(Items.graphite, 30)
             });
