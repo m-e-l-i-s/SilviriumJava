@@ -5,13 +5,11 @@ import mindustry.content.Items;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
-import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.world.Block;
-import mindustry.world.blocks.defense.turrets.BaseTurret;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LiquidTurret;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
@@ -176,12 +174,8 @@ public class SLBlocks {
             });
             outputLiquid = new LiquidStack(SLliquids.liquidSilvirium, 0.25f);
             size = 2;
-            hasPower = true;
-            hasItems = true;
-            hasLiquids = true;
+            hasPower = hasItems = hasLiquids = solid = outputsLiquid = true;
             rotate = false;
-            solid = true;
-            outputsLiquid = true;
             envEnabled = Env.any;
             liquidCapacity = 12f;
             craftTime = 60;
@@ -196,18 +190,18 @@ public class SLBlocks {
                 }},
                 new DrawRegion("-rot"){{
                         layer = 40.4f;
-                        rotateSpeed = 10f;
+                        rotateSpeed = 12f;
                 }},
                 new DrawSoftParticles(){{
                         color = SLPal.silviriumColor;
                         color2 = SLPal.silviriumColor;
                         alpha = 0.3f;
                         particles = 7;
-                        particleLife = 70f;
+                        particleLife = 90f;
                         particleRad = 4f;
                         particleSize = 3f;
                         fadeMargin = 0.2f;
-                        rotateScl = 0.1f;
+                        rotateScl = 0.4f;
                         particleInterp = Interp.one;
                 }},
                 new DrawRegion("-top"){{
@@ -224,10 +218,8 @@ public class SLBlocks {
                 new ItemStack(Items.silicon, 50),
             });
             size = 2;
-            hasPower = true;
-            hasItems = true;
+            hasPower = hasItems = solid = true;
             rotate = false;
-            solid = true;
             envEnabled = Env.any;
             itemCapacity = 16;
             craftTime = 600;
@@ -245,35 +237,39 @@ public class SLBlocks {
                 new ItemStack(Items.silicon, 110),
             });
             size = 2;
-            hasPower = true;
-            hasItems = true;
-            hasLiquids = true;
+            hasPower = hasItems = hasLiquids = solid = true;
             rotate = false;
-            solid = true;
             envEnabled = Env.any;
             itemCapacity = 1;
             craftTime = 1200;
             flammabilityScale = 0;
 
             consumePower(2f);
-            outputsPower = true;
             outputItem = new ItemStack(SLItems.starFrag, 1);
         }};
         //ore
         silvOre = new OreBlock("ore-silvirium", SLItems.silvirium){{
             alwaysUnlocked = true;
-            oreDefault = true;
+            oreDefault = emitLight = true;
             oreScale = 10f;
-            oreThreshold = 0.5f;
-            emitLight = true;
+            oreThreshold = 0.3f;
             lightRadius = 9f;
             lightColor = SLPal.silviriumColor;
             variants = 2;
         }};
+        silvOre = new OreBlock("ore-shapinite", SLItems.shapinite){{
+            alwaysUnlocked = true;
+            oreDefault = emitLight = true;
+            oreScale = 20f;
+            oreThreshold = 0.1f;
+            lightRadius = 0f;
+            lightColor = SLPal.mgray;
+            variants = 0;
+        }};
         //floors
         slivFloor = new Floor("silvirium-floor", 2){{
             liquidDrop = SLliquids.liquidSilvirium;
-            liquidMultiplier = 0.001f;
+            liquidMultiplier = 0.01f;//1500 times less that a LSF(Liquid Silvirium Factory)
             walkEffect = SLFx.silvAmb;
             status = SLStatusEffects.disrupted;
             statusDuration = 6f;
@@ -298,7 +294,7 @@ public class SLBlocks {
             });
             ammo(
                 SLliquids.liquidSilvirium,new LiquidBulletType(SLliquids.liquidSilvirium){{
-                    damage = 30;
+                    damage = 70;
                     speed = 16;
                     lifetime = 40;
                     knockback = 0.3f;
@@ -308,15 +304,15 @@ public class SLBlocks {
                     statusDuration = 300;
                     pierce = pierceBuilding = true;
                     pierceCap = 3;
-                    pierceDamageFactor = 0.01f;
+                    pierceDamageFactor = 0.1f;
                     puddleSize = 16;
                     orbSize = 3;
                     boilTime = 600;
                     
                 }}
             );
-            shoot.shots = 7;
-            shoot.shotDelay = 5f;
+            shoot.shots = 3;
+            shoot.shotDelay = 50f;
             size = 3;
             recoil = 1f;
             reload = 180f;
@@ -586,8 +582,8 @@ public class SLBlocks {
 
             range = 120;
             reload = 60;
-            armor = -12000;
-            health = 12000;
+            armor = -999999;
+            health = 100000;
             alwaysUpdateInUnits = true;
             priority = 9;
             flags = EnumSet.of(BlockFlag.all);

@@ -14,5 +14,8 @@ public class SLPal {
     starOrangeColor = Color.valueOf("FF6622"),
     starOrangeDarkColor = Color.valueOf("ff4411"),
     starRedColor = Color.valueOf("FF3300"),
-    starRedDarkColor = Color.valueOf("EE1100");
+    starRedDarkColor = Color.valueOf("EE1100"),
+    lgray = Color.valueOf("b0bac0"),
+    mgray = Color.valueOf("989aa4"),
+    dgray = Color.valueOf("6e7080");
 }

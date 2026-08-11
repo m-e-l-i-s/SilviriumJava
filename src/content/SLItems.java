@@ -3,7 +3,7 @@ package content;
 import mindustry.type.Item;
 
 public class SLItems {
-public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
+public static Item silvirium, silviriumIng, shapinite, starFrag, antintuitivemater;
 
     public static void load(){
         silvirium = new Item("silvirium"){{
@@ -25,11 +25,11 @@ public static Item silvirium, silviriumIng, starFrag, antintuitivemater;
             radioactivity = 0.2f;
             color = SLPal.starOrangeColor;
         }};
-        silvirium = new Item("shapinite"){{
+        shapinite = new Item("shapinite"){{
             alwaysUnlocked = true;
             hardness = 3;
             cost = 2f;
-            color = SLPal.silviriumColor;
+            color = SLPal.mgray;
         }};
         antintuitivemater = new Item("antintuitive-matter"){{
             alwaysUnlocked = true;

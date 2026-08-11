@@ -11,11 +11,16 @@ import mindustry.entities.Units;
 import mindustry.entities.abilities.Ability;
 import mindustry.gen.Unit;
 
-import static mindustry.Vars.*;
-
 public class HeatAreaAbility extends Ability{
     public float
-    velMin = 0, velMax = 1, range = 40, brange = 40, damage = 5, bdamage = 95;
+    /** minimum and maximum velocity value (not fractionary, 0.5 means 0.5 units not 50%)*/
+    velMin = 0, velMax = 1,
+    /** range at velMin and at velMax respectively*/
+    range = 40, brange = 80,
+    /** damage at velMin and at velMax respectively*/
+    damage = 10, bdamage = 100,
+    /** Multiplier of damage done to units on the same team */
+    friendPercent = 0.05f;
 
     protected float vel = 0;
 
@@ -30,15 +35,15 @@ public class HeatAreaAbility extends Ability{
 
     @Override
     public void update(Unit unit){
-        vel = Mathf.approachDelta(vel,(velMin-unit.vel.len())/(velMin-velMax),velMax-velMin/4);
+        vel = Mathf.approachDelta(vel,(velMin-unit.vel.len())/(velMin-velMax),velMax-velMin/10);
         Units.nearby(null, unit.x, unit.y, range+(brange*vel), e -> {
             if(e==unit) return;
             lStroke();
             Lines.dashCircle(e.x, e.y, e.hitSize);
             if(e.team() != unit.team()){
-                e.damage((damage+(bdamage*vel))*Time.delta);
+                e.damage(Mathf.lerp(damage,bdamage,vel)*Time.delta);
             }else{
-                e.damage((damage+(bdamage*vel))*Time.delta*0.1f);
+                e.damage(Mathf.lerp(damage,bdamage,vel)*Time.delta*friendPercent);
             }
         });
     }
@@ -50,8 +55,7 @@ public class HeatAreaAbility extends Ability{
     @Override
     public void draw(Unit unit){
         lStroke();
-        Lines.dashCircle(unit.x, unit.y, range+(brange*vel));
-        
+        Lines.dashCircle(unit.x, unit.y, Mathf.lerp(range, brange, vel));
         Draw.reset();
     }
 
@@ -59,6 +63,7 @@ public class HeatAreaAbility extends Ability{
     public void addStats(Table t){
         super.addStats(t);
         t.row();
+        /*
         t.add(
             abilityStat("velocityRange",
                 ":[stat]"+velMin*tilesize + "-" + velMax*tilesize
@@ -69,6 +74,7 @@ public class HeatAreaAbility extends Ability{
                 ":[stat]"+range/tilesize + "-" + brange/tilesize
             )
         ).row();
+        //*/
         t.add(
             abilityStat("damage",
                 ":[stat]"+damage + "-" + bdamage

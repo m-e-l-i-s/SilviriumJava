@@ -18,12 +18,14 @@ import static mindustry.Vars.*;
 
 public class HealtActivationWeapon extends Weapon{
     public float
-        maxHealthRange,
-        minHealthRange;
-    public boolean drawWhenDisabled=true;
+    /** Maximum and minimum Hp fractions at witch this weapon is enabled*/
+    maxHealthRange=1f, minHealthRange=0f;
+    public boolean 
+    /** Whether to draw this weapon when disabled or not*/
+    drawWhenDisabled = true;
 
     public HealtActivationWeapon(String name){
-        this(name, 1f, 0f);
+        super(name);
     }
 
     public HealtActivationWeapon(String name, float maxHealthRange, float minHealthRange){
