@@ -343,7 +343,8 @@ public class SLBlocks {
         }
         @Override
         public void init(){
-            ((Turret)this).init();
+            super.init();
+            coolant = consumeCoolant(coolant.amount);
         }};
         ST = new ItemTurret("silvirium-turret"){{
             alwaysUnlocked = true;
