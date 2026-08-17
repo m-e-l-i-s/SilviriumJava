@@ -16,16 +16,15 @@ import arc.util.Strings;
 import arc.util.Time;
 import type.HealtActivationWeapon;
 import mindustry.Vars;
-import mindustry.ai.types.MissileAI;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
+import mindustry.entities.Leg;
 import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.EmptyDataAbility;
 import mindustry.entities.abilities.RegenAbility;
 import mindustry.entities.effect.WaveEffect;
 import mindustry.entities.part.*;
-import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
@@ -38,6 +37,7 @@ import mindustry.type.Weapon;
 import static Mod.SilviriumJ.*;
 
 public class SLUnits {
+    protected static final Leg[] EmpyLegs = new Leg[0];
     public static UnitType silvanon, silvirror, silvokeor, silvbane, silvruner, silv5,
     silvone, silvioros,
     silvot,
@@ -80,9 +80,9 @@ public class SLUnits {
                     bullet = new BasicBulletType(6,0){{
                         chargeEffect = SLFx.silviriumChargeEffect;
                         knockback = 25;
-                        splashDamage = 180;
-                        splashDamageRadius = 12;
-                        buildingDamageMultiplier = 0.5f;
+                        splashDamage = 160;
+                        splashDamageRadius = 22;
+                        buildingDamageMultiplier = 0.25f;
                         lifetime = 40f;
                         scaleLife = true;
                         killShooter = true;
@@ -138,7 +138,7 @@ public class SLUnits {
                 width = 2f;
                 damageInterval = 5f;
                 damage = 1f /*12 * damageInterval / 60f*/;
-                buildingDamageMultiplier = 0.5f;
+                buildingDamageMultiplier = 0.60f;
                 pierceBuilding = true;
                 pierceCap = 4;
                 status = SLStatusEffects.disrupted;
@@ -184,23 +184,24 @@ public class SLUnits {
                         new ShapePart(){{
                             color = SLPal.silviriumOtherColor;
                             colorTo = SLPal.silviriumColor;
-                            progress = PartProgress.recoil;
+                            progress = PartProgress.recoil.delay(0.5f);
                             hollow = mirror = true;
                             sides = 4;
-                            rotateSpeed = 2;
-                            radius = 8;
+                            rotateSpeed = 4;
+                            radius = 2;
                             radiusTo = 1;
                             stroke = 1;
-                            strokeTo = 0.2f;
-                            x = moveX = y = 0;
+                            strokeTo = 0f;
+                            x = moveY = 0;
+                            y = 2;
                             moveX = -1;
                         }}
                     );
-                    bullet = new BasicBulletType(8f,15f){{
+                    bullet = new BasicBulletType(4f,15f){{
                         sprite = "circle";
-                        lifetime = 10f;
+                        lifetime = 20f;
                         range = 80f;
-                        buildingDamageMultiplier = 0.5f;
+                        buildingDamageMultiplier = 0.25f;
                         pierce = pierceBuilding = true;
                         pierceCap = 3;
                         frontColor = trailColor  = SLPal.silviriumColor;
@@ -212,7 +213,7 @@ public class SLUnits {
             );
             for(int side : Mathf.signs){
                 weapons.add(
-                    new Weapon(name("silvirror-side-")+(side<0?"R":"L")){{
+                    new Weapon(name("silvirror-side-")+(side<0?"L":"R")){{
                         x = 8f*side;
                         y = 1f;
                         reload = 10f;
@@ -221,9 +222,8 @@ public class SLUnits {
                         shootY = 2f;
                         mirror = false;
                         rotate = true;
-                        top = false;
-                        rotateSpeed = 2f;
-                        rotationLimit = 50f;
+                        rotateSpeed = 2.5f;
+                        rotationLimit = 60f;
                         predictTarget = false;
                         continuous = true;
                         alwaysContinuous = true;
@@ -382,8 +382,8 @@ public class SLUnits {
                         homingPower = 0.1f;
                         homingRange = 48;
                         range = 200;
-                        weaveScale = 5f;
-                        weaveMag = 5f;
+                        weaveScale = 10f;
+                        weaveMag = 10f;
                     }};
                 }},
                 new Weapon("Silvbane-missile"){{
@@ -506,6 +506,7 @@ public class SLUnits {
                         status = SLStatusEffects.disrupted;
                         statusDuration = 600f;
                         sprite = "circle-bullet";
+                        buildingDamageMultiplier = 0.75f;
                     }};
                 }},
                 new HealtActivationWeapon("Silvruner-Explosion", 0.1f, 0f){{
@@ -519,8 +520,8 @@ public class SLUnits {
                     shoot.firstShotDelay = 180;
                     shootStatus = SLStatusEffects.rush;
                     shootStatusDuration = 180;
-                    bullet = new ExplosionBulletType(220,120){{
-                        buildingDamageMultiplier = 0.5f;
+                    bullet = new ExplosionBulletType(900,120){{
+                        buildingDamageMultiplier = 0.25f;
                         range = 40;
                         splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
                         hittable = false;
@@ -554,8 +555,8 @@ public class SLUnits {
             legForwardScl = 1f;
             legMoveSpace = 1f;
             legSpeed = 0.2f;
-            legSplashDamage =  12f;
-            legSplashRange =  8f;
+            legSplashDamage = 30f;
+            legSplashRange =  20f;
             legExtension = 4f;
             legGroupSize = 2;
             legPairOffset = 2f;
@@ -576,14 +577,14 @@ public class SLUnits {
             flying = true;
             immunities.add(SLStatusEffects.disrupted);
             outlines = false;
-            health = 40;
+            health = 40f;
             speed = 4f;
             accel = 0.1f;
             drag = 0.005f;
             range = 64;
             maxRange = 64;
             engineSize = 0.01f;
-            hitSize = 4;
+            hitSize = 3;
             weapons.add(
                 new Weapon("piercer"){{
                     x = 0f;
@@ -646,8 +647,7 @@ public class SLUnits {
                 x = 0;
                 y = 9;
                 shootY = 0;
-                mirror = false;
-                top = false;
+                mirror = top = false;
                 reload = 20f;
                 rotate = true;
                 rotateSpeed = 15f;
@@ -655,7 +655,7 @@ public class SLUnits {
                 rotationLimit = 300f;
                 range = 240f;
                 maxRange = 240f;
-                bullet = new BasicBulletType(6f, 8f){{
+                bullet = new BasicBulletType(6f, 6f){{
                     width = 8f;
                     lifesteal = 0.1f;
                     height = 12f;
@@ -674,7 +674,8 @@ public class SLUnits {
                 @Override
                 public void hitTile(Bullet b, Building build, float x, float y, float initialHealth, boolean direct){
                     super.hitTile(b, build, x, y, initialHealth, direct);
-                    build.applySlowdown(0.01f, 60f);
+                    build.applySlowdown(0f, 60f);
+                    
                 }};
             }});
         }};
@@ -762,7 +763,7 @@ public class SLUnits {
                 ((Unit & Legsc) unit).resetLegs();
                 drawLegs((Unit & Legsc)unit);
             }else{
-                ((Unit & Legsc) unit).resetLegs(4f);
+                ((Unit & Legsc) unit).legs(EmpyLegs);
             }
 
             Draw.z(Math.min(z - 0.01f, Layer.bullet - 1f));

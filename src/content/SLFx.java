@@ -104,15 +104,16 @@ public class SLFx {
     }},
     sndLine = new ParticleEffect(){{
         particles = 1;
-        length = 0.5f;
+        length = 0f;
         baseLength = 1;
         line = true;
+        randLength = false;
         colorFrom = Items.sand.color;
-        colorTo = Items.sand.color.cpy().mul(0.8f);
+        colorTo = Items.sand.color.cpy().mula(0.5f);
         strokeFrom = 1f;
         strokeTo = 0f;
-        lenFrom = 16f;
-        lenTo = 16f;
+        lenFrom = 22f;
+        lenTo = 22f;
         lifetime = 20;
         cone = 0;
     }},
