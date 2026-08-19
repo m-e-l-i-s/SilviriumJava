@@ -171,13 +171,13 @@ public class SLUnits {
             weapons.add(
                 new HealtActivationWeapon("silvirror-center", 0.80f, 0f){{
                     x = 0f;
-                    y = 2f;
+                    y = 8f;
                     reload = 120f;
                     shootCone = 8f;
                     shootX = 0f;
-                    shootY = 2f;
+                    shootY = 0f;
                     rotateSpeed = 2f;
-                    rotationLimit = 120f;
+                    rotationLimit = 360f;
                     mirror = top = false;
                     rotate = true;
                     parts.add(
@@ -193,7 +193,7 @@ public class SLUnits {
                             stroke = 1;
                             strokeTo = 0f;
                             x = moveY = 0;
-                            y = 2;
+                            y = 0;
                             moveX = -1;
                         }}
                     );

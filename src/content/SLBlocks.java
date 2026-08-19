@@ -6,7 +6,6 @@ import mindustry.entities.UnitSorts;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.ShootSpread;
-import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
@@ -15,13 +14,16 @@ import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LiquidTurret;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
-import mindustry.world.blocks.defense.turrets.Turret;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.environment.StaticWall;
 import mindustry.world.blocks.units.UnitFactory;
 import mindustry.world.blocks.units.Reconstructor;
+import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
+import mindustry.world.draw.*;
+import mindustry.world.meta.*;
+import mindustry.type.*;
 
 import arc.graphics.*;
 import arc.struct.EnumSet;
@@ -30,10 +32,7 @@ import arc.util.Tmp;
 import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
-import mindustry.type.*;
-import mindustry.world.blocks.production.*;
-import mindustry.world.draw.*;
-import mindustry.world.meta.*;
+
 import world.meta.SLAttributes;
 
 
@@ -52,7 +51,7 @@ public class SLBlocks {
             alwaysUnlocked = true;
             oreDefault = emitLight = true;
             oreScale = 10f;
-            oreThreshold = 0.3f;
+            oreThreshold = 0.85f;
             lightRadius = 9f;
             lightColor = SLPal.silviriumColor;
             variants = 2;
@@ -61,10 +60,10 @@ public class SLBlocks {
             alwaysUnlocked = true;
             oreDefault = emitLight = true;
             oreScale = 20f;
-            oreThreshold = 0.1f;
+            oreThreshold = 0.9f;
             lightRadius = 0f;
             lightColor = SLPal.mgray;
-            variants = 0;
+            variants = 2;
         }};
         //floors
         slivFloor = new Floor("silvirium-floor", 2){{
@@ -105,14 +104,14 @@ public class SLBlocks {
                     }
                 ),
                 new UnitPlan(
-                    SLUnits.silvone, 900,
+                    SLUnits.silvone, 300,
                     new ItemStack[]{
                         new ItemStack(SLItems.silvirium, 20),
                         new ItemStack(SLItems.shapinite, 10)
                     }
                 ),
                 new UnitPlan(
-                    SLUnits.silvioros, 1200,
+                    SLUnits.silvioros, 1500,
                     new ItemStack[]{
                         new ItemStack(SLItems.silvirium, 20),
                         new ItemStack(SLItems.shapinite, 10),
@@ -143,7 +142,7 @@ public class SLBlocks {
                 new ItemStack(SLItems.silvirium, 80),
                 new ItemStack(SLItems.shapinite, 40),
             });
-            constructTime = 900f;
+            constructTime = 1200f;
             addUpgrade(SLUnits.silvirror, SLUnits.silvokeor);
         }};
         
@@ -162,7 +161,7 @@ public class SLBlocks {
                 new ItemStack(SLItems.silvirium, 200),
                 new ItemStack(SLItems.shapinite, 150),
             });
-            constructTime = 1800f;
+            constructTime = 2400f;
             addUpgrade(SLUnits.silvokeor, SLUnits.silvbane);
         }};
         
@@ -181,7 +180,7 @@ public class SLBlocks {
                 new ItemStack(SLItems.silvirium, 1200),
                 new ItemStack(SLItems.shapinite, 400),
             });
-            constructTime = 2400f;
+            constructTime = 3300f;
             addUpgrade(SLUnits.silvbane, SLUnits.silvruner);
         }};
         
@@ -211,7 +210,6 @@ public class SLBlocks {
             alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
-                new ItemStack(Items.metaglass, 40),
                 new ItemStack(SLItems.shapinite, 70),
                 new ItemStack(SLItems.silviriumIng, 50)
             });
@@ -257,7 +255,6 @@ public class SLBlocks {
             alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 100),
-                new ItemStack(Items.metaglass, 10),
                 new ItemStack(SLItems.shapinite, 50),
             });
             size = 2;
@@ -270,7 +267,7 @@ public class SLBlocks {
             consumePower(0.5f);
             consumeItem(SLItems.silvirium,4);
             outputItem = new ItemStack(SLItems.silviriumIng, 1);
-            drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("ffef99")));
+            drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("66fff7")));
         }};
         
         starfac = new GenericCrafter("star-factory"){{
@@ -297,7 +294,8 @@ public class SLBlocks {
             });
             health = 200;
             tier = 3;
-            drillTime = 900;
+            drillTime = 700f;
+            hardnessDrillMultiplier = 200f;
             size = 3;
 
             consumeLiquid(SLliquids.liquidSilvirium, 0.1f).boost();
@@ -327,19 +325,19 @@ public class SLBlocks {
                     
                 }}
             );
-            shoot = new ShootSpread(21,1);
+            shoot = new ShootSpread(21,0.3f);
+            inaccuracy = 0.2f;
             size = 3;
             recoil = 1f;
             reload = 180f;
             inaccuracy = 0f;
-            shootCone = 2f;
+            shootCone = 5f;
             liquidCapacity = 10f;
             rotateSpeed = 3f;
-            range = 200f;
+            range = 224f;
             health = 1000;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
             shootEffect = Fx.shootLiquid;
-            coolant = consumeCoolant(0.1f);
         }
         @Override
         public void init(){
@@ -401,10 +399,10 @@ public class SLBlocks {
                             killShooter = false;
                             fragBullets = 12;
                             shootEffect = Fx.dynamicExplosion;
-                            fragBullet = new BasicBulletType(24,20){{
+                            fragBullet = new BasicBulletType(8,20){{
                                 lifetime = 600;
-                                homingPower = 1f;
-                                homingRange = 24;
+                                homingPower = 0.05f;
+                                homingRange = 40;
                                 pierce = pierceBuilding = true;
                             }
                             @Override
@@ -433,8 +431,8 @@ public class SLBlocks {
                                         b.vel.setAngle(Angles.moveToward(b.rotation(), b.angleTo(target), homingPower * Time.delta * 50f));
                                     }else if(b.owner instanceof Healthc h && h.isValid()){
                                         Tmp.v1.set(h).sub(b);
-                                        Tmp.v1.rotate(90f * Mathf.lerp(0f, 1f, 1f - Mathf.clamp((Tmp.v1.len() - Mathf.randomSeed(b.id,8,240)) / 2*(b.id%2==0?1:-1))));
-                                        b.vel.add(Tmp.v1.limit(speed * 10 * Time.delta)).limit(speed);
+                                        Tmp.v1.rotate(90f * Mathf.lerp(0f, 1f, 1f - Mathf.clamp((Tmp.v1.len() - Mathf.randomSeed(b.id,44,220)) / 2*(b.id%2==0?1:-1))));
+                                        b.vel.add(Tmp.v1.limit(speed * 1 * Time.delta)).limit(speed);
                                     }
                                 }
                             }}; 

@@ -4,7 +4,7 @@
     "author": "Melis",
     "main": "Mod.SilviriumJ",
     "description": "A java remake of my json unfinished mod.",
-    "version": 1.2,
+    "version": 1.7,
     "minGameVersion": 158.1,
     "java": true
 }
