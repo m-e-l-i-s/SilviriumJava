@@ -319,7 +319,7 @@ public class SLBlocks {
                 new ItemStack(Items.metaglass, 60)
             });
             ammo(
-                SLliquids.liquidSilvirium,new LiquidBulletType(){{
+                SLliquids.liquidSilvirium,new LiquidBulletType(SLliquids.liquidSilvirium){{
                     speed = 22.5f;
                     damage = 10;
                     lifetime = 65;
@@ -335,7 +335,6 @@ public class SLBlocks {
                         puddleRange = 48;
                         instantDisappear = true;
                     }};
-                    
                 }}
             );
             shoot = new ShootSpread(21,0.3f);
