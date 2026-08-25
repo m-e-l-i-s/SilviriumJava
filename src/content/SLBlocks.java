@@ -6,6 +6,7 @@ import mindustry.entities.UnitSorts;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.ShootSpread;
+import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
@@ -72,7 +73,8 @@ public class SLBlocks {
             walkEffect = SLFx.silvAmb;
             status = SLStatusEffects.disrupted;
             statusDuration = 6f;
-            dragMultiplier = 5;
+            dragMultiplier = 2;
+            speedMultiplier = 0.5f;
             attributes.set(SLAttributes.silvirium,1f);
         }};
         //envirmental walls
@@ -93,8 +95,7 @@ public class SLBlocks {
             size = 2;
             health = 220;
             consumesPower = connectedPower = conductivePower = false;
-            
-            consumeLiquid(SLliquids.liquidSilvirium, 0.5f);
+            consumeLiquid(SLliquids.liquidSilvirium, 0.1f).boost();
             plans.addAll(
                 new UnitPlan(
                     SLUnits.silvirror, 1200,
@@ -137,6 +138,7 @@ public class SLBlocks {
             });
             size = 3;
             consumePower(0f);
+            consumeLiquid(SLliquids.liquidSilvirium, 0.1f);
             health = 495;
             consumeItems(new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 80),
@@ -156,6 +158,7 @@ public class SLBlocks {
             });
             size = 4;
             consumePower(0f);
+            consumeLiquid(SLliquids.liquidSilvirium, 0.25f);
             health = 880;
             consumeItems(new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 200),
@@ -175,6 +178,7 @@ public class SLBlocks {
             });
             size = 5;
             consumePower(0f);
+            consumeLiquid(SLliquids.liquidSilvirium, 0.75f);
             health = 1375;
             consumeItems(new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 1200),
@@ -251,7 +255,7 @@ public class SLBlocks {
             );
         }};
         
-        silvingfac = new GenericCrafter("silvirium-ingot-factory"){{
+        silvingfac = new AttributeCrafter("silvirium-ingot-factory"){{
             alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 100),
@@ -263,11 +267,15 @@ public class SLBlocks {
             envEnabled = Env.any;
             itemCapacity = 16;
             craftTime = 600;
+            attribute = SLAttributes.silvirium;
+            maxBoost = 2f;
+            boostScale = 0.15f;
+            minEfficiency = -1f;
 
             consumePower(0.5f);
             consumeItem(SLItems.silvirium,4);
             outputItem = new ItemStack(SLItems.silviriumIng, 1);
-            drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("66fff7")));
+            drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("44fff7")));
         }};
         
         starfac = new GenericCrafter("star-factory"){{
@@ -319,9 +327,9 @@ public class SLBlocks {
                     status = SLStatusEffects.disrupted;
                     statusDuration = 6000;
                     puddleLiquid = SLliquids.liquidSilvirium;
-                    puddleAmount = 24;
-                    puddles = 4;
-                    puddleRange = 12;
+                    puddleAmount = 48;
+                    puddles = 1;
+                    puddleRange = 48;
                     
                 }}
             );
@@ -399,10 +407,10 @@ public class SLBlocks {
                             killShooter = false;
                             fragBullets = 12;
                             shootEffect = Fx.dynamicExplosion;
-                            fragBullet = new BasicBulletType(8,20){{
-                                lifetime = 600;
-                                homingPower = 0.05f;
-                                homingRange = 40;
+                            fragBullet = new BasicBulletType(2,20){{
+                                lifetime = 300;
+                                homingPower = 0.01f;
+                                homingRange = 80;
                                 pierce = pierceBuilding = true;
                             }
                             @Override
@@ -431,7 +439,7 @@ public class SLBlocks {
                                         b.vel.setAngle(Angles.moveToward(b.rotation(), b.angleTo(target), homingPower * Time.delta * 50f));
                                     }else if(b.owner instanceof Healthc h && h.isValid()){
                                         Tmp.v1.set(h).sub(b);
-                                        Tmp.v1.rotate(90f * Mathf.lerp(0f, 1f, 1f - Mathf.clamp((Tmp.v1.len() - Mathf.randomSeed(b.id,44,220)) / 2*(b.id%2==0?1:-1))));
+                                        Tmp.v1.rotate(90f * Mathf.lerp(0f, 1f, 1f - Mathf.clamp((Tmp.v1.len() - Mathf.randomSeed(b.id,110,220)) / 2*(b.id%2==0?1:-1))));
                                         b.vel.add(Tmp.v1.limit(speed * 1 * Time.delta)).limit(speed);
                                     }
                                 }
@@ -451,7 +459,7 @@ public class SLBlocks {
             range = 280f;
             health = 2200;
             liquidCapacity = 40f;
-            coolant = consumeCoolant(0.4f);
+            coolant = consume(new ConsumeLiquidFilter(liquid -> true, 1f));
             coolantMultiplier = 2f;
             flags = EnumSet.of(BlockFlag.turret);
             shootEffect = SLFx.silviriumHit1Effect;
@@ -466,7 +474,7 @@ public class SLBlocks {
                 new ItemStack(SLItems.shapinite, 300),
                 new ItemStack(Items.graphite, 700)
             });
-            coolantMultiplier = 0.5f;
+            coolantMultiplier = 0.1f;
             liquidCapacity = 900f;
             coolant = consumeCoolant(2f);
             range = 1600;
@@ -478,7 +486,7 @@ public class SLBlocks {
             flags = EnumSet.of(BlockFlag.turret);
             drawer = new DrawTurret(){{
                 parts.add(new RegionPart("-barrel"){{
-                    progress = PartProgress.smoothReload;
+                    progress = PartProgress.heat;
                     mirror = true;
                     under = true;
                     x = -2;
@@ -569,11 +577,14 @@ public class SLBlocks {
             @Override
             public void hitEntity(Bullet b, Hitboxc entity, float health){
                 super.hitEntity(b, entity, health);
-
                 if(b.owner !=null && entity instanceof Unit unit && unit.canTarget((Teamc) b.owner)){
                     for(WeaponMount w : unit.mounts){
                         w.target = (Teamc) b.owner;
+                        w.aimX = b.x;
+                        w.aimY = b.y;
                     }
+                    unit.aimX = b.x;
+                    unit.aimY = b.y;
                 }
             }};
 
@@ -587,4 +598,5 @@ public class SLBlocks {
             variants = 3;
             consumePower(2f);
         }};
-    }}
+    }
+}
