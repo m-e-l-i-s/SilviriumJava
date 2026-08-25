@@ -130,18 +130,30 @@ public class SLFx {
         }},
         silviriumWave1Effect
     ),
-    starHit = new ParticleEffect(){{
-        particles = 1;
-        length = 0.5f;
-        baseLength = 1;
-        line = true;
-        colorFrom = SLPal.starOrangeColor;
-        colorTo = SLPal.starRedDarkColor;
-        strokeFrom = 2f;
-        strokeTo = 0f;
-        lenFrom = 12f;
-        lenTo = 1f;
-        lifetime = 10;
-        cone = 60;
-    }};
+    starHit = new MultiEffect(
+        new ParticleEffect(){{
+            particles = 1;
+            length = 0.5f;
+            baseLength = 1;
+            line = true;
+            colorFrom = SLPal.starOrangeColor;
+            colorTo = SLPal.starRedDarkColor;
+            strokeFrom = 2f;
+            strokeTo = 0f;
+            lenFrom = 12f;
+            lenTo = 1f;
+            lifetime = 10;
+            cone = 60;
+        }},new ParticleEffect(){{
+            particles = 3;
+            length = 0.5f;
+            baseLength = 1;
+            line = false;
+            colorFrom = SLPal.starOrangeColor;
+            colorTo = SLPal.starRedDarkColor;
+            sizeFrom = 1f;
+            sizeTo = 0f;
+            lifetime = 20;
+            cone = 60;
+        }});
 }

@@ -319,17 +319,22 @@ public class SLBlocks {
                 new ItemStack(Items.metaglass, 60)
             });
             ammo(
-                SLliquids.liquidSilvirium,new BasicBulletType(22.5f,10){{
+                SLliquids.liquidSilvirium,new LiquidBulletType(){{
+                    speed = 22.5f;
+                    damage = 10;
                     lifetime = 65;
                     knockback = 0.2f;
                     drag = 0.1f;
                     layer = Layer.bullet - 1f;
                     status = SLStatusEffects.disrupted;
                     statusDuration = 6000;
-                    puddleLiquid = SLliquids.liquidSilvirium;
-                    puddleAmount = 48;
-                    puddles = 1;
-                    puddleRange = 48;
+                    fragBullet = new BulletType(){{
+                        puddleLiquid = SLliquids.liquidSilvirium;
+                        puddleAmount = 48;
+                        puddles = 1;
+                        puddleRange = 48;
+                        instantDisappear = true;
+                    }};
                     
                 }}
             );
@@ -346,11 +351,6 @@ public class SLBlocks {
             health = 1000;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
             shootEffect = Fx.shootLiquid;
-        }
-        @Override
-        public void init(){
-            super.init();
-            coolant = consumeCoolant(coolant.amount);
         }};
         ST = new ItemTurret("silvirium-turret"){{
             alwaysUnlocked = true;
