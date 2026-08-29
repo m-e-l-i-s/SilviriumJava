@@ -430,7 +430,7 @@ public class SLBlocks {
             range = 120f;
             health = 240;
             flags = EnumSet.of(BlockFlag.turret);
-            coolant = consume(new ConsumeLiquidFilter(liquid -> liquid==SLliquids.liquidSilvirium, 0.4f));
+            coolant = consume(new ConsumeLiquidFilter(liquid -> liquid==SLliquids.liquidSilvirium, 0.5f));
             coolantMultiplier = 10f;
             coolEffect = SLFx.sliviriumSpark;
             shootEffect = SLFx.silviriumHit1Effect;
