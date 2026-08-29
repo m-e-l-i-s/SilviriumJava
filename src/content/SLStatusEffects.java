@@ -16,11 +16,11 @@ public class SLStatusEffects {
     public static void load(){
 
         disrupted = new StatusEffect("disrupted"){{
-            reloadMultiplier = 0.8f;
-            damageMultiplier = 0.8f;
-            buildSpeedMultiplier = 0.8f;
-            speedMultiplier = 0.8f;
-            healthMultiplier = 0.8f;
+            reloadMultiplier = 0.9f;
+            damageMultiplier = 0.9f;
+            buildSpeedMultiplier = 0.9f;
+            speedMultiplier = 0.9f;
+            healthMultiplier = 0.9f;
             color = SLPal.silviriumColor;
             applyColor = SLPal.silviriumColor;
             alwaysUnlocked = outline = true;
@@ -30,8 +30,8 @@ public class SLStatusEffects {
         @Override
         public void update(Unit unit, StatusEntry entry){
             if(unit.isShooting()) {
-                unit.damageContinuousPierce(10*Time.delta);
-                entry.time += Time.delta;
+                unit.damageContinuousPierce(1*Time.delta);
+                entry.time += Time.delta/2;
             }
             super.update(unit, entry);
         }};
@@ -47,7 +47,7 @@ public class SLStatusEffects {
         public void update(Unit unit, StatusEntry entry){
             unit.clearStatuses();
             unit.type(UnitTypes.dagger);
-            Fx.unitSpawn.at(unit.x,unit.x,unit.rotation,UnitTypes.dagger);
+            Fx.unitSpawn.at(unit.x,unit.x,unit.rotation, UnitTypes.dagger);
             super.update(unit, entry);
         }};
 

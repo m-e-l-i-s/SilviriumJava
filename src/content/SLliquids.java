@@ -12,7 +12,7 @@ public static Liquid liquidSilvirium;
             color = SLPal.silviriumColor;
             gasColor = SLPal.silviriumligthColor;
             effect = SLStatusEffects.disrupted;
-            heatCapacity = 0.5f;
+            heatCapacity = 0.6f;
             boilPoint = 3f;
             temperature = 0.2f;
             flammability = -0.1f;
