@@ -759,7 +759,7 @@ public class SLUnits {
 
             Draw.z(z - 0.02f);
 
-            if(unit instanceof Legsc && !isPayload && unit.floorOn() != null && unit.floorOn().isLiquid){
+            if(unit instanceof Legsc && !isPayload && unit.floorOn() != null && !unit.floorOn().isLiquid || unit.tileOn().solid()){
                 ((Unit & Legsc) unit).resetLegs();
                 drawLegs((Unit & Legsc)unit);
             }else{
