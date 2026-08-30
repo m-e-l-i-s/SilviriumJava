@@ -7,15 +7,12 @@ import mindustry.entities.UnitSorts;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.ShootSpread;
-import mindustry.entities.part.DrawPart.PartProgress;
 import mindustry.entities.part.RegionPart;
-import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LiquidTurret;
-import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.defense.turrets.TractorBeamTurret;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.environment.OreBlock;
@@ -216,10 +213,23 @@ public class SLBlocks {
                       new ItemStack(SLItems.shapinite, 20)
                     }
                 ),new UnitPlan(
+                    SLUnits.silvistar, 600,
+                    new ItemStack[]{
+                      new ItemStack(SLItems.starFrag, 2),
+                      new ItemStack(SLItems.silvirium, 20),
+                      new ItemStack(SLItems.shapinite, 30)
+                    }
+                ),new UnitPlan(
                     SLUnits.star2, 600,
                     new ItemStack[]{
                       new ItemStack(SLItems.starFrag, 5),
                       new ItemStack(SLItems.shapinite, 50)
+                    }
+                ),new UnitPlan(
+                    SLUnits.star2, 55020,
+                    new ItemStack[]{
+                      new ItemStack(SLItems.starFrag, 300),
+                      new ItemStack(SLItems.shapinite, 4500)
                     }
                 )
             );
@@ -430,7 +440,7 @@ public class SLBlocks {
             range = 120f;
             health = 240;
             flags = EnumSet.of(BlockFlag.turret);
-            coolant = consume(new ConsumeLiquidFilter(liquid -> liquid==SLliquids.liquidSilvirium, 0.5f));
+            coolant = consume(new ConsumeLiquidFilter(liquid -> liquid==SLliquids.liquidSilvirium, 0.25f));
             coolantMultiplier = 10f;
             coolEffect = SLFx.sliviriumSpark;
             shootEffect = SLFx.silviriumHit1Effect;
@@ -524,14 +534,14 @@ public class SLBlocks {
                 new ItemStack(SLItems.shapinite, 300),
                 new ItemStack(Items.graphite, 700)
             });
-            coolantMultiplier = 0.2f;
+            coolantMultiplier = 0.5f;
             liquidCapacity = 2700f;
-            coolant = consumeCoolant(4f);
+            coolant = consumeCoolant(3f);
             range = 1600;
             size = 6;
             reload = 1200;
-            ammoPerShot = 20;
-            maxAmmo = 20;
+            ammoPerShot = 15;
+            maxAmmo = 15;
             recoil = 12;
             flags = EnumSet.of(BlockFlag.turret);
             drawer = new DrawTurret(){{
@@ -564,7 +574,8 @@ public class SLBlocks {
                 absorbable = false;
                 pierceCap = 3;
                 frontColor = Items.silicon.color;
-                backColor = Items.silicon.color.cpy().mul(0.8f);
+                trailColor = backColor = Items.silicon.color.cpy().mul(0.8f);
+                trailLength = 8;
                 homingPower = 0.05f;
                 homingRange = 24;
                 reloadMultiplier = 4;
@@ -572,13 +583,15 @@ public class SLBlocks {
             Items.thorium, new BasicBulletType(16, 5000){{
                 ammoMultiplier = 1;
                 lifetime = 100;
-                width = 16;
-                height = 12;
+                width = 4;
+                height = 3;
+                hitSize = 0.05f;
                 pierce = pierceBuilding = true;
                 absorbable = false;
                 pierceDamageFactor = 0.01f;
                 frontColor = Items.thorium.color;
-                backColor = Items.thorium.color.cpy().mul(0.8f);
+                trailColor = backColor = Items.thorium.color.cpy().mul(0.8f);
+                trailLength = 8;
             }},
             SLItems.starFrag, new BasicBulletType(8, 2000){{
                 ammoMultiplier = 1;
@@ -590,7 +603,7 @@ public class SLBlocks {
                 splashDamagePierce = true;
                 absorbable = pierce = pierceBuilding = false;
                 fragBullets = 5;
-                fragSpread = 72;
+                fragSpread = 20;
                 fragOffsetMin = fragOffsetMax = fragRandomSpread = 0;
                 fragVelocityMin = fragVelocityMax = 1f;
                 fragBullet = new ShrapnelBulletType(){{
@@ -603,7 +616,8 @@ public class SLBlocks {
                     pierce = pierceBuilding = hitLarge = true;
                 }};
                 frontColor = SLItems.starFrag.color;
-                backColor = SLItems.starFrag.color.cpy().mul(0.8f);
+                trailColor = backColor = SLItems.starFrag.color.cpy().mul(0.8f);
+                trailLength = 8;
             }});
         }@Override
             public void init(){
@@ -615,22 +629,23 @@ public class SLBlocks {
         decoy = new TractorBeamTurret("decoy"){{
             alwaysUnlocked = true;
             requirements(Category.effect, new ItemStack[]{
-                new ItemStack(SLItems.shapinite, 80),
-                new ItemStack(Items.copper, 50),
-                new ItemStack(Items.graphite, 30)
+                new ItemStack(SLItems.shapinite, 280),
+                new ItemStack(Items.copper, 90),
+                new ItemStack(Items.graphite, 70),
+                new ItemStack(Items.silicon, 50)
             });
+            consumePower(0f);
 
             range = 240;
             damage = 0.1f;
-            force = -10f;
-            scaledForce = 0.5f;
+            force = -100f;
+            scaledForce = 5f;
             armor = -999999;
             health = 100000;
-            alwaysUpdateInUnits = true;
+            targetGround = alwaysUpdateInUnits = true;
             priority = 9;
             flags = EnumSet.of(BlockFlag.all);
             variants = 3;
-            consumePower(2f);
         }};
     }
 }

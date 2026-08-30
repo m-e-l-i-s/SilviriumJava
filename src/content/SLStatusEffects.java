@@ -29,9 +29,9 @@ public class SLStatusEffects {
 
         @Override
         public void update(Unit unit, StatusEntry entry){
-            if(unit.isShooting()) {
-                unit.damageContinuousPierce(1*Time.delta);
-                entry.time += Time.delta/2;
+            if(unit.healthf()>0.9f){
+                unit.damageContinuousPierce(unit.health*0.001f*Time.delta);
+                entry.time -= Time.delta*2;
             }
             super.update(unit, entry);
         }};

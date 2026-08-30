@@ -383,7 +383,7 @@ public class SLUnits {
                         homingRange = 48;
                         range = 200;
                         weaveScale = 10f;
-                        weaveMag = 10f;
+                        weaveMag = 2f;
                     }};
                 }},
                 new Weapon("Silvbane-missile"){{
@@ -424,14 +424,14 @@ public class SLUnits {
                                     shootCone = 360f;
                                     shootOnDeath = true;
                                     mirror = false;
-                                    bullet = new ExplosionBulletType(400, 40){{
+                                    bullet = new ExplosionBulletType(350, 80){{
                                         buildingDamageMultiplier = 0.5f;
-                                        range = 32;
+                                        range = 72;
                                         splashDamagePierce = pierceBuilding = collidesAir = collidesGround = true;
                                         hittable = false;
                                         smokeEffect = Fx.none;
                                         status = SLStatusEffects.disrupted;
-                                        statusDuration = 300f;
+                                        statusDuration = 900f;
                                     }};
                                 }}
                             );
@@ -947,9 +947,9 @@ public class SLUnits {
             hitSize = 8;
             itemCapacity = 8;
             outlines = false;
-            speed = 2.2f;
+            speed = 3.2f;
             accel = 0.2f;
-            drag = 0.6f;
+            drag = 0.18f;
             rotateMoveFirst = true;
             hoverable = false;
             mechFrontSway = 0.3f;
@@ -1010,7 +1010,7 @@ public class SLUnits {
             hitSize = 12;
             itemCapacity = 24;
             outlines = false;
-            speed = 6f;
+            speed = 8f;
             accel = 0.08f;
             drag = 0.07f;
             rotateMoveFirst = true;
@@ -1059,11 +1059,11 @@ public class SLUnits {
             health = 55000f;
             armor = -1.5f;
             hitSize = 51;
-            itemCapacity = 372;
+            itemCapacity = 1536;
             outlines = false;
             speed = 1f;
-            accel = 0.2f;
-            drag = 0.1f;
+            accel = 0.1f;
+            drag = 0.09f;
             rotateMoveFirst = true;
             hoverable = false;
             mechFrontSway = 1.2f;
