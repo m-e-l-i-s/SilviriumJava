@@ -79,10 +79,10 @@ public class SLUnits {
                     shoot.firstShotDelay = 120;
                     bullet = new BasicBulletType(6,0){{
                         chargeEffect = SLFx.silviriumChargeEffect;
-                        knockback = 25;
-                        splashDamage = 160;
-                        splashDamageRadius = 22;
-                        buildingDamageMultiplier = 0.25f;
+                        knockback = 24;
+                        splashDamage = 80;
+                        splashDamageRadius = 24;
+                        buildingDamageMultiplier = 0.5f;
                         lifetime = 40f;
                         scaleLife = true;
                         killShooter = true;
@@ -760,7 +760,7 @@ public class SLUnits {
             Draw.z(z - 0.02f);
 
             if(unit instanceof Legsc && !isPayload && unit.floorOn() != null && !unit.floorOn().isLiquid || unit.tileOn().solid()){
-                ((Unit & Legsc) unit).resetLegs();
+                if (((Unit & Legsc) unit).legs().equals(EmpyLegs)) ((Unit & Legsc) unit).resetLegs();
                 drawLegs((Unit & Legsc)unit);
             }else{
                 ((Unit & Legsc) unit).legs(EmpyLegs);
@@ -1071,6 +1071,7 @@ public class SLUnits {
             mechStride = 8f;
             abilities.add(new RegenAbility(){{
                 percentAmount = 0.01f;
+                amount = 120f;
             }
 
             @Override

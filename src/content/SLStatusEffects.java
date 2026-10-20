@@ -1,5 +1,6 @@
 package content;
 
+import arc.math.Mathf;
 import arc.util.Time;
 import mindustry.content.Fx;
 import mindustry.content.UnitTypes;
@@ -29,8 +30,8 @@ public class SLStatusEffects {
 
         @Override
         public void update(Unit unit, StatusEntry entry){
-            if(unit.healthf()>0.9f){
-                unit.damageContinuousPierce(unit.health*0.001f*Time.delta);
+            if(!unit.vel().isZero()){
+                unit.vel().scl(0.5f);
                 entry.time -= Time.delta*2;
             }
             super.update(unit, entry);

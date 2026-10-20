@@ -10,11 +10,23 @@ import mindustry.entities.abilities.Ability;
 import mindustry.gen.Unit;
 
 public class disruptPulseAbility extends Ability{
-    public float 
-    reload = 120, range = 60, time = 120,
-    deathRange = 120, deathTime = 600;
+    public float
+    /** interval of the disrupted aplication */
+    reload = 120,
+    /** range of the disrupted aplication */
+    range = 60,
+    /** duration of the disrupted aplication */
+    time = 120,
+    /** range of the disrupted aplication when killed */
+    deathRange = 120,
+    /** time of the disrupted aplication when killed */
+    deathTime = 600;
 
-    public boolean targetsTeam, targetsEnemy, targetsTeamOnDeath, targetsEnemyOnDeath, canReapply;
+    public boolean
+    /** self-explainatory */
+    targetsTeam, targetsEnemy, targetsTeamOnDeath, targetsEnemyOnDeath, 
+    /** can it reaply to already disrupted units? true/false*/
+    canReapply;
 
     protected float cd = 0;
 
@@ -58,7 +70,6 @@ public class disruptPulseAbility extends Ability{
                         }else if(canReapply){
                             e.apply(SLStatusEffects.disrupted, time * 2f);
                         }
-                        if(unit.elevation>0.5) unit.unapply(SLStatusEffects.disrupted);
                     }
                 });
             }
@@ -78,7 +89,6 @@ public class disruptPulseAbility extends Ability{
                 }else if(canReapply){
                     e.apply(SLStatusEffects.disrupted, deathTime * 2f);
                 }
-                if(unit.elevation>0.5) unit.unapply(SLStatusEffects.disrupted);
             }
         });
     }

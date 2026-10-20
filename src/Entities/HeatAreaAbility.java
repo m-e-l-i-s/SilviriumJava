@@ -41,9 +41,9 @@ public class HeatAreaAbility extends Ability{
             lStroke();
             Lines.dashCircle(e.x, e.y, e.hitSize);
             if(e.team() != unit.team()){
-                e.damage(Mathf.lerp(damage,bdamage,vel)*Time.delta);
+                e.damage(Mathf.lerp(damage,bdamage,vel)*Time.delta/60);
             }else{
-                e.damage(Mathf.lerp(damage,bdamage,vel)*Time.delta*friendPercent);
+                e.damage(Mathf.lerp(damage,bdamage,vel)*Time.delta*friendPercent/60);
             }
         });
     }

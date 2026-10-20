@@ -47,7 +47,8 @@ public class SLBlocks {
     tempSliv,tempShar;
     
     public static void load(){
-        //ore
+        
+        //region ore
         silvOre = new OreBlock("ore-silvirium", SLItems.silvirium){{
             alwaysUnlocked = true;
             oreDefault = emitLight = true;
@@ -66,7 +67,9 @@ public class SLBlocks {
             lightColor = SLPal.mgray;
             variants = 2;
         }};
-        //floors
+        //endregion ore
+
+        //region floors
         slivFloor = new Floor("silvirium-floor", 2){{
             liquidDrop = SLliquids.liquidSilvirium;
             liquidMultiplier = 0.01f;//1500 times less that a LSF(Liquid Silvirium Factory)
@@ -77,14 +80,15 @@ public class SLBlocks {
             speedMultiplier = 0.5f;
             attributes.set(SLAttributes.silvirium,1f);
         }};
-        //envirmental walls
+        //endregion floors
+        //region envirmental walls
         slivWall = new StaticWall("silvirium-wall"){{
             variants = 2;
             slivFloor.asFloor().wall = this;
             attributes.set(SLAttributes.silvirium,1f);
         }};
 
-        //unit factory
+        //region unit factory
         silvFacT1 = new UnitFactory("silvirium-molder"){{
             alwaysUnlocked = true;
             requirements(Category.units, new ItemStack[]{
@@ -234,7 +238,7 @@ public class SLBlocks {
                 )
             );
         }};
-        //factory
+        //region factory
         liqsilvfac = new GenericCrafter("liquid-silvirium-factory"){{
             alwaysUnlocked = true;
             requirements(Category.crafting, new ItemStack[]{
@@ -353,7 +357,8 @@ public class SLBlocks {
             consumePower(5f);
             outputItem = new ItemStack(SLItems.starFrag, 1);
         }};
-        //drills
+
+        //region drills
         silvDrill = new Drill("silvirium-drill"){{
             requirements(Category.production, new ItemStack[]{
                 new ItemStack(SLItems.silvirium, 50)
@@ -366,8 +371,9 @@ public class SLBlocks {
 
             consumeLiquid(SLliquids.liquidSilvirium, 0.1f).boost();
         }};
+        //region distribution
         
-        //turrets
+        //region turrets
         HPT = new LiquidTurret("higth-presure-turret"){{
             alwaysUnlocked = true;
             requirements(Category.turret, new ItemStack[]{
